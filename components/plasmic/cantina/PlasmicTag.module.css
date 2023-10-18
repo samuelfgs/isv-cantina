@@ -1,0 +1,33 @@
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #dad9d9;
+  cursor: pointer;
+  position: relative;
+  justify-self: flex-start;
+  border-radius: 20px;
+  padding: 8px;
+}
+.rootselected {
+  background: var(--token-6Lhw5mK6wolF);
+}
+.freeBox {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.text__a3D66 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}

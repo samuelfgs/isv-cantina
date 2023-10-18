@@ -1,0 +1,28 @@
+{
+  "name": "cantina",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@plasmicapp/cli": "^0.1.311",
+    "@plasmicapp/react-web": "^0.2.277",
+    "@plasmicpkgs/antd5": "0.0.136",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-to-print": "^2.14.13"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "typescript": "latest"
+  }
+}

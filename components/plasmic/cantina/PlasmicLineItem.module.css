@@ -1,0 +1,17 @@
+.root {
+  display: inline-flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  justify-self: flex-start;
+  background: #ecececa6;
+  cursor: pointer;
+  padding: 8px;
+}
+.rootselected {
+  background: var(--token-6Lhw5mK6wolF);
+}
