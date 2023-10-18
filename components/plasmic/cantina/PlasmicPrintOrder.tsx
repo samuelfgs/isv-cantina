@@ -128,7 +128,7 @@ function PlasmicPrintOrder__RenderFunc(props: {
           <React.Fragment>
             {(() => {
               try {
-                return `PEDIDO #${$props.id}`;
+                return `PEDIDO ${$props.id}`;
               } catch (e) {
                 if (
                   e instanceof TypeError ||
