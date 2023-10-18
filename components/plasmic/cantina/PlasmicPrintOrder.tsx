@@ -247,6 +247,43 @@ function PlasmicPrintOrder__RenderFunc(props: {
                 })()}
               </React.Fragment>
             </div>
+            {(() => {
+              try {
+                return currentItem.description != null;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__tEbRj
+                )}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return `Obs: ${currentItem.description}`;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
+              </div>
+            ) : null}
             <div
               className={classNames(
                 projectcss.all,

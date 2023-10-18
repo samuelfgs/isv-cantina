@@ -46,6 +46,8 @@ import {
 import Button from "../../Button"; // plasmic-import: WaoscXndZ0Zl/component
 import Tag from "../../Tag"; // plasmic-import: lrm25Wbtct6n/component
 import LineItem from "../../LineItem"; // plasmic-import: KBis_g_ud_Oy/component
+import { AntdTextArea } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: pTzGlMptTxd/codeComponent
+import { inputHelpers as AntdTextArea_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: pTzGlMptTxd/codeComponentHelper
 import Select from "../../Select"; // plasmic-import: TQ2uLm_LONoV/component
 import { AntdInputNumber } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: wxD5qjEe3pU/codeComponent
 import { AntdModal } from "@plasmicpkgs/antd5/skinny/registerModal"; // plasmic-import: xx93QbkHH5i/codeComponent
@@ -77,6 +79,7 @@ export type PlasmicHomepage__OverridesType = {
   img?: p.Flex<typeof p.PlasmicImg>;
   tag?: p.Flex<typeof Tag>;
   lineItem?: p.Flex<typeof LineItem>;
+  textArea?: p.Flex<typeof AntdTextArea>;
   formaPagamento?: p.Flex<typeof Select>;
   numberInput?: p.Flex<typeof AntdInputNumber>;
   modal?: p.Flex<typeof AntdModal>;
@@ -220,6 +223,14 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => 0
+      },
+      {
+        path: "textArea.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        onMutate: p.generateOnMutateForSpec("value", AntdTextArea_Helpers)
       }
     ],
     [$props, $ctx, $refs]
@@ -877,6 +888,56 @@ function PlasmicHomepage__RenderFunc(props: {
                       })}
                     </div>
                   ) : null}
+                  <p.Stack
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.freeBox__qLfSn)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___0AFmf
+                      )}
+                    >
+                      {"Observa\u00e7\u00e3o"}
+                    </div>
+                    {(() => {
+                      const child$Props = {
+                        className: classNames("__wab_instance", sty.textArea),
+                        onChange: p.generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "value",
+                          ["textArea", "value"],
+                          AntdTextArea_Helpers
+                        ),
+                        value: p.generateStateValueProp($state, [
+                          "textArea",
+                          "value"
+                        ])
+                      };
+                      p.initializeCodeComponentStates(
+                        $state,
+                        [
+                          {
+                            name: "value",
+                            plasmicStateName: "textArea.value"
+                          }
+                        ],
+                        [],
+                        AntdTextArea_Helpers ?? {},
+                        child$Props
+                      );
+
+                      return (
+                        <AntdTextArea
+                          data-plasmic-name={"textArea"}
+                          data-plasmic-override={overrides.textArea}
+                          {...child$Props}
+                        />
+                      );
+                    })()}
+                  </p.Stack>
                   <div
                     className={classNames(projectcss.all, sty.freeBox__qtusc)}
                   >
@@ -1073,7 +1134,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                       qtt: $state.itemQuantity,
                                       price:
                                         $state.selectedOption?.price ??
-                                        $state.selectedItem.price
+                                        $state.selectedItem.price,
+                                      description: $state.textArea.value
                                     });
                                   })();
                                 }
@@ -1909,6 +1971,7 @@ const PlasmicDescendants = {
     "img",
     "tag",
     "lineItem",
+    "textArea",
     "formaPagamento",
     "numberInput",
     "modal",
@@ -1918,6 +1981,7 @@ const PlasmicDescendants = {
   img: ["img"],
   tag: ["tag"],
   lineItem: ["lineItem"],
+  textArea: ["textArea"],
   formaPagamento: ["formaPagamento"],
   numberInput: ["numberInput"],
   modal: ["modal", "copias", "reactPrint"],
@@ -1932,6 +1996,7 @@ type NodeDefaultElementType = {
   img: typeof p.PlasmicImg;
   tag: typeof Tag;
   lineItem: typeof LineItem;
+  textArea: typeof AntdTextArea;
   formaPagamento: typeof Select;
   numberInput: typeof AntdInputNumber;
   modal: typeof AntdModal;
@@ -2002,6 +2067,7 @@ export const PlasmicHomepage = Object.assign(
     img: makeNodeComponent("img"),
     tag: makeNodeComponent("tag"),
     lineItem: makeNodeComponent("lineItem"),
+    textArea: makeNodeComponent("textArea"),
     formaPagamento: makeNodeComponent("formaPagamento"),
     numberInput: makeNodeComponent("numberInput"),
     modal: makeNodeComponent("modal"),
