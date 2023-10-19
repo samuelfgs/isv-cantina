@@ -81,7 +81,7 @@ export default function GlobalContextsProvider(
       removeLoading={
         antdConfigProviderProps && "removeLoading" in antdConfigProviderProps
           ? antdConfigProviderProps.removeLoading!
-          : undefined
+          : true
       }
       sizeStep={
         antdConfigProviderProps && "sizeStep" in antdConfigProviderProps
