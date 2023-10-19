@@ -210,7 +210,7 @@ function PlasmicPrintOrder__RenderFunc(props: {
                 <React.Fragment>
                   {(() => {
                     try {
-                      return `- ${currentItem.option}`;
+                      return `- ${currentItem.option.name}`;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||

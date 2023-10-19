@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/pro-components": "^2.6.31",
     "@plasmicapp/cli": "^0.1.311",
-    "@plasmicapp/react-web": "^0.2.277",
+    "@plasmicapp/react-web": "^0.2.280",
     "@plasmicpkgs/antd5": "0.0.136",
+    "@plasmicpkgs/plasmic-basic-components": "^0.0.193",
+    "@plasmicpkgs/plasmic-nav": "^0.0.147",
+    "@plasmicpkgs/plasmic-rich-components": "^1.0.151",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
