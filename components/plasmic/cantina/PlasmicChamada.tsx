@@ -229,7 +229,7 @@ function PlasmicChamada__RenderFunc(props: {
                     sty.text___6VOvX
                   )}
                 >
-                  {"PEDIDOS PRONTOS"}
+                  {"PRONTO"}
                 </div>
                 <div className={classNames(projectcss.all, sty.freeBox__tD8N8)}>
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
