@@ -562,6 +562,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/admin"
+        },
+        {
+          "id": "rjwUuA4AwYcB",
+          "name": "Cardapio",
+          "type": "managed",
+          "projectId": "eVCRKWwcuK6xExRdUZxKpb",
+          "renderModuleFilePath": "plasmic/cantina/PlasmicCardapio.tsx",
+          "importSpec": {
+            "modulePath": "../pages/cardapio.tsx"
+          },
+          "cssFilePath": "plasmic/cantina/PlasmicCardapio.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/cardapio"
         }
       ],
       "icons": [
