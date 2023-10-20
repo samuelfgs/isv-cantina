@@ -1831,19 +1831,23 @@ function PlasmicHomepage__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
-                $steps["goToHomepage"] = true
+                $steps["runCode"] = true
                   ? (() => {
-                      const actionArgs = { destination: `/` };
-                      return (({ destination }) => {
-                        __nextRouter?.push(destination);
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return window.location.reload();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
                       })?.apply(null, [actionArgs]);
                     })()
                   : undefined;
                 if (
-                  typeof $steps["goToHomepage"] === "object" &&
-                  typeof $steps["goToHomepage"].then === "function"
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
                 ) {
-                  $steps["goToHomepage"] = await $steps["goToHomepage"];
+                  $steps["runCode"] = await $steps["runCode"];
                 }
               }}
             >
