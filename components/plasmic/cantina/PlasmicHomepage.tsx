@@ -1550,6 +1550,39 @@ function PlasmicHomepage__RenderFunc(props: {
               onClick={async event => {
                 const $steps = {};
 
+                $steps["updateIsFinished"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["isFinished"]
+                        },
+                        operation: 4
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+
+                        const oldValue = p.get(objRoot, variablePath);
+                        p.set(objRoot, variablePath, !oldValue);
+                        return !oldValue;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  typeof $steps["updateIsFinished"] === "object" &&
+                  typeof $steps["updateIsFinished"].then === "function"
+                ) {
+                  $steps["updateIsFinished"] = await $steps["updateIsFinished"];
+                }
+
                 $steps["postgresCreate"] = true
                   ? (() => {
                       const actionArgs = {
@@ -1617,6 +1650,49 @@ function PlasmicHomepage__RenderFunc(props: {
                   typeof $steps["runCode"].then === "function"
                 ) {
                   $steps["runCode"] = await $steps["runCode"];
+                }
+
+                $steps["runCode2"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (async () => {
+                            const sleep = ms =>
+                              new Promise(resolve => setTimeout(resolve, ms));
+                            await sleep(100);
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  typeof $steps["runCode2"] === "object" &&
+                  typeof $steps["runCode2"].then === "function"
+                ) {
+                  $steps["runCode2"] = await $steps["runCode2"];
+                }
+
+                $steps["runActionOnReactPrint"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        tplRef: "reactPrint",
+                        action: "printOrder"
+                      };
+                      return (({ tplRef, action, args }) => {
+                        return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  typeof $steps["runActionOnReactPrint"] === "object" &&
+                  typeof $steps["runActionOnReactPrint"].then === "function"
+                ) {
+                  $steps["runActionOnReactPrint"] = await $steps[
+                    "runActionOnReactPrint"
+                  ];
                 }
 
                 $steps["useIntegration"] = true
@@ -1687,82 +1763,6 @@ function PlasmicHomepage__RenderFunc(props: {
                   typeof $steps["refreshData"].then === "function"
                 ) {
                   $steps["refreshData"] = await $steps["refreshData"];
-                }
-
-                $steps["runCode2"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return (async () => {
-                            const sleep = ms =>
-                              new Promise(resolve => setTimeout(resolve, ms));
-                            await sleep(100);
-                          })();
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  typeof $steps["runCode2"] === "object" &&
-                  typeof $steps["runCode2"].then === "function"
-                ) {
-                  $steps["runCode2"] = await $steps["runCode2"];
-                }
-
-                $steps["runActionOnReactPrint"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        tplRef: "reactPrint",
-                        action: "printOrder"
-                      };
-                      return (({ tplRef, action, args }) => {
-                        return $refs?.[tplRef]?.[action]?.(...(args ?? []));
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  typeof $steps["runActionOnReactPrint"] === "object" &&
-                  typeof $steps["runActionOnReactPrint"].then === "function"
-                ) {
-                  $steps["runActionOnReactPrint"] = await $steps[
-                    "runActionOnReactPrint"
-                  ];
-                }
-
-                $steps["updateIsFinished"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["isFinished"]
-                        },
-                        operation: 4
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
-                        }
-                        const { objRoot, variablePath } = variable;
-
-                        const oldValue = p.get(objRoot, variablePath);
-                        p.set(objRoot, variablePath, !oldValue);
-                        return !oldValue;
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  typeof $steps["updateIsFinished"] === "object" &&
-                  typeof $steps["updateIsFinished"].then === "function"
-                ) {
-                  $steps["updateIsFinished"] = await $steps["updateIsFinished"];
                 }
               }}
             >
