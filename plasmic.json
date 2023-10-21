@@ -632,6 +632,11 @@
           "id": "7HVTh042efWA",
           "name": "SquareMinussvgIcon",
           "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SquareMinussvg.tsx"
+        },
+        {
+          "id": "vK-DEgytCHDE",
+          "name": "Icon2Icon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__Icon2.tsx"
         }
       ],
       "images": [
