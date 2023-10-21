@@ -233,7 +233,11 @@
           "id": "lKdkQL67fv",
           "name": "AntdDatePicker",
           "displayName": "plasmic-antd5-date-picker",
-          "componentImportPath": "@plasmicpkgs/antd5/skinny/registerDatePicker"
+          "componentImportPath": "@plasmicpkgs/antd5/skinny/registerDatePicker",
+          "helper": {
+            "name": "datePickerHelpers",
+            "importPath": "@plasmicpkgs/antd5/skinny/registerDatePicker"
+          }
         },
         {
           "id": "YcIbmJhMwB",
@@ -372,10 +376,38 @@
           "name": "AntdSliderMark",
           "displayName": "plasmic-antd5-slider-mark",
           "componentImportPath": "@plasmicpkgs/antd5/skinny/registerSlider"
+        },
+        {
+          "id": "2lfDhkB3l-hf",
+          "name": "AntdSegmentedOption",
+          "displayName": "plasmic-antd5-segmented-option",
+          "componentImportPath": "@plasmicpkgs/antd5/skinny/registerSegmented"
+        },
+        {
+          "id": "hF7P_XBmSmah",
+          "name": "AntdSegmented",
+          "displayName": "plasmic-antd5-segmented",
+          "componentImportPath": "@plasmicpkgs/antd5/skinny/registerSegmented"
+        },
+        {
+          "id": "YczuxmmTqf82",
+          "name": "AntdProgress",
+          "displayName": "plasmic-antd5-progress",
+          "componentImportPath": "@plasmicpkgs/antd5/skinny/registerProgress"
+        },
+        {
+          "id": "zxit27ZPux0z",
+          "name": "AntdPagination",
+          "displayName": "plasmic-antd5-pagination",
+          "componentImportPath": "@plasmicpkgs/antd5/skinny/registerPagination",
+          "helper": {
+            "name": "paginationHelpers",
+            "importPath": "@plasmicpkgs/antd5/skinny/registerPagination"
+          }
         }
       ],
-      "jsBundleThemes": [],
-      "splitsProviderFilePath": ""
+      "splitsProviderFilePath": "",
+      "customFunctions": []
     },
     {
       "projectId": "eVCRKWwcuK6xExRdUZxKpb",
@@ -590,6 +622,20 @@
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "checkbox"
+        },
+        {
+          "id": "tr3HWRTy7Qhj",
+          "name": "Pedidos2",
+          "type": "managed",
+          "projectId": "eVCRKWwcuK6xExRdUZxKpb",
+          "renderModuleFilePath": "plasmic/cantina/PlasmicPedidos2.tsx",
+          "importSpec": {
+            "modulePath": "../pages/pedidos-2.tsx"
+          },
+          "cssFilePath": "plasmic/cantina/PlasmicPedidos2.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/pedidos-2"
         }
       ],
       "icons": [
