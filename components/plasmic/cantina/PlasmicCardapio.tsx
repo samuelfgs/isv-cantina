@@ -45,10 +45,10 @@ import {
 } from "@plasmicapp/react-web";
 import { NavigationBar } from "@plasmicpkgs/plasmic-nav"; // plasmic-import: jGx9tiKJoex/codeComponent
 import { SupabaseFetcher } from "../../supabase/supabase"; // plasmic-import: jGc1XPhYG1oO/codeComponent
+import { DataProvider } from "@plasmicpkgs/plasmic-basic-components"; // plasmic-import: D4RbnlpRXg3/codeComponent
 import Select from "../../Select"; // plasmic-import: TQ2uLm_LONoV/component
 import { AntdInputNumber } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: wxD5qjEe3pU/codeComponent
 import Button from "../../Button"; // plasmic-import: WaoscXndZ0Zl/component
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources"; // plasmic-import: CBeuHHn1qQBJ/codeComponent
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -74,6 +74,7 @@ export const PlasmicCardapio__ArgProps = new Array<ArgPropType>();
 export type PlasmicCardapio__OverridesType = {
   root?: p.Flex<"div">;
   navigationBar?: p.Flex<typeof NavigationBar>;
+  dataProvider?: p.Flex<typeof DataProvider>;
   product?: p.Flex<typeof Select>;
   productVariant?: p.Flex<typeof Select>;
   numberInput?: p.Flex<typeof AntdInputNumber>;
@@ -111,11 +112,10 @@ function PlasmicCardapio__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = ph.useGlobalActions?.();
+
   const currentUser = p.useCurrentUser?.() || {};
 
-  let [$queries, setDollarQueries] = React.useState<
-    Record<string, ReturnType<typeof usePlasmicDataOp>>
-  >({});
   const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -125,25 +125,41 @@ function PlasmicCardapio__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
       },
       {
-        path: "product[].value",
+        path: "productVariant.value",
         type: "private",
-        variableType: "text"
-      },
-      {
-        path: "productVariant[].value",
-        type: "private",
-        variableType: "text"
-      },
-      {
-        path: "numberInput[].value",
-        type: "private",
-        variableType: "text"
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "selectedVariant",
         type: "private",
         variableType: "object",
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "product.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "numberInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.selectedVariant.stock;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
       }
     ],
     [$props, $ctx, $refs]
@@ -151,29 +167,11 @@ function PlasmicCardapio__RenderFunc(props: {
   const $state = p.useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: $queries,
+    $queries: {},
     $refs
   });
   const dataSourcesCtx = usePlasmicDataSourceContext();
   const plasmicInvalidate = usePlasmicInvalidate();
-
-  const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
-    produtos: usePlasmicDataOp(() => {
-      return {
-        sourceId: "hLw78H9DAdcctLTB5Q6jny",
-        opId: "2be92a5a-ce7c-469c-91c8-89cef81840a8",
-        userArgs: {},
-        cacheKey: `plasmic.$.2be92a5a-ce7c-469c-91c8-89cef81840a8.$.`,
-        invalidatedKeys: null,
-        roleId: null
-      };
-    })
-  };
-  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
-    setDollarQueries(new$Queries);
-
-    $queries = new$Queries;
-  }
 
   return (
     <React.Fragment>
@@ -326,79 +324,96 @@ function PlasmicCardapio__RenderFunc(props: {
                   table={"productvariant"}
                 >
                   <ph.DataCtxReader>
-                    {$ctx =>
-                      (_par =>
-                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                        (() => {
+                    {$ctx => (
+                      <DataProvider
+                        data-plasmic-name={"dataProvider"}
+                        data-plasmic-override={overrides.dataProvider}
+                        className={classNames(
+                          "__wab_instance",
+                          sty.dataProvider
+                        )}
+                        data={(() => {
                           try {
-                            return [
-                              $ctx.product.map(prod => ({
-                                ...prod,
-                                variants: $ctx.productVariant.filter(
-                                  pv => pv.productid === prod.id
-                                )
-                              }))
-                            ];
+                            return $ctx.product.map(prod => ({
+                              ...prod,
+                              variants: $ctx.productVariant.filter(
+                                pv => pv.productid === prod.id
+                              )
+                            }));
                           } catch (e) {
                             if (
                               e instanceof TypeError ||
                               e?.plasmicType === "PlasmicUndefinedDataError"
                             ) {
-                              return [];
+                              return [
+                                {
+                                  name: "Fill Murray",
+                                  birthYear: 1950,
+                                  profilePicture: [
+                                    "https://www.fillmurray.com/200/300"
+                                  ]
+                                },
+                                {
+                                  name: "Place Cage",
+                                  birthYear: 1950,
+                                  profilePicture: [
+                                    "https://www.placecage.com/200/300"
+                                  ]
+                                }
+                              ];
                             }
                             throw e;
                           }
-                        })()
-                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                        const products = __plasmic_item_0;
-                        const currentIndex = __plasmic_idx_0;
-                        return (
-                          <p.Stack
-                            as={"div"}
-                            hasGap={true}
-                            className={classNames(
-                              projectcss.all,
-                              sty.freeBox__p5XNi
-                            )}
-                            key={currentIndex}
-                          >
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__jmluv
-                              )}
-                            >
-                              {"Atualizar estoque"}
-                            </div>
+                        })()}
+                        name={"products"}
+                      >
+                        <ph.DataCtxReader>
+                          {$ctx => (
                             <p.Stack
                               as={"div"}
                               hasGap={true}
                               className={classNames(
                                 projectcss.all,
-                                sty.freeBox__qKgI
+                                sty.freeBox__p5XNi
                               )}
                             >
                               <div
                                 className={classNames(
                                   projectcss.all,
                                   projectcss.__wab_text,
-                                  sty.text___3D6D5
+                                  sty.text__jmluv
                                 )}
                               >
-                                {"Selecionar produto"}
+                                {"Atualizar estoque"}
                               </div>
-                              {(() => {
-                                const child$Props = {
-                                  className: classNames(
+                              <p.Stack
+                                as={"div"}
+                                hasGap={true}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.freeBox__qKgI
+                                )}
+                              >
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text___3D6D5
+                                  )}
+                                >
+                                  {"Selecionar produto"}
+                                </div>
+                                <Select
+                                  data-plasmic-name={"product"}
+                                  data-plasmic-override={overrides.product}
+                                  className={classNames(
                                     "__wab_instance",
                                     sty.product
-                                  ),
-                                  onChange: async (...eventArgs: any) => {
+                                  )}
+                                  onChange={async (...eventArgs: any) => {
                                     ((...eventArgs) => {
                                       p.generateStateOnChangeProp($state, [
                                         "product",
-                                        __plasmic_idx_0,
                                         "value"
                                       ])(eventArgs[0]);
                                     }).apply(null, eventArgs);
@@ -415,10 +430,9 @@ function PlasmicCardapio__RenderFunc(props: {
                                                 ]
                                               },
                                               operation: 0,
-                                              value:
-                                                $queries.produtos.data.find(
-                                                  row => row.id === value
-                                                )
+                                              value: $ctx.products.find(
+                                                prod => +prod.id === +value
+                                              )
                                             };
                                             return (({
                                               variable,
@@ -589,12 +603,12 @@ function PlasmicCardapio__RenderFunc(props: {
                                           ];
                                       }
                                     }).apply(null, eventArgs);
-                                  },
-                                  options: (() => {
+                                  }}
+                                  options={(() => {
                                     try {
-                                      return products.map(row => ({
-                                        label: row.name,
-                                        value: row.id
+                                      return $ctx.products.map(prod => ({
+                                        value: prod.id,
+                                        label: prod.name
                                       }));
                                     } catch (e) {
                                       if (
@@ -615,65 +629,43 @@ function PlasmicCardapio__RenderFunc(props: {
                                       }
                                       throw e;
                                     }
-                                  })(),
-                                  value: p.generateStateValueProp($state, [
+                                  })()}
+                                  value={p.generateStateValueProp($state, [
                                     "product",
-                                    __plasmic_idx_0,
                                     "value"
-                                  ])
-                                };
-
-                                p.initializePlasmicStates(
-                                  $state,
-                                  [
-                                    {
-                                      name: "product[].value",
-                                      initFunc: ({
-                                        $props,
-                                        $state,
-                                        $queries
-                                      }) => undefined
-                                    }
-                                  ],
-                                  [__plasmic_idx_0]
-                                );
-                                return (
-                                  <Select
-                                    data-plasmic-name={"product"}
-                                    data-plasmic-override={overrides.product}
-                                    {...child$Props}
-                                  />
-                                );
-                              })()}
-                            </p.Stack>
-                            <p.Stack
-                              as={"div"}
-                              hasGap={true}
-                              className={classNames(
-                                projectcss.all,
-                                sty.freeBox__dRl
-                              )}
-                            >
-                              <div
+                                  ])}
+                                />
+                              </p.Stack>
+                              <p.Stack
+                                as={"div"}
+                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text__rssJ
+                                  sty.freeBox__dRl
                                 )}
                               >
-                                {"Selecionar op\u00e7\u00e3o"}
-                              </div>
-                              {(() => {
-                                const child$Props = {
-                                  className: classNames(
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__rssJ
+                                  )}
+                                >
+                                  {"Selecionar op\u00e7\u00e3o"}
+                                </div>
+                                <Select
+                                  data-plasmic-name={"productVariant"}
+                                  data-plasmic-override={
+                                    overrides.productVariant
+                                  }
+                                  className={classNames(
                                     "__wab_instance",
                                     sty.productVariant
-                                  ),
-                                  onChange: async (...eventArgs: any) => {
+                                  )}
+                                  onChange={async (...eventArgs: any) => {
                                     ((...eventArgs) => {
                                       p.generateStateOnChangeProp($state, [
                                         "productVariant",
-                                        __plasmic_idx_0,
                                         "value"
                                       ])(eventArgs[0]);
                                     }).apply(null, eventArgs);
@@ -773,8 +765,8 @@ function PlasmicCardapio__RenderFunc(props: {
                                           ];
                                       }
                                     }).apply(null, eventArgs);
-                                  },
-                                  options: (() => {
+                                  }}
+                                  options={(() => {
                                     try {
                                       return $state.selectedProduct.variants.map(
                                         pv => ({
@@ -801,202 +793,182 @@ function PlasmicCardapio__RenderFunc(props: {
                                       }
                                       throw e;
                                     }
-                                  })(),
-                                  value: p.generateStateValueProp($state, [
+                                  })()}
+                                  value={p.generateStateValueProp($state, [
                                     "productVariant",
-                                    __plasmic_idx_0,
                                     "value"
-                                  ])
-                                };
-
-                                p.initializePlasmicStates(
-                                  $state,
-                                  [
-                                    {
-                                      name: "productVariant[].value",
-                                      initFunc: ({
-                                        $props,
-                                        $state,
-                                        $queries
-                                      }) => undefined
-                                    }
-                                  ],
-                                  [__plasmic_idx_0]
-                                );
-                                return (
-                                  <Select
-                                    data-plasmic-name={"productVariant"}
-                                    data-plasmic-override={
-                                      overrides.productVariant
-                                    }
-                                    {...child$Props}
-                                  />
-                                );
-                              })()}
-                            </p.Stack>
-                            <p.Stack
-                              as={"div"}
-                              hasGap={true}
-                              className={classNames(
-                                projectcss.all,
-                                sty.freeBox__pjhtS
-                              )}
-                            >
-                              <div
+                                  ])}
+                                />
+                              </p.Stack>
+                              <p.Stack
+                                as={"div"}
+                                hasGap={true}
                                 className={classNames(
                                   projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text___1Cxed
+                                  sty.freeBox__pjhtS
                                 )}
                               >
-                                {"Estoque"}
-                              </div>
-                              {(() => {
-                                const child$Props = {
-                                  className: classNames(
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text___1Cxed
+                                  )}
+                                >
+                                  {"Estoque"}
+                                </div>
+                                <AntdInputNumber
+                                  data-plasmic-name={"numberInput"}
+                                  data-plasmic-override={overrides.numberInput}
+                                  className={classNames(
                                     "__wab_instance",
                                     sty.numberInput
-                                  ),
-                                  onChange: p.generateStateOnChangeProp(
+                                  )}
+                                  onChange={p.generateStateOnChangeProp(
                                     $state,
-                                    ["numberInput", __plasmic_idx_0, "value"]
-                                  ),
-                                  value: p.generateStateValueProp($state, [
+                                    ["numberInput", "value"]
+                                  )}
+                                  value={p.generateStateValueProp($state, [
                                     "numberInput",
-                                    __plasmic_idx_0,
                                     "value"
-                                  ])
-                                };
-                                p.initializeCodeComponentStates(
-                                  $state,
-                                  [
-                                    {
-                                      name: "value",
-                                      plasmicStateName: "numberInput[].value"
-                                    }
-                                  ],
-                                  [__plasmic_idx_0],
-                                  undefined ?? {},
-                                  child$Props
-                                );
-                                p.initializePlasmicStates(
-                                  $state,
-                                  [
-                                    {
-                                      name: "numberInput[].value",
-                                      initFunc: ({
-                                        $props,
-                                        $state,
-                                        $queries
-                                      }) =>
-                                        (() => {
-                                          try {
-                                            return $state.selectedVariant.stock;
-                                          } catch (e) {
-                                            if (
-                                              e instanceof TypeError ||
-                                              e?.plasmicType ===
-                                                "PlasmicUndefinedDataError"
-                                            ) {
-                                              return undefined;
-                                            }
-                                            throw e;
-                                          }
-                                        })()
-                                    }
-                                  ],
-                                  [__plasmic_idx_0]
-                                );
-                                return (
-                                  <AntdInputNumber
-                                    data-plasmic-name={"numberInput"}
-                                    data-plasmic-override={
-                                      overrides.numberInput
-                                    }
-                                    {...child$Props}
-                                  />
-                                );
-                              })()}
-                            </p.Stack>
-                            <Button
-                              data-plasmic-name={"button"}
-                              data-plasmic-override={overrides.button}
-                              className={classNames(
-                                "__wab_instance",
-                                sty.button
-                              )}
-                              onClick={async event => {
-                                const $steps = {};
-
-                                $steps["postgresUpdateById"] = true
-                                  ? (() => {
-                                      const actionArgs = {
-                                        dataOp: {
-                                          sourceId: "hLw78H9DAdcctLTB5Q6jny",
-                                          opId: "4b85247b-e63a-4dc7-b44a-a36084f8867d",
-                                          userArgs: {
-                                            keys: [$state.selectedVariant.id],
-                                            variables: [
-                                              $state.numberInput.value
-                                            ]
-                                          },
-                                          cacheKey: `plasmic.$.4b85247b-e63a-4dc7-b44a-a36084f8867d.$.`,
-                                          invalidatedKeys: [
-                                            "plasmic_refresh_all"
-                                          ],
-                                          roleId: null
-                                        }
-                                      };
-                                      return (async ({
-                                        dataOp,
-                                        continueOnError
-                                      }) => {
-                                        try {
-                                          const response =
-                                            await executePlasmicDataOp(dataOp, {
-                                              userAuthToken:
-                                                dataSourcesCtx?.userAuthToken,
-                                              user: dataSourcesCtx?.user
-                                            });
-                                          await plasmicInvalidate(
-                                            dataOp.invalidatedKeys
-                                          );
-                                          return response;
-                                        } catch (e) {
-                                          if (!continueOnError) {
-                                            throw e;
-                                          }
-                                          return e;
-                                        }
-                                      })?.apply(null, [actionArgs]);
-                                    })()
-                                  : undefined;
-                                if (
-                                  typeof $steps["postgresUpdateById"] ===
-                                    "object" &&
-                                  typeof $steps["postgresUpdateById"].then ===
-                                    "function"
-                                ) {
-                                  $steps["postgresUpdateById"] = await $steps[
-                                    "postgresUpdateById"
-                                  ];
-                                }
-                              }}
-                            >
-                              <div
+                                  ])}
+                                />
+                              </p.Stack>
+                              <Button
+                                data-plasmic-name={"button"}
+                                data-plasmic-override={overrides.button}
                                 className={classNames(
-                                  projectcss.all,
-                                  projectcss.__wab_text,
-                                  sty.text__bCfPq
+                                  "__wab_instance",
+                                  sty.button
                                 )}
+                                onClick={async event => {
+                                  const $steps = {};
+
+                                  $steps["postgresUpdateById"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          dataOp: {
+                                            sourceId: "hLw78H9DAdcctLTB5Q6jny",
+                                            opId: "4b85247b-e63a-4dc7-b44a-a36084f8867d",
+                                            userArgs: {
+                                              keys: [$state.selectedVariant.id],
+                                              variables: [
+                                                $state.numberInput.value
+                                              ]
+                                            },
+                                            cacheKey: `plasmic.$.4b85247b-e63a-4dc7-b44a-a36084f8867d.$.`,
+                                            invalidatedKeys: [
+                                              "plasmic_refresh_all"
+                                            ],
+                                            roleId: null
+                                          }
+                                        };
+                                        return (async ({
+                                          dataOp,
+                                          continueOnError
+                                        }) => {
+                                          try {
+                                            const response =
+                                              await executePlasmicDataOp(
+                                                dataOp,
+                                                {
+                                                  userAuthToken:
+                                                    dataSourcesCtx?.userAuthToken,
+                                                  user: dataSourcesCtx?.user
+                                                }
+                                              );
+                                            await plasmicInvalidate(
+                                              dataOp.invalidatedKeys
+                                            );
+                                            return response;
+                                          } catch (e) {
+                                            if (!continueOnError) {
+                                              throw e;
+                                            }
+                                            return e;
+                                          }
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    typeof $steps["postgresUpdateById"] ===
+                                      "object" &&
+                                    typeof $steps["postgresUpdateById"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["postgresUpdateById"] = await $steps[
+                                      "postgresUpdateById"
+                                    ];
+                                  }
+
+                                  $steps["showNotification"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          type: "success",
+                                          message: "Estoque atualizado",
+                                          description: ``
+                                        };
+                                        return $globalActions[
+                                          "plasmic-antd5-config-provider.showNotification"
+                                        ]?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    typeof $steps["showNotification"] ===
+                                      "object" &&
+                                    typeof $steps["showNotification"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["showNotification"] = await $steps[
+                                      "showNotification"
+                                    ];
+                                  }
+
+                                  $steps["refreshData"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          queryInvalidation: [
+                                            "plasmic_refresh_all"
+                                          ]
+                                        };
+                                        return (async ({
+                                          queryInvalidation
+                                        }) => {
+                                          if (!queryInvalidation) {
+                                            return;
+                                          }
+                                          await plasmicInvalidate(
+                                            queryInvalidation
+                                          );
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    typeof $steps["refreshData"] === "object" &&
+                                    typeof $steps["refreshData"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["refreshData"] = await $steps[
+                                      "refreshData"
+                                    ];
+                                  }
+                                }}
                               >
-                                {"Salvar"}
-                              </div>
-                            </Button>
-                          </p.Stack>
-                        );
-                      })
-                    }
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__bCfPq
+                                  )}
+                                >
+                                  {"Salvar"}
+                                </div>
+                              </Button>
+                            </p.Stack>
+                          )}
+                        </ph.DataCtxReader>
+                      </DataProvider>
+                    )}
                   </ph.DataCtxReader>
                 </SupabaseFetcher>
               )}
@@ -1012,12 +984,20 @@ const PlasmicDescendants = {
   root: [
     "root",
     "navigationBar",
+    "dataProvider",
     "product",
     "productVariant",
     "numberInput",
     "button"
   ],
   navigationBar: ["navigationBar"],
+  dataProvider: [
+    "dataProvider",
+    "product",
+    "productVariant",
+    "numberInput",
+    "button"
+  ],
   product: ["product"],
   productVariant: ["productVariant"],
   numberInput: ["numberInput"],
@@ -1029,6 +1009,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   navigationBar: typeof NavigationBar;
+  dataProvider: typeof DataProvider;
   product: typeof Select;
   productVariant: typeof Select;
   numberInput: typeof AntdInputNumber;
@@ -1096,6 +1077,7 @@ export const PlasmicCardapio = Object.assign(
   {
     // Helper components rendering sub-elements
     navigationBar: makeNodeComponent("navigationBar"),
+    dataProvider: makeNodeComponent("dataProvider"),
     product: makeNodeComponent("product"),
     productVariant: makeNodeComponent("productVariant"),
     numberInput: makeNodeComponent("numberInput"),
