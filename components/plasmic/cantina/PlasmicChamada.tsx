@@ -143,16 +143,6 @@ function PlasmicChamada__RenderFunc(props: {
   const plasmicInvalidate = usePlasmicInvalidate();
 
   const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
-    preparando: usePlasmicDataOp(() => {
-      return {
-        sourceId: "hLw78H9DAdcctLTB5Q6jny",
-        opId: "9af5ff9a-0fb1-4716-b369-57b356449283",
-        userArgs: {},
-        cacheKey: `plasmic.$.9af5ff9a-0fb1-4716-b369-57b356449283.$.`,
-        invalidatedKeys: null,
-        roleId: null
-      };
-    }),
     pronto: usePlasmicDataOp(() => {
       return {
         sourceId: "hLw78H9DAdcctLTB5Q6jny",
@@ -296,83 +286,6 @@ function PlasmicChamada__RenderFunc(props: {
                 </div>
               </p.Stack>
               <div className={classNames(projectcss.all, sty.freeBox__ix8Va)} />
-
-              <p.Stack
-                as={"div"}
-                hasGap={true}
-                className={classNames(projectcss.all, sty.freeBox__c7XrX)}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__sStdx
-                  )}
-                >
-                  {"PREPARANDO"}
-                </div>
-                <div className={classNames(projectcss.all, sty.freeBox__kg0HZ)}>
-                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                    (() => {
-                      try {
-                        return $queries.preparando.data;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return [];
-                        }
-                        throw e;
-                      }
-                    })()
-                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                    const currentItem = __plasmic_item_0;
-                    const currentIndex = __plasmic_idx_0;
-                    return (
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          sty.freeBox__e82H0
-                        )}
-                        key={currentIndex}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__y4F4D
-                          )}
-                        >
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__pdDhc
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.id;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </p.Stack>
             </div>
           </div>
           <SideEffect
