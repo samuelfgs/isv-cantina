@@ -231,13 +231,13 @@ function PlasmicChamada__RenderFunc(props: {
                     sty.text___6VOvX
                   )}
                 >
-                  {"PRONTO"}
+                  {"RETIRE SEU PEDIDO"}
                 </div>
                 <div className={classNames(projectcss.all, sty.freeBox__tD8N8)}>
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                     (() => {
                       try {
-                        return $queries.pronto.data;
+                        return $queries.preparando.data;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
