@@ -2565,46 +2565,63 @@ function PlasmicHomepage__RenderFunc(props: {
                                                   throw error;
                                                 }
                                                 $state.orderId = venda[0].id;
+                                                const HAMBURGUER_ID = 4;
+                                                const nonHamburguer = [];
+                                                let hambuerguerQtt = 0;
+                                                for (const lineItem of $state.carrinho) {
+                                                  const product =
+                                                    $ctx.supabase.find(
+                                                      p => p.id === lineItem.id
+                                                    );
+                                                  const productVariant =
+                                                    product.variants.find(
+                                                      pv =>
+                                                        pv.id ===
+                                                        lineItem.option.id
+                                                    );
+                                                  if (
+                                                    product.id === HAMBURGUER_ID
+                                                  ) {
+                                                    hambuerguerQtt +=
+                                                      lineItem.qtt;
+                                                  } else {
+                                                    const currentItem =
+                                                      nonHamburguer.find(
+                                                        it =>
+                                                          it.id ===
+                                                          productVariant.id
+                                                      );
+                                                    if (currentItem) {
+                                                      currentItem.stock -=
+                                                        lineItem.qtt;
+                                                    } else {
+                                                      nonHamburguer.push({
+                                                        id: productVariant.id,
+                                                        stock:
+                                                          productVariant.stock -
+                                                          lineItem.qtt
+                                                      });
+                                                    }
+                                                  }
+                                                }
+                                                const upsertValues = [
+                                                  ...nonHamburguer,
+                                                  ...$ctx.supabase
+                                                    .find(
+                                                      p =>
+                                                        p.id === HAMBURGUER_ID
+                                                    )
+                                                    .variants.map(pv => ({
+                                                      id: pv.id,
+                                                      stock: (pv.stock -=
+                                                        hambuerguerQtt)
+                                                    }))
+                                                ];
+
                                                 await $ctx.supabaseMutation.upsert(
                                                   {
                                                     table: "productvariant",
-                                                    upsertValues:
-                                                      $state.carrinho.reduce(
-                                                        (acc, lineItem) => {
-                                                          const product =
-                                                            $ctx.supabase.find(
-                                                              p =>
-                                                                p.id ===
-                                                                lineItem.id
-                                                            );
-                                                          const productVariant =
-                                                            product.variants.find(
-                                                              pv =>
-                                                                pv.id ===
-                                                                lineItem.option
-                                                                  .id
-                                                            );
-                                                          const currentItem =
-                                                            acc.find(
-                                                              it =>
-                                                                it.id ===
-                                                                productVariant.id
-                                                            );
-                                                          if (currentItem) {
-                                                            currentItem.stock -=
-                                                              lineItem.qtt;
-                                                          } else {
-                                                            acc.push({
-                                                              id: productVariant.id,
-                                                              stock:
-                                                                productVariant.stock -
-                                                                lineItem.qtt
-                                                            });
-                                                          }
-                                                          return [...acc];
-                                                        },
-                                                        []
-                                                      )
+                                                    upsertValues
                                                   }
                                                 );
                                                 await sleep(100);
