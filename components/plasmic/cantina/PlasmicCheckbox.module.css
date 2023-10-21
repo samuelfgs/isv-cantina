@@ -46,8 +46,8 @@
   position: relative;
   object-fit: cover;
   color: #dbdbd7;
-  width: 24px;
-  height: 24px;
+  width: 75px;
+  height: 75px;
   flex-shrink: 0;
 }
 .svgisChecked {

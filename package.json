@@ -16,6 +16,7 @@
     "@plasmicpkgs/plasmic-basic-components": "^0.0.193",
     "@plasmicpkgs/plasmic-nav": "^0.0.147",
     "@plasmicpkgs/plasmic-rich-components": "^1.0.151",
+    "@supabase/supabase-js": "^2.38.2",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

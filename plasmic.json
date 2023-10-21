@@ -666,6 +666,24 @@
           "name": "ReactPrint",
           "displayName": "React Print",
           "componentImportPath": "./pages/plasmic-host"
+        },
+        {
+          "id": "jGc1XPhYG1oO",
+          "name": "SupabaseFetcher",
+          "displayName": "SupabaseFetcher",
+          "componentImportPath": "./components/supabase/supabase"
+        },
+        {
+          "id": "Cu9sFLV3rnHH",
+          "name": "PreQueries",
+          "displayName": "Supabase PreQueries",
+          "componentImportPath": "./components/supabase/supabase"
+        },
+        {
+          "id": "RAfjAj2dBb8c",
+          "name": "SupabaseMutation",
+          "displayName": "Supabase Mutation",
+          "componentImportPath": "./components/supabase/supabase"
         }
       ],
       "splitsProviderFilePath": "",
