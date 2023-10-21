@@ -44,6 +44,7 @@ import {
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
 import { NavigationBar } from "@plasmicpkgs/plasmic-nav"; // plasmic-import: jGx9tiKJoex/codeComponent
+import { SupabaseFetcher } from "../../supabase/supabase"; // plasmic-import: jGc1XPhYG1oO/codeComponent
 import Select from "../../Select"; // plasmic-import: TQ2uLm_LONoV/component
 import { AntdInputNumber } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: wxD5qjEe3pU/codeComponent
 import Button from "../../Button"; // plasmic-import: WaoscXndZ0Zl/component
@@ -124,35 +125,19 @@ function PlasmicCardapio__RenderFunc(props: {
         initFunc: ({ $props, $state, $queries, $ctx }) => ({})
       },
       {
-        path: "product.value",
+        path: "product[].value",
         type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        variableType: "text"
       },
       {
-        path: "productVariant.value",
+        path: "productVariant[].value",
         type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        variableType: "text"
       },
       {
-        path: "numberInput.value",
+        path: "numberInput[].value",
         type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) =>
-          (() => {
-            try {
-              return $state.selectedVariant.stock;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return undefined;
-              }
-              throw e;
-            }
-          })()
+        variableType: "text"
       },
       {
         path: "selectedVariant",
@@ -325,413 +310,698 @@ function PlasmicCardapio__RenderFunc(props: {
             responsiveBreakpoint={768}
           />
 
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text__jmluv
-            )}
+          <SupabaseFetcher
+            className={classNames("__wab_instance", sty.supabaseFetcher__um2AZ)}
+            name={"product"}
+            table={"product"}
           >
-            {"Atualizar estoque"}
-          </div>
-          <p.Stack
-            as={"div"}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__qKgI)}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text___3D6D5
+            <ph.DataCtxReader>
+              {$ctx => (
+                <SupabaseFetcher
+                  className={classNames(
+                    "__wab_instance",
+                    sty.supabaseFetcher__gk8IK
+                  )}
+                  name={"productVariant"}
+                  table={"productvariant"}
+                >
+                  <ph.DataCtxReader>
+                    {$ctx =>
+                      (_par =>
+                        !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                        (() => {
+                          try {
+                            return [
+                              $ctx.product.map(prod => ({
+                                ...prod,
+                                variants: $ctx.productVariant.filter(
+                                  pv => pv.productid === prod.id
+                                )
+                              }))
+                            ];
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return [];
+                            }
+                            throw e;
+                          }
+                        })()
+                      ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                        const products = __plasmic_item_0;
+                        const currentIndex = __plasmic_idx_0;
+                        return (
+                          <p.Stack
+                            as={"div"}
+                            hasGap={true}
+                            className={classNames(
+                              projectcss.all,
+                              sty.freeBox__p5XNi
+                            )}
+                            key={currentIndex}
+                          >
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__jmluv
+                              )}
+                            >
+                              {"Atualizar estoque"}
+                            </div>
+                            <p.Stack
+                              as={"div"}
+                              hasGap={true}
+                              className={classNames(
+                                projectcss.all,
+                                sty.freeBox__qKgI
+                              )}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text___3D6D5
+                                )}
+                              >
+                                {"Selecionar produto"}
+                              </div>
+                              {(() => {
+                                const child$Props = {
+                                  className: classNames(
+                                    "__wab_instance",
+                                    sty.product
+                                  ),
+                                  onChange: async (...eventArgs: any) => {
+                                    ((...eventArgs) => {
+                                      p.generateStateOnChangeProp($state, [
+                                        "product",
+                                        __plasmic_idx_0,
+                                        "value"
+                                      ])(eventArgs[0]);
+                                    }).apply(null, eventArgs);
+                                    (async value => {
+                                      const $steps = {};
+
+                                      $steps["updateSelectedProduct"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "selectedProduct"
+                                                ]
+                                              },
+                                              operation: 0,
+                                              value:
+                                                $queries.produtos.data.find(
+                                                  row => row.id === value
+                                                )
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              p.set(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        typeof $steps[
+                                          "updateSelectedProduct"
+                                        ] === "object" &&
+                                        typeof $steps["updateSelectedProduct"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateSelectedProduct"] =
+                                          await $steps["updateSelectedProduct"];
+                                      }
+
+                                      $steps["updateSelectedProduct2"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "selectedVariant"
+                                                ]
+                                              },
+                                              operation: 1
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              p.set(
+                                                objRoot,
+                                                variablePath,
+                                                undefined
+                                              );
+                                              return undefined;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        typeof $steps[
+                                          "updateSelectedProduct2"
+                                        ] === "object" &&
+                                        typeof $steps["updateSelectedProduct2"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateSelectedProduct2"] =
+                                          await $steps[
+                                            "updateSelectedProduct2"
+                                          ];
+                                      }
+
+                                      $steps["updateSelectedProduct3"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "numberInput",
+                                                  "value"
+                                                ]
+                                              },
+                                              operation: 1
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              p.set(
+                                                objRoot,
+                                                variablePath,
+                                                undefined
+                                              );
+                                              return undefined;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        typeof $steps[
+                                          "updateSelectedProduct3"
+                                        ] === "object" &&
+                                        typeof $steps["updateSelectedProduct3"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateSelectedProduct3"] =
+                                          await $steps[
+                                            "updateSelectedProduct3"
+                                          ];
+                                      }
+
+                                      $steps["updateSelectedProduct4"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "productVariant",
+                                                  "value"
+                                                ]
+                                              },
+                                              operation: 1
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              p.set(
+                                                objRoot,
+                                                variablePath,
+                                                undefined
+                                              );
+                                              return undefined;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        typeof $steps[
+                                          "updateSelectedProduct4"
+                                        ] === "object" &&
+                                        typeof $steps["updateSelectedProduct4"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateSelectedProduct4"] =
+                                          await $steps[
+                                            "updateSelectedProduct4"
+                                          ];
+                                      }
+                                    }).apply(null, eventArgs);
+                                  },
+                                  options: (() => {
+                                    try {
+                                      return products.map(row => ({
+                                        label: row.name,
+                                        value: row.id
+                                      }));
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return [
+                                          {
+                                            value: "option1",
+                                            label: "Option 1"
+                                          },
+                                          {
+                                            value: "option2",
+                                            label: "Option 2"
+                                          }
+                                        ];
+                                      }
+                                      throw e;
+                                    }
+                                  })(),
+                                  value: p.generateStateValueProp($state, [
+                                    "product",
+                                    __plasmic_idx_0,
+                                    "value"
+                                  ])
+                                };
+
+                                p.initializePlasmicStates(
+                                  $state,
+                                  [
+                                    {
+                                      name: "product[].value",
+                                      initFunc: ({
+                                        $props,
+                                        $state,
+                                        $queries
+                                      }) => undefined
+                                    }
+                                  ],
+                                  [__plasmic_idx_0]
+                                );
+                                return (
+                                  <Select
+                                    data-plasmic-name={"product"}
+                                    data-plasmic-override={overrides.product}
+                                    {...child$Props}
+                                  />
+                                );
+                              })()}
+                            </p.Stack>
+                            <p.Stack
+                              as={"div"}
+                              hasGap={true}
+                              className={classNames(
+                                projectcss.all,
+                                sty.freeBox__dRl
+                              )}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__rssJ
+                                )}
+                              >
+                                {"Selecionar op\u00e7\u00e3o"}
+                              </div>
+                              {(() => {
+                                const child$Props = {
+                                  className: classNames(
+                                    "__wab_instance",
+                                    sty.productVariant
+                                  ),
+                                  onChange: async (...eventArgs: any) => {
+                                    ((...eventArgs) => {
+                                      p.generateStateOnChangeProp($state, [
+                                        "productVariant",
+                                        __plasmic_idx_0,
+                                        "value"
+                                      ])(eventArgs[0]);
+                                    }).apply(null, eventArgs);
+                                    (async value => {
+                                      const $steps = {};
+
+                                      $steps["updateSelectedVariant"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "selectedVariant"
+                                                ]
+                                              },
+                                              operation: 0,
+                                              value:
+                                                $state.selectedProduct.variants.find(
+                                                  pv => +pv.id === +value
+                                                )
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              p.set(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        typeof $steps[
+                                          "updateSelectedVariant"
+                                        ] === "object" &&
+                                        typeof $steps["updateSelectedVariant"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateSelectedVariant"] =
+                                          await $steps["updateSelectedVariant"];
+                                      }
+
+                                      $steps["updateNumberInputValue"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "numberInput",
+                                                  "value"
+                                                ]
+                                              },
+                                              operation: 1
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              p.set(
+                                                objRoot,
+                                                variablePath,
+                                                undefined
+                                              );
+                                              return undefined;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        typeof $steps[
+                                          "updateNumberInputValue"
+                                        ] === "object" &&
+                                        typeof $steps["updateNumberInputValue"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateNumberInputValue"] =
+                                          await $steps[
+                                            "updateNumberInputValue"
+                                          ];
+                                      }
+                                    }).apply(null, eventArgs);
+                                  },
+                                  options: (() => {
+                                    try {
+                                      return $state.selectedProduct.variants.map(
+                                        pv => ({
+                                          label: pv.name,
+                                          value: pv.id
+                                        })
+                                      );
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return [
+                                          {
+                                            value: "option1",
+                                            label: "Option 1"
+                                          },
+                                          {
+                                            value: "option2",
+                                            label: "Option 2"
+                                          }
+                                        ];
+                                      }
+                                      throw e;
+                                    }
+                                  })(),
+                                  value: p.generateStateValueProp($state, [
+                                    "productVariant",
+                                    __plasmic_idx_0,
+                                    "value"
+                                  ])
+                                };
+
+                                p.initializePlasmicStates(
+                                  $state,
+                                  [
+                                    {
+                                      name: "productVariant[].value",
+                                      initFunc: ({
+                                        $props,
+                                        $state,
+                                        $queries
+                                      }) => undefined
+                                    }
+                                  ],
+                                  [__plasmic_idx_0]
+                                );
+                                return (
+                                  <Select
+                                    data-plasmic-name={"productVariant"}
+                                    data-plasmic-override={
+                                      overrides.productVariant
+                                    }
+                                    {...child$Props}
+                                  />
+                                );
+                              })()}
+                            </p.Stack>
+                            <p.Stack
+                              as={"div"}
+                              hasGap={true}
+                              className={classNames(
+                                projectcss.all,
+                                sty.freeBox__pjhtS
+                              )}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text___1Cxed
+                                )}
+                              >
+                                {"Estoque"}
+                              </div>
+                              {(() => {
+                                const child$Props = {
+                                  className: classNames(
+                                    "__wab_instance",
+                                    sty.numberInput
+                                  ),
+                                  onChange: p.generateStateOnChangeProp(
+                                    $state,
+                                    ["numberInput", __plasmic_idx_0, "value"]
+                                  ),
+                                  value: p.generateStateValueProp($state, [
+                                    "numberInput",
+                                    __plasmic_idx_0,
+                                    "value"
+                                  ])
+                                };
+                                p.initializeCodeComponentStates(
+                                  $state,
+                                  [
+                                    {
+                                      name: "value",
+                                      plasmicStateName: "numberInput[].value"
+                                    }
+                                  ],
+                                  [__plasmic_idx_0],
+                                  undefined ?? {},
+                                  child$Props
+                                );
+                                p.initializePlasmicStates(
+                                  $state,
+                                  [
+                                    {
+                                      name: "numberInput[].value",
+                                      initFunc: ({
+                                        $props,
+                                        $state,
+                                        $queries
+                                      }) =>
+                                        (() => {
+                                          try {
+                                            return $state.selectedVariant.stock;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return undefined;
+                                            }
+                                            throw e;
+                                          }
+                                        })()
+                                    }
+                                  ],
+                                  [__plasmic_idx_0]
+                                );
+                                return (
+                                  <AntdInputNumber
+                                    data-plasmic-name={"numberInput"}
+                                    data-plasmic-override={
+                                      overrides.numberInput
+                                    }
+                                    {...child$Props}
+                                  />
+                                );
+                              })()}
+                            </p.Stack>
+                            <Button
+                              data-plasmic-name={"button"}
+                              data-plasmic-override={overrides.button}
+                              className={classNames(
+                                "__wab_instance",
+                                sty.button
+                              )}
+                              onClick={async event => {
+                                const $steps = {};
+
+                                $steps["postgresUpdateById"] = true
+                                  ? (() => {
+                                      const actionArgs = {
+                                        dataOp: {
+                                          sourceId: "hLw78H9DAdcctLTB5Q6jny",
+                                          opId: "4b85247b-e63a-4dc7-b44a-a36084f8867d",
+                                          userArgs: {
+                                            keys: [$state.selectedVariant.id],
+                                            variables: [
+                                              $state.numberInput.value
+                                            ]
+                                          },
+                                          cacheKey: `plasmic.$.4b85247b-e63a-4dc7-b44a-a36084f8867d.$.`,
+                                          invalidatedKeys: [
+                                            "plasmic_refresh_all"
+                                          ],
+                                          roleId: null
+                                        }
+                                      };
+                                      return (async ({
+                                        dataOp,
+                                        continueOnError
+                                      }) => {
+                                        try {
+                                          const response =
+                                            await executePlasmicDataOp(dataOp, {
+                                              userAuthToken:
+                                                dataSourcesCtx?.userAuthToken,
+                                              user: dataSourcesCtx?.user
+                                            });
+                                          await plasmicInvalidate(
+                                            dataOp.invalidatedKeys
+                                          );
+                                          return response;
+                                        } catch (e) {
+                                          if (!continueOnError) {
+                                            throw e;
+                                          }
+                                          return e;
+                                        }
+                                      })?.apply(null, [actionArgs]);
+                                    })()
+                                  : undefined;
+                                if (
+                                  typeof $steps["postgresUpdateById"] ===
+                                    "object" &&
+                                  typeof $steps["postgresUpdateById"].then ===
+                                    "function"
+                                ) {
+                                  $steps["postgresUpdateById"] = await $steps[
+                                    "postgresUpdateById"
+                                  ];
+                                }
+                              }}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.__wab_text,
+                                  sty.text__bCfPq
+                                )}
+                              >
+                                {"Salvar"}
+                              </div>
+                            </Button>
+                          </p.Stack>
+                        );
+                      })
+                    }
+                  </ph.DataCtxReader>
+                </SupabaseFetcher>
               )}
-            >
-              {"Selecionar produto"}
-            </div>
-            <Select
-              data-plasmic-name={"product"}
-              data-plasmic-override={overrides.product}
-              className={classNames("__wab_instance", sty.product)}
-              onChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  p.generateStateOnChangeProp($state, ["product", "value"])(
-                    eventArgs[0]
-                  );
-                }).apply(null, eventArgs);
-                (async value => {
-                  const $steps = {};
-
-                  $steps["updateSelectedProduct"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["selectedProduct"]
-                          },
-                          operation: 0,
-                          value: $queries.produtos.data.find(
-                            row => row.id === value
-                          )
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          p.set(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    typeof $steps["updateSelectedProduct"] === "object" &&
-                    typeof $steps["updateSelectedProduct"].then === "function"
-                  ) {
-                    $steps["updateSelectedProduct"] = await $steps[
-                      "updateSelectedProduct"
-                    ];
-                  }
-
-                  $steps["updateSelectedProduct2"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["selectedVariant"]
-                          },
-                          operation: 1
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          p.set(objRoot, variablePath, undefined);
-                          return undefined;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    typeof $steps["updateSelectedProduct2"] === "object" &&
-                    typeof $steps["updateSelectedProduct2"].then === "function"
-                  ) {
-                    $steps["updateSelectedProduct2"] = await $steps[
-                      "updateSelectedProduct2"
-                    ];
-                  }
-
-                  $steps["updateSelectedProduct3"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["numberInput", "value"]
-                          },
-                          operation: 1
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          p.set(objRoot, variablePath, undefined);
-                          return undefined;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    typeof $steps["updateSelectedProduct3"] === "object" &&
-                    typeof $steps["updateSelectedProduct3"].then === "function"
-                  ) {
-                    $steps["updateSelectedProduct3"] = await $steps[
-                      "updateSelectedProduct3"
-                    ];
-                  }
-
-                  $steps["updateSelectedProduct4"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["productVariant", "value"]
-                          },
-                          operation: 1
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          p.set(objRoot, variablePath, undefined);
-                          return undefined;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    typeof $steps["updateSelectedProduct4"] === "object" &&
-                    typeof $steps["updateSelectedProduct4"].then === "function"
-                  ) {
-                    $steps["updateSelectedProduct4"] = await $steps[
-                      "updateSelectedProduct4"
-                    ];
-                  }
-                }).apply(null, eventArgs);
-              }}
-              options={(() => {
-                try {
-                  return $queries.produtos.data.map(row => ({
-                    label: row.name,
-                    value: row.id
-                  }));
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return [
-                      { value: "option1", label: "Option 1" },
-                      { value: "option2", label: "Option 2" }
-                    ];
-                  }
-                  throw e;
-                }
-              })()}
-              value={p.generateStateValueProp($state, ["product", "value"])}
-            />
-          </p.Stack>
-          <p.Stack
-            as={"div"}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__dRl)}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__rssJ
-              )}
-            >
-              {"Selecionar op\u00e7\u00e3o"}
-            </div>
-            <Select
-              data-plasmic-name={"productVariant"}
-              data-plasmic-override={overrides.productVariant}
-              className={classNames("__wab_instance", sty.productVariant)}
-              onChange={async (...eventArgs: any) => {
-                ((...eventArgs) => {
-                  p.generateStateOnChangeProp($state, [
-                    "productVariant",
-                    "value"
-                  ])(eventArgs[0]);
-                }).apply(null, eventArgs);
-                (async value => {
-                  const $steps = {};
-
-                  $steps["updateSelectedVariant"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["selectedVariant"]
-                          },
-                          operation: 0,
-                          value: $state.selectedProduct.variants.find(
-                            pv => +pv.id === +value
-                          )
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          p.set(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    typeof $steps["updateSelectedVariant"] === "object" &&
-                    typeof $steps["updateSelectedVariant"].then === "function"
-                  ) {
-                    $steps["updateSelectedVariant"] = await $steps[
-                      "updateSelectedVariant"
-                    ];
-                  }
-
-                  $steps["updateNumberInputValue"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["numberInput", "value"]
-                          },
-                          operation: 1
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-
-                          p.set(objRoot, variablePath, undefined);
-                          return undefined;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    typeof $steps["updateNumberInputValue"] === "object" &&
-                    typeof $steps["updateNumberInputValue"].then === "function"
-                  ) {
-                    $steps["updateNumberInputValue"] = await $steps[
-                      "updateNumberInputValue"
-                    ];
-                  }
-                }).apply(null, eventArgs);
-              }}
-              options={(() => {
-                try {
-                  return $state.selectedProduct.variants.map(pv => ({
-                    label: pv.name,
-                    value: pv.id
-                  }));
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return [
-                      { value: "option1", label: "Option 1" },
-                      { value: "option2", label: "Option 2" }
-                    ];
-                  }
-                  throw e;
-                }
-              })()}
-              value={p.generateStateValueProp($state, [
-                "productVariant",
-                "value"
-              ])}
-            />
-          </p.Stack>
-          <p.Stack
-            as={"div"}
-            hasGap={true}
-            className={classNames(projectcss.all, sty.freeBox__pjhtS)}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text___1Cxed
-              )}
-            >
-              {"Estoque"}
-            </div>
-            <AntdInputNumber
-              data-plasmic-name={"numberInput"}
-              data-plasmic-override={overrides.numberInput}
-              className={classNames("__wab_instance", sty.numberInput)}
-              onChange={p.generateStateOnChangeProp($state, [
-                "numberInput",
-                "value"
-              ])}
-              value={p.generateStateValueProp($state, ["numberInput", "value"])}
-            />
-          </p.Stack>
-          <Button
-            data-plasmic-name={"button"}
-            data-plasmic-override={overrides.button}
-            className={classNames("__wab_instance", sty.button)}
-            onClick={async event => {
-              const $steps = {};
-
-              $steps["postgresUpdateById"] = true
-                ? (() => {
-                    const actionArgs = {
-                      dataOp: {
-                        sourceId: "hLw78H9DAdcctLTB5Q6jny",
-                        opId: "4b85247b-e63a-4dc7-b44a-a36084f8867d",
-                        userArgs: {
-                          keys: [$state.selectedVariant.id],
-                          variables: [$state.numberInput.value]
-                        },
-                        cacheKey: `plasmic.$.4b85247b-e63a-4dc7-b44a-a36084f8867d.$.`,
-                        invalidatedKeys: ["plasmic_refresh_all"],
-                        roleId: null
-                      }
-                    };
-                    return (async ({ dataOp, continueOnError }) => {
-                      try {
-                        const response = await executePlasmicDataOp(dataOp, {
-                          userAuthToken: dataSourcesCtx?.userAuthToken,
-                          user: dataSourcesCtx?.user
-                        });
-                        await plasmicInvalidate(dataOp.invalidatedKeys);
-                        return response;
-                      } catch (e) {
-                        if (!continueOnError) {
-                          throw e;
-                        }
-                        return e;
-                      }
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                typeof $steps["postgresUpdateById"] === "object" &&
-                typeof $steps["postgresUpdateById"].then === "function"
-              ) {
-                $steps["postgresUpdateById"] = await $steps[
-                  "postgresUpdateById"
-                ];
-              }
-            }}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__bCfPq
-              )}
-            >
-              {"Salvar"}
-            </div>
-          </Button>
+            </ph.DataCtxReader>
+          </SupabaseFetcher>
         </div>
       </div>
     </React.Fragment>
