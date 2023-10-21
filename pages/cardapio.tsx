@@ -24,10 +24,10 @@ function Cardapio() {
   // variant context providers. These wrappers may be moved to
   // Next.js Custom App component
   // (https://nextjs.org/docs/advanced-features/custom-app).
-  const [isLoaded, setIsLoaded] = React.useState(false);
-  React.useEffect(() => {
-    setIsLoaded(true);
-  }, [])
+  const [isLoaded, setIsLoaded] = React.useState(true);
+  // React.useEffect(() => {
+  //   setIsLoaded(true);
+  // }, [])
   return isLoaded ? (
     <GlobalContextsProvider>
       <ph.PageParamsProvider
