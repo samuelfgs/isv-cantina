@@ -237,7 +237,7 @@ function PlasmicChamada__RenderFunc(props: {
                   {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                     (() => {
                       try {
-                        return $queries.preparando.data;
+                        return $queries.pronto.data;
                       } catch (e) {
                         if (
                           e instanceof TypeError ||
