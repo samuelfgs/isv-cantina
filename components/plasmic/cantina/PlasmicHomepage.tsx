@@ -52,6 +52,7 @@ import { inputHelpers as AntdTextArea_Helpers } from "@plasmicpkgs/antd5/skinny/
 import Select from "../../Select"; // plasmic-import: TQ2uLm_LONoV/component
 import { AntdInputNumber } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: wxD5qjEe3pU/codeComponent
 import TextInput from "../../TextInput"; // plasmic-import: J6Bka2G1vC3V/component
+import Checkbox from "../../Checkbox"; // plasmic-import: 3SFd0T01Rc6S/component
 import { ReactPrint } from "../../../pages/plasmic-host"; // plasmic-import: X8Zc8pbRE2UR/codeComponent
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources"; // plasmic-import: CBeuHHn1qQBJ/codeComponent
 
@@ -85,6 +86,7 @@ export type PlasmicHomepage__OverridesType = {
   formaPagamento?: p.Flex<typeof Select>;
   numberInput?: p.Flex<typeof AntdInputNumber>;
   name?: p.Flex<typeof TextInput>;
+  senha?: p.Flex<typeof Checkbox>;
   reactPrint?: p.Flex<typeof ReactPrint>;
 };
 
@@ -234,6 +236,12 @@ function PlasmicHomepage__RenderFunc(props: {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "senha.isChecked",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
     [$props, $ctx, $refs]
@@ -1527,6 +1535,36 @@ function PlasmicHomepage__RenderFunc(props: {
                 }
               />
             </p.Stack>
+            <p.Stack
+              as={"div"}
+              hasGap={true}
+              className={classNames(projectcss.all, sty.freeBox__mXAjI)}
+            >
+              <Checkbox
+                data-plasmic-name={"senha"}
+                data-plasmic-override={overrides.senha}
+                className={classNames("__wab_instance", sty.senha)}
+                isChecked={
+                  p.generateStateValueProp($state, ["senha", "isChecked"]) ??
+                  false
+                }
+                onChange={(...eventArgs) => {
+                  p.generateStateOnChangeProp($state, ["senha", "isChecked"])(
+                    eventArgs[0]
+                  );
+                }}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__afUrM
+                  )}
+                >
+                  {"N\u00e3o precisa de senha"}
+                </div>
+              </Checkbox>
+            </p.Stack>
             <Button
               className={classNames("__wab_instance", sty.button__v5WXs)}
               isDisabled={(() => {
@@ -1599,7 +1637,10 @@ function PlasmicHomepage__RenderFunc(props: {
                                   0
                                 ),
                                 lineItems: JSON.stringify($state.carrinho),
-                                method: $state.formaPagamento.value
+                                method: $state.formaPagamento.value,
+                                status: $state.senha.isChecked
+                                  ? "entregue"
+                                  : undefined
                               }
                             ]
                           },
@@ -1949,6 +1990,7 @@ const PlasmicDescendants = {
     "formaPagamento",
     "numberInput",
     "name",
+    "senha",
     "reactPrint"
   ],
   navigationBar: ["navigationBar"],
@@ -1958,6 +2000,7 @@ const PlasmicDescendants = {
   formaPagamento: ["formaPagamento"],
   numberInput: ["numberInput"],
   name: ["name"],
+  senha: ["senha"],
   reactPrint: ["reactPrint"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -1972,6 +2015,7 @@ type NodeDefaultElementType = {
   formaPagamento: typeof Select;
   numberInput: typeof AntdInputNumber;
   name: typeof TextInput;
+  senha: typeof Checkbox;
   reactPrint: typeof ReactPrint;
 };
 
@@ -2042,6 +2086,7 @@ export const PlasmicHomepage = Object.assign(
     formaPagamento: makeNodeComponent("formaPagamento"),
     numberInput: makeNodeComponent("numberInput"),
     _name: makeNodeComponent("name"),
+    senha: makeNodeComponent("senha"),
     reactPrint: makeNodeComponent("reactPrint"),
 
     // Metadata about props expected for PlasmicHomepage

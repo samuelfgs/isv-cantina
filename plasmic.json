@@ -576,6 +576,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/cardapio"
+        },
+        {
+          "id": "3SFd0T01Rc6S",
+          "name": "Checkbox",
+          "type": "managed",
+          "projectId": "eVCRKWwcuK6xExRdUZxKpb",
+          "renderModuleFilePath": "plasmic/cantina/PlasmicCheckbox.tsx",
+          "importSpec": {
+            "modulePath": "Checkbox.tsx"
+          },
+          "cssFilePath": "plasmic/cantina/PlasmicCheckbox.module.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "plumeType": "checkbox"
         }
       ],
       "icons": [
@@ -603,6 +617,21 @@
           "id": "4cDugE6nCYpo",
           "name": "SearchsvgIcon",
           "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__Searchsvg.tsx"
+        },
+        {
+          "id": "kJfrcxVUxRzg",
+          "name": "SquaresvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__Squaresvg.tsx"
+        },
+        {
+          "id": "TlQ7n2RwYBRj",
+          "name": "SquareCheckFilledsvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SquareCheckFilledsvg.tsx"
+        },
+        {
+          "id": "7HVTh042efWA",
+          "name": "SquareMinussvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SquareMinussvg.tsx"
         }
       ],
       "images": [

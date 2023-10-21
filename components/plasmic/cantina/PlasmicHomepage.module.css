@@ -837,6 +837,41 @@
   width: 1em;
   height: 1em;
 }
+.freeBox__mXAjI {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.freeBox__mXAjI > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin-left: calc(0px - 30px);
+  width: calc(100% + 30px);
+}
+.freeBox__mXAjI > :global(.__wab_flex-container) > *,
+.freeBox__mXAjI > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__mXAjI > :global(.__wab_flex-container) > picture > img,
+.freeBox__mXAjI
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 30px;
+}
+.senha:global(.__wab_instance) {
+  max-width: 100%;
+  position: relative;
+}
+.text__afUrM {
+  font-size: 20px;
+}
 .button__v5WXs:global(.__wab_instance) {
   max-width: 100%;
   position: relative;
