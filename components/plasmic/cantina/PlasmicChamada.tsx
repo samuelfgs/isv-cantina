@@ -43,8 +43,8 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
+import { SupabaseFetcher } from "../../supabase/supabase"; // plasmic-import: jGc1XPhYG1oO/codeComponent
 import { SideEffect } from "@plasmicpkgs/plasmic-basic-components"; // plasmic-import: K-mWGqrHefEp/codeComponent
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources"; // plasmic-import: CBeuHHn1qQBJ/codeComponent
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -72,6 +72,7 @@ export const PlasmicChamada__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicChamada__OverridesType = {
   root?: p.Flex<"div">;
+  supabaseFetcher?: p.Flex<typeof SupabaseFetcher>;
   img?: p.Flex<typeof p.PlasmicImg>;
   sideEffect?: p.Flex<typeof SideEffect>;
 };
@@ -119,9 +120,6 @@ function PlasmicChamada__RenderFunc(props: {
 
   const currentUser = p.useCurrentUser?.() || {};
 
-  let [$queries, setDollarQueries] = React.useState<
-    Record<string, ReturnType<typeof usePlasmicDataOp>>
-  >({});
   const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
     () => [
       {
@@ -136,29 +134,11 @@ function PlasmicChamada__RenderFunc(props: {
   const $state = p.useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: $queries,
+    $queries: {},
     $refs
   });
   const dataSourcesCtx = usePlasmicDataSourceContext();
   const plasmicInvalidate = usePlasmicInvalidate();
-
-  const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
-    pronto: usePlasmicDataOp(() => {
-      return {
-        sourceId: "hLw78H9DAdcctLTB5Q6jny",
-        opId: "f660d1da-c1f2-4a36-94fe-e8a9f60bf6c1",
-        userArgs: {},
-        cacheKey: `plasmic.$.f660d1da-c1f2-4a36-94fe-e8a9f60bf6c1.$.`,
-        invalidatedKeys: null,
-        roleId: null
-      };
-    })
-  };
-  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
-    setDollarQueries(new$Queries);
-
-    $queries = new$Queries;
-  }
 
   return (
     <React.Fragment>
@@ -187,107 +167,132 @@ function PlasmicChamada__RenderFunc(props: {
             sty.root
           )}
         >
-          <div className={classNames(projectcss.all, sty.freeBox__ed4ZA)}>
-            <p.PlasmicImg
-              data-plasmic-name={"img"}
-              data-plasmic-override={overrides.img}
-              alt={""}
-              className={classNames(sty.img)}
-              displayHeight={"100%"}
-              displayMaxHeight={"none"}
-              displayMaxWidth={"100%"}
-              displayMinHeight={"0"}
-              displayMinWidth={"0"}
-              displayWidth={"100%"}
-              loading={"lazy"}
-              src={{
-                src: "/plasmic/cantina/images/logo.png",
-                fullWidth: 1080,
-                fullHeight: 1080,
-                aspectRatio: undefined
-              }}
-            />
+          <SupabaseFetcher
+            data-plasmic-name={"supabaseFetcher"}
+            data-plasmic-override={overrides.supabaseFetcher}
+            className={classNames("__wab_instance", sty.supabaseFetcher)}
+            filters={[{ column: "status", operator: "eq", value: "pronto" }]}
+            table={"vendas"}
+          >
+            <ph.DataCtxReader>
+              {$ctx => (
+                <div className={classNames(projectcss.all, sty.freeBox__ed4ZA)}>
+                  <p.PlasmicImg
+                    data-plasmic-name={"img"}
+                    data-plasmic-override={overrides.img}
+                    alt={""}
+                    className={classNames(sty.img)}
+                    displayHeight={"100%"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"100%"}
+                    loading={"lazy"}
+                    src={{
+                      src: "/plasmic/cantina/images/logo.png",
+                      fullWidth: 1080,
+                      fullHeight: 1080,
+                      aspectRatio: undefined
+                    }}
+                  />
 
-            <div className={classNames(projectcss.all, sty.freeBox__ux5O3)}>
-              <p.Stack
-                as={"div"}
-                hasGap={true}
-                className={classNames(projectcss.all, sty.freeBox___3Pbc5)}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text___6VOvX
-                  )}
-                >
-                  {"RETIRE SEU PEDIDO"}
-                </div>
-                <div className={classNames(projectcss.all, sty.freeBox__tD8N8)}>
-                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                    (() => {
-                      try {
-                        return $queries.pronto.data;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return [];
-                        }
-                        throw e;
-                      }
-                    })()
-                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                    const currentItem = __plasmic_item_0;
-                    const currentIndex = __plasmic_idx_0;
-                    return (
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox__ux5O3)}
+                  >
+                    <p.Stack
+                      as={"div"}
+                      hasGap={true}
+                      className={classNames(
+                        projectcss.all,
+                        sty.freeBox___3Pbc5
+                      )}
+                    >
                       <div
                         className={classNames(
                           projectcss.all,
-                          sty.freeBox__ixTfa
+                          projectcss.__wab_text,
+                          sty.text___6VOvX
                         )}
-                        key={currentIndex}
                       >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__sF5NM
-                          )}
-                        >
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__z0H5V
-                            )}
-                          >
-                            <React.Fragment>
-                              {(() => {
-                                try {
-                                  return currentItem.id;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return "";
-                                  }
-                                  throw e;
-                                }
-                              })()}
-                            </React.Fragment>
-                          </div>
-                        </div>
+                        {"RETIRE SEU PEDIDO"}
                       </div>
-                    );
-                  })}
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__tD8N8
+                        )}
+                      >
+                        {(_par =>
+                          !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                          (() => {
+                            try {
+                              return $ctx.supabase;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return [];
+                              }
+                              throw e;
+                            }
+                          })()
+                        ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                          const currentItem = __plasmic_item_0;
+                          const currentIndex = __plasmic_idx_0;
+                          return (
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                sty.freeBox__ixTfa
+                              )}
+                              key={currentIndex}
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.freeBox__sF5NM
+                                )}
+                              >
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__z0H5V
+                                  )}
+                                >
+                                  <React.Fragment>
+                                    {(() => {
+                                      try {
+                                        return currentItem.id;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return "";
+                                        }
+                                        throw e;
+                                      }
+                                    })()}
+                                  </React.Fragment>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </p.Stack>
+                    <div
+                      className={classNames(projectcss.all, sty.freeBox__ix8Va)}
+                    />
+                  </div>
                 </div>
-              </p.Stack>
-              <div className={classNames(projectcss.all, sty.freeBox__ix8Va)} />
-            </div>
-          </div>
+              )}
+            </ph.DataCtxReader>
+          </SupabaseFetcher>
           <SideEffect
             data-plasmic-name={"sideEffect"}
             data-plasmic-override={overrides.sideEffect}
@@ -387,7 +392,8 @@ function PlasmicChamada__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "img", "sideEffect"],
+  root: ["root", "supabaseFetcher", "img", "sideEffect"],
+  supabaseFetcher: ["supabaseFetcher", "img"],
   img: ["img"],
   sideEffect: ["sideEffect"]
 } as const;
@@ -396,6 +402,7 @@ type DescendantsType<T extends NodeNameType> =
   (typeof PlasmicDescendants)[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  supabaseFetcher: typeof SupabaseFetcher;
   img: typeof p.PlasmicImg;
   sideEffect: typeof SideEffect;
 };
@@ -460,6 +467,7 @@ export const PlasmicChamada = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    supabaseFetcher: makeNodeComponent("supabaseFetcher"),
     img: makeNodeComponent("img"),
     sideEffect: makeNodeComponent("sideEffect"),
 

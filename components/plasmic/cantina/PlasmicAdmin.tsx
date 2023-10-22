@@ -44,14 +44,11 @@ import {
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
 import { NavigationBar } from "@plasmicpkgs/plasmic-nav"; // plasmic-import: jGx9tiKJoex/codeComponent
-import { RichTable } from "@plasmicpkgs/plasmic-rich-components"; // plasmic-import: k4RvFQUTZKCU/codeComponent
-import { tableHelpers as RichTable_Helpers } from "@plasmicpkgs/plasmic-rich-components"; // plasmic-import: k4RvFQUTZKCU/codeComponentHelper
+import { SupabaseMutation } from "../../supabase/supabase"; // plasmic-import: RAfjAj2dBb8c/codeComponent
+import { SupabaseFetcher } from "../../supabase/supabase"; // plasmic-import: jGc1XPhYG1oO/codeComponent
 import { AntdTabs } from "@plasmicpkgs/antd5/skinny/registerTabs"; // plasmic-import: HV5Zx3YTIxFT/codeComponent
 import { AntdTabItem } from "@plasmicpkgs/antd5/skinny/registerTabs"; // plasmic-import: OSD--ykMTE95/codeComponent
 import Button from "../../Button"; // plasmic-import: WaoscXndZ0Zl/component
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources"; // plasmic-import: CBeuHHn1qQBJ/codeComponent
-
-import { useScreenVariants as useScreenVariantsjkjoRz1IjIaF } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: JkjoRZ1ijIaF/globalVariant
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -77,7 +74,8 @@ export const PlasmicAdmin__ArgProps = new Array<ArgPropType>();
 export type PlasmicAdmin__OverridesType = {
   root?: p.Flex<"div">;
   navigationBar?: p.Flex<typeof NavigationBar>;
-  table?: p.Flex<typeof RichTable>;
+  supabaseMutation?: p.Flex<typeof SupabaseMutation>;
+  supabaseFetcher?: p.Flex<typeof SupabaseFetcher>;
   tabs?: p.Flex<typeof AntdTabs>;
 };
 
@@ -114,46 +112,8 @@ function PlasmicAdmin__RenderFunc(props: {
 
   const currentUser = p.useCurrentUser?.() || {};
 
-  let [$queries, setDollarQueries] = React.useState<
-    Record<string, ReturnType<typeof usePlasmicDataOp>>
-  >({});
   const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
     () => [
-      {
-        path: "table.selectedRowKey",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: p.generateOnMutateForSpec("selectedRowKey", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRow",
-        type: "private",
-        variableType: "object",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: p.generateOnMutateForSpec("selectedRow", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRows",
-        type: "private",
-        variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: p.generateOnMutateForSpec("selectedRows", RichTable_Helpers)
-      },
-      {
-        path: "table.selectedRowKeys",
-        type: "private",
-        variableType: "array",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
-
-        onMutate: p.generateOnMutateForSpec(
-          "selectedRowKeys",
-          RichTable_Helpers
-        )
-      },
       {
         path: "tabs.activeKey",
         type: "private",
@@ -166,33 +126,11 @@ function PlasmicAdmin__RenderFunc(props: {
   const $state = p.useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: $queries,
+    $queries: {},
     $refs
   });
   const dataSourcesCtx = usePlasmicDataSourceContext();
   const plasmicInvalidate = usePlasmicInvalidate();
-
-  const new$Queries: Record<string, ReturnType<typeof usePlasmicDataOp>> = {
-    query: usePlasmicDataOp(() => {
-      return {
-        sourceId: "hLw78H9DAdcctLTB5Q6jny",
-        opId: "941e3615-8b19-4ad1-b50a-55a84ebff58f",
-        userArgs: {},
-        cacheKey: `plasmic.$.941e3615-8b19-4ad1-b50a-55a84ebff58f.$.`,
-        invalidatedKeys: null,
-        roleId: null
-      };
-    })
-  };
-  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
-    setDollarQueries(new$Queries);
-
-    $queries = new$Queries;
-  }
-
-  const globalVariants = ensureGlobalVariants({
-    screen: useScreenVariantsjkjoRz1IjIaF()
-  });
 
   return (
     <React.Fragment>
@@ -329,1029 +267,601 @@ function PlasmicAdmin__RenderFunc(props: {
             responsiveBreakpoint={768}
           />
 
-          {(() => {
-            const child$Props = {
-              className: classNames("__wab_instance", sty.table),
-              data: (() => {
-                try {
-                  return $queries.query;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })(),
-              fields: (() => {
-                const __composite = [
-                  { key: "id", fieldId: "id", title: null },
-                  { key: "method", fieldId: "method", isHidden: null },
-                  { key: "name", fieldId: "name", dataType: null },
-                  { key: "created_at", fieldId: "created_at", isHidden: null },
-                  {
-                    key: "lineItems",
-                    fieldId: "lineItems",
-                    title: null,
-                    expr: null
-                  },
-                  {
-                    key: "total",
-                    fieldId: "total",
-                    title: null,
-                    dataType: null,
-                    currency: null,
-                    locale: null
-                  },
-                  { key: "status", fieldId: "status" }
-                ];
-                __composite["0"]["title"] = "Pedido";
-                __composite["1"]["isHidden"] = true;
-                __composite["2"]["dataType"] = "string";
-                __composite["3"]["isHidden"] = true;
-                __composite["4"]["title"] = "Itens";
-                __composite["4"]["expr"] = (currentItem, currentValue) => {
-                  return currentValue
-                    ?.map(
-                      lineItem =>
-                        `${lineItem.qtt}x\t${lineItem.name}${
-                          !lineItem.isSingle ? ` - ${lineItem.option.name}` : ""
-                        }`
-                    )
-                    .join("\n");
-                };
-                __composite["5"]["title"] = "Total";
-                __composite["5"]["dataType"] = "currency";
-                __composite["5"]["currency"] = "BRL";
-                __composite["5"]["locale"] = "pt-BR";
-                return __composite;
-              })(),
-              onRowSelectionChanged: async (...eventArgs: any) => {
-                p.generateStateOnChangePropForCodeComponents(
-                  $state,
-                  "selectedRowKey",
-                  ["table", "selectedRowKey"],
-                  RichTable_Helpers
-                ).apply(null, eventArgs);
-                p.generateStateOnChangePropForCodeComponents(
-                  $state,
-                  "selectedRow",
-                  ["table", "selectedRow"],
-                  RichTable_Helpers
-                ).apply(null, eventArgs);
-                p.generateStateOnChangePropForCodeComponents(
-                  $state,
-                  "selectedRows",
-                  ["table", "selectedRows"],
-                  RichTable_Helpers
-                ).apply(null, eventArgs);
-                p.generateStateOnChangePropForCodeComponents(
-                  $state,
-                  "selectedRowKeys",
-                  ["table", "selectedRowKeys"],
-                  RichTable_Helpers
-                ).apply(null, eventArgs);
-              },
-              rowActions: (() => {
-                const __composite = [
-                  { type: null, label: null, children: null }
-                ];
-                __composite["0"]["type"] = "menu";
-                __composite["0"]["label"] = "Alterar status";
-                __composite["0"]["children"] = (() => {
-                  const __composite = [
-                    { label: null, onClick: null },
-                    { label: null, onClick: null },
-                    { label: null, onClick: null }
-                  ];
-                  __composite["0"]["label"] = "Preparando";
-                  __composite["0"]["onClick"] = async (rowKey, row) => {
-                    const $steps = {};
-
-                    $steps["postgresUpdateById"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            dataOp: {
-                              sourceId: "hLw78H9DAdcctLTB5Q6jny",
-                              opId: "e9fbef0a-55ab-4397-bf0a-fb390e045620",
-                              userArgs: {
-                                keys: [row.id]
-                              },
-                              cacheKey: `plasmic.$.e9fbef0a-55ab-4397-bf0a-fb390e045620.$.`,
-                              invalidatedKeys: ["plasmic_refresh_all"],
-                              roleId: null
-                            }
-                          };
-                          return (async ({ dataOp, continueOnError }) => {
-                            try {
-                              const response = await executePlasmicDataOp(
-                                dataOp,
-                                {
-                                  userAuthToken: dataSourcesCtx?.userAuthToken,
-                                  user: dataSourcesCtx?.user
-                                }
-                              );
-                              await plasmicInvalidate(dataOp.invalidatedKeys);
-                              return response;
-                            } catch (e) {
-                              if (!continueOnError) {
-                                throw e;
-                              }
-                              return e;
-                            }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      typeof $steps["postgresUpdateById"] === "object" &&
-                      typeof $steps["postgresUpdateById"].then === "function"
-                    ) {
-                      $steps["postgresUpdateById"] = await $steps[
-                        "postgresUpdateById"
-                      ];
-                    }
-                  };
-                  __composite["1"]["label"] = "Pronto";
-                  __composite["1"]["onClick"] = async (rowKey, row) => {
-                    const $steps = {};
-
-                    $steps["postgresUpdateById"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            dataOp: {
-                              sourceId: "hLw78H9DAdcctLTB5Q6jny",
-                              opId: "8fab87d7-e3df-47dc-84ec-285e32d52644",
-                              userArgs: {
-                                keys: [row.id]
-                              },
-                              cacheKey: `plasmic.$.8fab87d7-e3df-47dc-84ec-285e32d52644.$.`,
-                              invalidatedKeys: ["plasmic_refresh_all"],
-                              roleId: null
-                            }
-                          };
-                          return (async ({ dataOp, continueOnError }) => {
-                            try {
-                              const response = await executePlasmicDataOp(
-                                dataOp,
-                                {
-                                  userAuthToken: dataSourcesCtx?.userAuthToken,
-                                  user: dataSourcesCtx?.user
-                                }
-                              );
-                              await plasmicInvalidate(dataOp.invalidatedKeys);
-                              return response;
-                            } catch (e) {
-                              if (!continueOnError) {
-                                throw e;
-                              }
-                              return e;
-                            }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      typeof $steps["postgresUpdateById"] === "object" &&
-                      typeof $steps["postgresUpdateById"].then === "function"
-                    ) {
-                      $steps["postgresUpdateById"] = await $steps[
-                        "postgresUpdateById"
-                      ];
-                    }
-                  };
-                  __composite["2"]["label"] = "Entregue";
-                  __composite["2"]["onClick"] = async (rowKey, row) => {
-                    const $steps = {};
-
-                    $steps["postgresUpdateById"] = true
-                      ? (() => {
-                          const actionArgs = {
-                            dataOp: {
-                              sourceId: "hLw78H9DAdcctLTB5Q6jny",
-                              opId: "b5e6bab0-8e8b-40d6-b40c-f2d270ef8cd9",
-                              userArgs: {
-                                keys: [row.id]
-                              },
-                              cacheKey: `plasmic.$.b5e6bab0-8e8b-40d6-b40c-f2d270ef8cd9.$.`,
-                              invalidatedKeys: ["plasmic_refresh_all"],
-                              roleId: null
-                            }
-                          };
-                          return (async ({ dataOp, continueOnError }) => {
-                            try {
-                              const response = await executePlasmicDataOp(
-                                dataOp,
-                                {
-                                  userAuthToken: dataSourcesCtx?.userAuthToken,
-                                  user: dataSourcesCtx?.user
-                                }
-                              );
-                              await plasmicInvalidate(dataOp.invalidatedKeys);
-                              return response;
-                            } catch (e) {
-                              if (!continueOnError) {
-                                throw e;
-                              }
-                              return e;
-                            }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      typeof $steps["postgresUpdateById"] === "object" &&
-                      typeof $steps["postgresUpdateById"].then === "function"
-                    ) {
-                      $steps["postgresUpdateById"] = await $steps[
-                        "postgresUpdateById"
-                      ];
-                    }
-                  };
-                  return __composite;
-                })();
-                return __composite;
-              })(),
-              scopeClassName: sty["table__instance"],
-              selectedRowKey: p.generateStateValueProp($state, [
-                "table",
-                "selectedRowKey"
-              ]),
-              selectedRowKeys: p.generateStateValueProp($state, [
-                "table",
-                "selectedRowKeys"
-              ]),
-              themeResetClassName: classNames(
-                projectcss.root_reset,
-                projectcss.root_reset_tags,
-                projectcss.plasmic_default_styles,
-                projectcss.plasmic_mixins,
-                projectcss.plasmic_tokens,
-                plasmic_antd_5_hostless_css.plasmic_tokens,
-                plasmic_plasmic_rich_components_css.plasmic_tokens
-              )
-            };
-            p.initializeCodeComponentStates(
-              $state,
-              [
-                {
-                  name: "selectedRowKey",
-                  plasmicStateName: "table.selectedRowKey"
-                },
-                {
-                  name: "selectedRow",
-                  plasmicStateName: "table.selectedRow"
-                },
-                {
-                  name: "selectedRows",
-                  plasmicStateName: "table.selectedRows"
-                },
-                {
-                  name: "selectedRowKeys",
-                  plasmicStateName: "table.selectedRowKeys"
-                }
-              ],
-              [],
-              RichTable_Helpers ?? {},
-              child$Props
-            );
-
-            return (
-              <RichTable
-                data-plasmic-name={"table"}
-                data-plasmic-override={overrides.table}
-                {...child$Props}
-              />
-            );
-          })()}
-          <AntdTabs
-            data-plasmic-name={"tabs"}
-            data-plasmic-override={overrides.tabs}
-            activeKey={p.generateStateValueProp($state, ["tabs", "activeKey"])}
-            animateTabBar={true}
-            animateTabContent={false}
-            animated={true}
-            className={classNames("__wab_instance", sty.tabs)}
-            items={
-              <React.Fragment>
-                <AntdTabItem
-                  className={classNames("__wab_instance", sty.tabItem__lRa0V)}
-                  key={"preparando"}
-                  label={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__lsGqU
-                      )}
-                    >
-                      {"PREPARANDO"}
-                    </div>
-                  }
+          <SupabaseMutation
+            data-plasmic-name={"supabaseMutation"}
+            data-plasmic-override={overrides.supabaseMutation}
+            className={classNames("__wab_instance", sty.supabaseMutation)}
+          >
+            <ph.DataCtxReader>
+              {$ctx => (
+                <SupabaseFetcher
+                  data-plasmic-name={"supabaseFetcher"}
+                  data-plasmic-override={overrides.supabaseFetcher}
+                  className={classNames("__wab_instance", sty.supabaseFetcher)}
+                  name={"vendas"}
+                  table={"vendas"}
                 >
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__iltgf)}
-                  >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $queries.query.data.filter(
-                            row => row.status === "preparando"
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <p.Stack
-                          as={"div"}
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__jR11H
-                          )}
-                          key={currentIndex}
-                        >
-                          <p.Stack
-                            as={"div"}
-                            hasGap={true}
-                            className={classNames(
-                              projectcss.all,
-                              sty.freeBox__kLcj0
-                            )}
-                          >
-                            <div
+                  <ph.DataCtxReader>
+                    {$ctx => (
+                      <AntdTabs
+                        data-plasmic-name={"tabs"}
+                        data-plasmic-override={overrides.tabs}
+                        activeKey={p.generateStateValueProp($state, [
+                          "tabs",
+                          "activeKey"
+                        ])}
+                        animateTabBar={true}
+                        animateTabContent={false}
+                        animated={true}
+                        className={classNames("__wab_instance", sty.tabs)}
+                        items={
+                          <React.Fragment>
+                            <AntdTabItem
                               className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___97Dst
+                                "__wab_instance",
+                                sty.tabItem__lRa0V
                               )}
+                              key={"preparando"}
+                              label={
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__lsGqU
+                                  )}
+                                >
+                                  {"PREPARANDO"}
+                                </div>
+                              }
                             >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.id;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.freeBox__iltgf
+                                )}
+                              >
+                                {(_par =>
+                                  !_par
+                                    ? []
+                                    : Array.isArray(_par)
+                                    ? _par
+                                    : [_par])(
+                                  (() => {
+                                    try {
+                                      return $ctx.vendas
+                                        .filter(
+                                          row => row.status === "preparando"
+                                        )
+                                        .sort((a, b) => b.id - a.id);
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return [];
+                                      }
+                                      throw e;
                                     }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__vt4Vs
-                              )}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.name;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__wb7Ju
-                              )}
-                            >
-                              <React.Fragment>
-                                <React.Fragment>{""}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__vCya0
-                                    )}
-                                  >
-                                    {(_par =>
-                                      !_par
-                                        ? []
-                                        : Array.isArray(_par)
-                                        ? _par
-                                        : [_par])(
-                                      (() => {
-                                        try {
-                                          return currentItem.lineItems;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return [];
-                                          }
-                                          throw e;
-                                        }
-                                      })()
-                                    ).map(
-                                      (__plasmic_item_1, __plasmic_idx_1) => {
-                                        const lineItem = __plasmic_item_1;
-                                        const currentIndex = __plasmic_idx_1;
-                                        return (
-                                          <li
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.li,
-                                              projectcss.__wab_text,
-                                              sty.li__zjxog
-                                            )}
-                                            key={currentIndex}
-                                          >
-                                            <React.Fragment>
-                                              {(() => {
-                                                try {
-                                                  return `${lineItem.qtt}x  ${
-                                                    lineItem.name
-                                                  }${
-                                                    !lineItem.isSingle
-                                                      ? ` - ${lineItem.option.name}`
-                                                      : ""
-                                                  }`;
-                                                } catch (e) {
-                                                  if (
-                                                    e instanceof TypeError ||
-                                                    e?.plasmicType ===
-                                                      "PlasmicUndefinedDataError"
-                                                  ) {
-                                                    return "";
-                                                  }
-                                                  throw e;
-                                                }
-                                              })()}
-                                            </React.Fragment>
-                                          </li>
-                                        );
-                                      }
-                                    )}
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
-                              </React.Fragment>
-                            </div>
-                          </p.Stack>
-                          <Button
-                            className={classNames(
-                              "__wab_instance",
-                              sty.button__zq1N6
-                            )}
-                            onClick={async event => {
-                              const $steps = {};
-
-                              $steps["postgresUpdateById"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      dataOp: {
-                                        sourceId: "hLw78H9DAdcctLTB5Q6jny",
-                                        opId: "8fab87d7-e3df-47dc-84ec-285e32d52644",
-                                        userArgs: {
-                                          keys: [currentItem.id]
-                                        },
-                                        cacheKey: `plasmic.$.8fab87d7-e3df-47dc-84ec-285e32d52644.$.`,
-                                        invalidatedKeys: [
-                                          "plasmic_refresh_all"
-                                        ],
-                                        roleId: null
-                                      }
-                                    };
-                                    return (async ({
-                                      dataOp,
-                                      continueOnError
-                                    }) => {
-                                      try {
-                                        const response =
-                                          await executePlasmicDataOp(dataOp, {
-                                            userAuthToken:
-                                              dataSourcesCtx?.userAuthToken,
-                                            user: dataSourcesCtx?.user
-                                          });
-                                        await plasmicInvalidate(
-                                          dataOp.invalidatedKeys
-                                        );
-                                        return response;
-                                      } catch (e) {
-                                        if (!continueOnError) {
-                                          throw e;
-                                        }
-                                        return e;
-                                      }
-                                    })?.apply(null, [actionArgs]);
                                   })()
-                                : undefined;
-                              if (
-                                typeof $steps["postgresUpdateById"] ===
-                                  "object" &&
-                                typeof $steps["postgresUpdateById"].then ===
-                                  "function"
-                              ) {
-                                $steps["postgresUpdateById"] = await $steps[
-                                  "postgresUpdateById"
-                                ];
-                              }
-                            }}
-                          >
-                            {"PRONTO"}
-                          </Button>
-                        </p.Stack>
-                      );
-                    })}
-                  </div>
-                </AntdTabItem>
-                <AntdTabItem
-                  className={classNames("__wab_instance", sty.tabItem__znL1Z)}
-                  key={"pronto"}
-                  label={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text___9WYr3
-                      )}
-                    >
-                      {"PRONTO"}
-                    </div>
-                  }
-                >
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__v7R5)}
-                  >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $queries.query.data.filter(
-                            row => row.status === "pronto"
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <p.Stack
-                          as={"div"}
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__x2Toe
-                          )}
-                          key={currentIndex}
-                        >
-                          <p.Stack
-                            as={"div"}
-                            hasGap={true}
-                            className={classNames(
-                              projectcss.all,
-                              sty.freeBox__tqJpE
-                            )}
-                          >
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___0Cl2W
-                              )}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.id;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__uYoB3
-                              )}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.name;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___8Bz6
-                              )}
-                            >
-                              <React.Fragment>
-                                <React.Fragment>{""}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__v2GA
-                                    )}
-                                  >
-                                    {(_par =>
-                                      !_par
-                                        ? []
-                                        : Array.isArray(_par)
-                                        ? _par
-                                        : [_par])(
-                                      (() => {
-                                        try {
-                                          return currentItem.lineItems;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return [];
-                                          }
-                                          throw e;
-                                        }
-                                      })()
-                                    ).map(
-                                      (__plasmic_item_1, __plasmic_idx_1) => {
-                                        const lineItem = __plasmic_item_1;
-                                        const currentIndex = __plasmic_idx_1;
-                                        return (
-                                          <li
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.li,
-                                              projectcss.__wab_text,
-                                              sty.li___8W5J7
-                                            )}
-                                            key={currentIndex}
-                                          >
-                                            <React.Fragment>
-                                              {(() => {
-                                                try {
-                                                  return `${lineItem.qtt}x  ${
-                                                    lineItem.name
-                                                  }${
-                                                    !lineItem.isSingle
-                                                      ? ` - ${lineItem.option.name}`
-                                                      : ""
-                                                  }`;
-                                                } catch (e) {
-                                                  if (
-                                                    e instanceof TypeError ||
-                                                    e?.plasmicType ===
-                                                      "PlasmicUndefinedDataError"
-                                                  ) {
-                                                    return "";
-                                                  }
-                                                  throw e;
+                                ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                                  const currentItem = __plasmic_item_0;
+                                  const currentIndex = __plasmic_idx_0;
+                                  return (
+                                    <p.Stack
+                                      as={"div"}
+                                      hasGap={true}
+                                      className={classNames(
+                                        projectcss.all,
+                                        sty.freeBox__jR11H
+                                      )}
+                                      key={currentIndex}
+                                    >
+                                      <p.Stack
+                                        as={"div"}
+                                        hasGap={true}
+                                        className={classNames(
+                                          projectcss.all,
+                                          sty.freeBox__kLcj0
+                                        )}
+                                      >
+                                        <div
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.text___97Dst
+                                          )}
+                                        >
+                                          <React.Fragment>
+                                            {(() => {
+                                              try {
+                                                return currentItem.id;
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return "";
                                                 }
-                                              })()}
+                                                throw e;
+                                              }
+                                            })()}
+                                          </React.Fragment>
+                                        </div>
+                                        <div
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.text__vt4Vs
+                                          )}
+                                        >
+                                          <React.Fragment>
+                                            {(() => {
+                                              try {
+                                                return currentItem.name;
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return "";
+                                                }
+                                                throw e;
+                                              }
+                                            })()}
+                                          </React.Fragment>
+                                        </div>
+                                        <div
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.text__wb7Ju
+                                          )}
+                                        >
+                                          <React.Fragment>
+                                            <React.Fragment>
+                                              {""}
                                             </React.Fragment>
-                                          </li>
-                                        );
-                                      }
-                                    )}
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
-                              </React.Fragment>
-                            </div>
-                          </p.Stack>
-                          <Button
-                            className={classNames(
-                              "__wab_instance",
-                              sty.button__fqbS
-                            )}
-                            onClick={async event => {
-                              const $steps = {};
+                                            {
+                                              <ul
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.ul,
+                                                  sty.ul__vCya0
+                                                )}
+                                              >
+                                                {(_par =>
+                                                  !_par
+                                                    ? []
+                                                    : Array.isArray(_par)
+                                                    ? _par
+                                                    : [_par])(
+                                                  (() => {
+                                                    try {
+                                                      return currentItem.lineItems;
+                                                    } catch (e) {
+                                                      if (
+                                                        e instanceof
+                                                          TypeError ||
+                                                        e?.plasmicType ===
+                                                          "PlasmicUndefinedDataError"
+                                                      ) {
+                                                        return [];
+                                                      }
+                                                      throw e;
+                                                    }
+                                                  })()
+                                                ).map(
+                                                  (
+                                                    __plasmic_item_1,
+                                                    __plasmic_idx_1
+                                                  ) => {
+                                                    const lineItem =
+                                                      __plasmic_item_1;
+                                                    const currentIndex =
+                                                      __plasmic_idx_1;
+                                                    return (
+                                                      <li
+                                                        className={classNames(
+                                                          projectcss.all,
+                                                          projectcss.li,
+                                                          projectcss.__wab_text,
+                                                          sty.li__zjxog
+                                                        )}
+                                                        key={currentIndex}
+                                                      >
+                                                        <React.Fragment>
+                                                          {(() => {
+                                                            try {
+                                                              return `${
+                                                                lineItem.qtt
+                                                              }x  ${
+                                                                lineItem.name
+                                                              }${
+                                                                !lineItem.isSingle
+                                                                  ? ` - ${lineItem.option.name}`
+                                                                  : ""
+                                                              }`;
+                                                            } catch (e) {
+                                                              if (
+                                                                e instanceof
+                                                                  TypeError ||
+                                                                e?.plasmicType ===
+                                                                  "PlasmicUndefinedDataError"
+                                                              ) {
+                                                                return "";
+                                                              }
+                                                              throw e;
+                                                            }
+                                                          })()}
+                                                        </React.Fragment>
+                                                      </li>
+                                                    );
+                                                  }
+                                                )}
+                                              </ul>
+                                            }
+                                            <React.Fragment>
+                                              {""}
+                                            </React.Fragment>
+                                          </React.Fragment>
+                                        </div>
+                                      </p.Stack>
+                                      <Button
+                                        className={classNames(
+                                          "__wab_instance",
+                                          sty.button__zq1N6
+                                        )}
+                                        onClick={async event => {
+                                          const $steps = {};
 
-                              $steps["postgresUpdateById"] = true
-                                ? (() => {
-                                    const actionArgs = {
-                                      dataOp: {
-                                        sourceId: "hLw78H9DAdcctLTB5Q6jny",
-                                        opId: "b5e6bab0-8e8b-40d6-b40c-f2d270ef8cd9",
-                                        userArgs: {
-                                          keys: [currentItem.id]
-                                        },
-                                        cacheKey: `plasmic.$.b5e6bab0-8e8b-40d6-b40c-f2d270ef8cd9.$.`,
-                                        invalidatedKeys: [
-                                          "plasmic_refresh_all"
-                                        ],
-                                        roleId: null
-                                      }
-                                    };
-                                    return (async ({
-                                      dataOp,
-                                      continueOnError
-                                    }) => {
-                                      try {
-                                        const response =
-                                          await executePlasmicDataOp(dataOp, {
-                                            userAuthToken:
-                                              dataSourcesCtx?.userAuthToken,
-                                            user: dataSourcesCtx?.user
-                                          });
-                                        await plasmicInvalidate(
-                                          dataOp.invalidatedKeys
-                                        );
-                                        return response;
-                                      } catch (e) {
-                                        if (!continueOnError) {
-                                          throw e;
-                                        }
-                                        return e;
-                                      }
-                                    })?.apply(null, [actionArgs]);
-                                  })()
-                                : undefined;
-                              if (
-                                typeof $steps["postgresUpdateById"] ===
-                                  "object" &&
-                                typeof $steps["postgresUpdateById"].then ===
-                                  "function"
-                              ) {
-                                $steps["postgresUpdateById"] = await $steps[
-                                  "postgresUpdateById"
-                                ];
-                              }
-                            }}
-                          >
-                            {"ENTREGUE"}
-                          </Button>
-                        </p.Stack>
-                      );
-                    })}
-                  </div>
-                </AntdTabItem>
-                <AntdTabItem
-                  className={classNames("__wab_instance", sty.tabItem__i4YM0)}
-                  key={"entregue"}
-                  label={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__y110C
-                      )}
-                    >
-                      {"ENTREGUE"}
-                    </div>
-                  }
-                >
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__xttgJ)}
-                  >
-                    {(_par =>
-                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                      (() => {
-                        try {
-                          return $queries.query.data.filter(
-                            row => row.status === "entregue"
-                          );
-                        } catch (e) {
-                          if (
-                            e instanceof TypeError ||
-                            e?.plasmicType === "PlasmicUndefinedDataError"
-                          ) {
-                            return [];
-                          }
-                          throw e;
-                        }
-                      })()
-                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                      const currentItem = __plasmic_item_0;
-                      const currentIndex = __plasmic_idx_0;
-                      return (
-                        <p.Stack
-                          as={"div"}
-                          hasGap={true}
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__pp4L3
-                          )}
-                          key={currentIndex}
-                        >
-                          <p.Stack
-                            as={"div"}
-                            hasGap={true}
-                            className={classNames(
-                              projectcss.all,
-                              sty.freeBox__npoJ6
-                            )}
-                          >
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___3PLvo
-                              )}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.id;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__uoVqZ
-                              )}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.name;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___3Afhq
-                              )}
-                            >
-                              <React.Fragment>
-                                <React.Fragment>{""}</React.Fragment>
-                                {
-                                  <ul
-                                    className={classNames(
-                                      projectcss.all,
-                                      projectcss.ul,
-                                      sty.ul__l8E9O
-                                    )}
-                                  >
-                                    {(_par =>
-                                      !_par
-                                        ? []
-                                        : Array.isArray(_par)
-                                        ? _par
-                                        : [_par])(
-                                      (() => {
-                                        try {
-                                          return currentItem.lineItems;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return [];
-                                          }
-                                          throw e;
-                                        }
-                                      })()
-                                    ).map(
-                                      (__plasmic_item_1, __plasmic_idx_1) => {
-                                        const lineItem = __plasmic_item_1;
-                                        const currentIndex = __plasmic_idx_1;
-                                        return (
-                                          <li
-                                            className={classNames(
-                                              projectcss.all,
-                                              projectcss.li,
-                                              projectcss.__wab_text,
-                                              sty.li__uS78W
-                                            )}
-                                            key={currentIndex}
-                                          >
-                                            <React.Fragment>
-                                              {(() => {
-                                                try {
-                                                  return `${lineItem.qtt}x  ${
-                                                    lineItem.name
-                                                  }${
-                                                    !lineItem.isSingle
-                                                      ? ` - ${lineItem.option.name}`
-                                                      : ""
-                                                  }`;
-                                                } catch (e) {
-                                                  if (
-                                                    e instanceof TypeError ||
-                                                    e?.plasmicType ===
-                                                      "PlasmicUndefinedDataError"
-                                                  ) {
-                                                    return "";
+                                          $steps["runCode"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  customFunction: async () => {
+                                                    return $ctx.supabaseMutation.upsert(
+                                                      [
+                                                        {
+                                                          id: currentItem.id,
+                                                          status: "pronto"
+                                                        }
+                                                      ]
+                                                    );
                                                   }
-                                                  throw e;
-                                                }
-                                              })()}
-                                            </React.Fragment>
-                                          </li>
-                                        );
+                                                };
+                                                return (({
+                                                  customFunction
+                                                }) => {
+                                                  return customFunction();
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            typeof $steps["runCode"] ===
+                                              "object" &&
+                                            typeof $steps["runCode"].then ===
+                                              "function"
+                                          ) {
+                                            $steps["runCode"] = await $steps[
+                                              "runCode"
+                                            ];
+                                          }
+
+                                          $steps["refreshData"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  queryInvalidation: [
+                                                    "plasmic_refresh_all"
+                                                  ]
+                                                };
+                                                return (async ({
+                                                  queryInvalidation
+                                                }) => {
+                                                  if (!queryInvalidation) {
+                                                    return;
+                                                  }
+                                                  await plasmicInvalidate(
+                                                    queryInvalidation
+                                                  );
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            typeof $steps["refreshData"] ===
+                                              "object" &&
+                                            typeof $steps["refreshData"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["refreshData"] =
+                                              await $steps["refreshData"];
+                                          }
+                                        }}
+                                      >
+                                        {"PRONTO"}
+                                      </Button>
+                                    </p.Stack>
+                                  );
+                                })}
+                              </div>
+                            </AntdTabItem>
+                            <AntdTabItem
+                              className={classNames(
+                                "__wab_instance",
+                                sty.tabItem__znL1Z
+                              )}
+                              key={"pronto"}
+                              label={
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text___9WYr3
+                                  )}
+                                >
+                                  {"PRONTO"}
+                                </div>
+                              }
+                            >
+                              <div
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.freeBox__v7R5
+                                )}
+                              >
+                                {(_par =>
+                                  !_par
+                                    ? []
+                                    : Array.isArray(_par)
+                                    ? _par
+                                    : [_par])(
+                                  (() => {
+                                    try {
+                                      return $ctx.vendas
+                                        .filter(row => row.status === "pronto")
+                                        .sort((a, b) => b.id - a.id);
+                                    } catch (e) {
+                                      if (
+                                        e instanceof TypeError ||
+                                        e?.plasmicType ===
+                                          "PlasmicUndefinedDataError"
+                                      ) {
+                                        return [];
                                       }
-                                    )}
-                                  </ul>
-                                }
-                                <React.Fragment>{""}</React.Fragment>
-                              </React.Fragment>
-                            </div>
-                          </p.Stack>
-                          <Button
-                            className={classNames(
-                              "__wab_instance",
-                              sty.button__qQv2F
-                            )}
-                          >
-                            {"ENTREGUE"}
-                          </Button>
-                        </p.Stack>
-                      );
-                    })}
-                  </div>
-                </AntdTabItem>
-              </React.Fragment>
-            }
-            onChange={p.generateStateOnChangeProp($state, [
-              "tabs",
-              "activeKey"
-            ])}
-            sticky={false}
-            tabBarBackground={"#FFF"}
-            tabsDropdownScopeClassName={sty["tabs__tabsDropdown"]}
-            tabsScopeClassName={sty["tabs__tabs"]}
-          />
+                                      throw e;
+                                    }
+                                  })()
+                                ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                                  const currentItem = __plasmic_item_0;
+                                  const currentIndex = __plasmic_idx_0;
+                                  return (
+                                    <p.Stack
+                                      as={"div"}
+                                      hasGap={true}
+                                      className={classNames(
+                                        projectcss.all,
+                                        sty.freeBox__x2Toe
+                                      )}
+                                      key={currentIndex}
+                                    >
+                                      <p.Stack
+                                        as={"div"}
+                                        hasGap={true}
+                                        className={classNames(
+                                          projectcss.all,
+                                          sty.freeBox__tqJpE
+                                        )}
+                                      >
+                                        <div
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.text___0Cl2W
+                                          )}
+                                        >
+                                          <React.Fragment>
+                                            {(() => {
+                                              try {
+                                                return currentItem.id;
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return "";
+                                                }
+                                                throw e;
+                                              }
+                                            })()}
+                                          </React.Fragment>
+                                        </div>
+                                        <div
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.text__uYoB3
+                                          )}
+                                        >
+                                          <React.Fragment>
+                                            {(() => {
+                                              try {
+                                                return currentItem.name;
+                                              } catch (e) {
+                                                if (
+                                                  e instanceof TypeError ||
+                                                  e?.plasmicType ===
+                                                    "PlasmicUndefinedDataError"
+                                                ) {
+                                                  return "";
+                                                }
+                                                throw e;
+                                              }
+                                            })()}
+                                          </React.Fragment>
+                                        </div>
+                                        <div
+                                          className={classNames(
+                                            projectcss.all,
+                                            projectcss.__wab_text,
+                                            sty.text___8Bz6
+                                          )}
+                                        >
+                                          <React.Fragment>
+                                            <React.Fragment>
+                                              {""}
+                                            </React.Fragment>
+                                            {
+                                              <ul
+                                                className={classNames(
+                                                  projectcss.all,
+                                                  projectcss.ul,
+                                                  sty.ul__v2GA
+                                                )}
+                                              >
+                                                {(_par =>
+                                                  !_par
+                                                    ? []
+                                                    : Array.isArray(_par)
+                                                    ? _par
+                                                    : [_par])(
+                                                  (() => {
+                                                    try {
+                                                      return currentItem.lineItems;
+                                                    } catch (e) {
+                                                      if (
+                                                        e instanceof
+                                                          TypeError ||
+                                                        e?.plasmicType ===
+                                                          "PlasmicUndefinedDataError"
+                                                      ) {
+                                                        return [];
+                                                      }
+                                                      throw e;
+                                                    }
+                                                  })()
+                                                ).map(
+                                                  (
+                                                    __plasmic_item_1,
+                                                    __plasmic_idx_1
+                                                  ) => {
+                                                    const lineItem =
+                                                      __plasmic_item_1;
+                                                    const currentIndex =
+                                                      __plasmic_idx_1;
+                                                    return (
+                                                      <li
+                                                        className={classNames(
+                                                          projectcss.all,
+                                                          projectcss.li,
+                                                          projectcss.__wab_text,
+                                                          sty.li___8W5J7
+                                                        )}
+                                                        key={currentIndex}
+                                                      >
+                                                        <React.Fragment>
+                                                          {(() => {
+                                                            try {
+                                                              return `${
+                                                                lineItem.qtt
+                                                              }x  ${
+                                                                lineItem.name
+                                                              }${
+                                                                !lineItem.isSingle
+                                                                  ? ` - ${lineItem.option.name}`
+                                                                  : ""
+                                                              }`;
+                                                            } catch (e) {
+                                                              if (
+                                                                e instanceof
+                                                                  TypeError ||
+                                                                e?.plasmicType ===
+                                                                  "PlasmicUndefinedDataError"
+                                                              ) {
+                                                                return "";
+                                                              }
+                                                              throw e;
+                                                            }
+                                                          })()}
+                                                        </React.Fragment>
+                                                      </li>
+                                                    );
+                                                  }
+                                                )}
+                                              </ul>
+                                            }
+                                            <React.Fragment>
+                                              {""}
+                                            </React.Fragment>
+                                          </React.Fragment>
+                                        </div>
+                                      </p.Stack>
+                                      <Button
+                                        className={classNames(
+                                          "__wab_instance",
+                                          sty.button__fqbS
+                                        )}
+                                        onClick={async event => {
+                                          const $steps = {};
+
+                                          $steps["runCode"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  customFunction: async () => {
+                                                    return $ctx.supabaseMutation.upsert(
+                                                      [
+                                                        {
+                                                          id: currentItem.id,
+                                                          status: "entregue"
+                                                        }
+                                                      ]
+                                                    );
+                                                  }
+                                                };
+                                                return (({
+                                                  customFunction
+                                                }) => {
+                                                  return customFunction();
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            typeof $steps["runCode"] ===
+                                              "object" &&
+                                            typeof $steps["runCode"].then ===
+                                              "function"
+                                          ) {
+                                            $steps["runCode"] = await $steps[
+                                              "runCode"
+                                            ];
+                                          }
+                                        }}
+                                      >
+                                        {"ENTREGUE"}
+                                      </Button>
+                                    </p.Stack>
+                                  );
+                                })}
+                              </div>
+                            </AntdTabItem>
+                          </React.Fragment>
+                        }
+                        onChange={p.generateStateOnChangeProp($state, [
+                          "tabs",
+                          "activeKey"
+                        ])}
+                        sticky={false}
+                        tabBarBackground={"#FFF"}
+                        tabsDropdownScopeClassName={sty["tabs__tabsDropdown"]}
+                        tabsScopeClassName={sty["tabs__tabs"]}
+                      />
+                    )}
+                  </ph.DataCtxReader>
+                </SupabaseFetcher>
+              )}
+            </ph.DataCtxReader>
+          </SupabaseMutation>
         </div>
       </div>
     </React.Fragment>
@@ -1359,9 +869,16 @@ function PlasmicAdmin__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navigationBar", "table", "tabs"],
+  root: [
+    "root",
+    "navigationBar",
+    "supabaseMutation",
+    "supabaseFetcher",
+    "tabs"
+  ],
   navigationBar: ["navigationBar"],
-  table: ["table"],
+  supabaseMutation: ["supabaseMutation", "supabaseFetcher", "tabs"],
+  supabaseFetcher: ["supabaseFetcher", "tabs"],
   tabs: ["tabs"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -1370,7 +887,8 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   navigationBar: typeof NavigationBar;
-  table: typeof RichTable;
+  supabaseMutation: typeof SupabaseMutation;
+  supabaseFetcher: typeof SupabaseFetcher;
   tabs: typeof AntdTabs;
 };
 
@@ -1435,7 +953,8 @@ export const PlasmicAdmin = Object.assign(
   {
     // Helper components rendering sub-elements
     navigationBar: makeNodeComponent("navigationBar"),
-    table: makeNodeComponent("table"),
+    supabaseMutation: makeNodeComponent("supabaseMutation"),
+    supabaseFetcher: makeNodeComponent("supabaseFetcher"),
     tabs: makeNodeComponent("tabs"),
 
     // Metadata about props expected for PlasmicAdmin
