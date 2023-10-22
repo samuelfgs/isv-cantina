@@ -81,7 +81,6 @@ export function PreQueries(props: {
       return finalData;
     });
     data = queryData
-    console.log("dale", query, data, error, isLoading);
   }
   return <DataProvider data={data} name={"supabase"}>
     {children}
