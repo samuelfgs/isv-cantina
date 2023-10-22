@@ -24,6 +24,7 @@ export interface ReactPrintRefActions {
 export const ReactPrint = React.forwardRef(function ReactPrint(props: React.PropsWithChildren<{
   lineItems: any,
   id: number
+  name: string,
 }>, ref: React.Ref<ReactPrintRefActions>) {
   const { children, ...rest } = props;
   const componentRef = React.useRef(null);
@@ -37,7 +38,7 @@ export const ReactPrint = React.forwardRef(function ReactPrint(props: React.Prop
       printOrder: () => {
         handlePrint();
       },
-    }), [props.lineItems, props.id, handlePrint]
+    }), [props.lineItems, props.id, handlePrint, props.name]
   );
 
   return <>
@@ -55,7 +56,8 @@ registerComponent(ReactPrint, {
   name: "React Print",
   props: {
     lineItems: "exprEditor",
-    id: "number"
+    id: "number",
+    name: "string"
   },
   refActions: {
     printOrder: {

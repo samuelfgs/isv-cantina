@@ -54,11 +54,13 @@ export const PlasmicPrintOrder__VariantProps = new Array<VariantPropType>();
 export type PlasmicPrintOrder__ArgsType = {
   carrinho?: any;
   id?: number;
+  name?: string;
 };
 type ArgPropType = keyof PlasmicPrintOrder__ArgsType;
 export const PlasmicPrintOrder__ArgProps = new Array<ArgPropType>(
   "carrinho",
-  "id"
+  "id",
+  "name"
 );
 
 export type PlasmicPrintOrder__OverridesType = {
@@ -68,6 +70,7 @@ export type PlasmicPrintOrder__OverridesType = {
 export interface DefaultPrintOrderProps {
   carrinho?: any;
   id?: number;
+  name?: string;
   className?: string;
 }
 
@@ -131,6 +134,29 @@ function PlasmicPrintOrder__RenderFunc(props: {
             {(() => {
               try {
                 return `PEDIDO ${$props.id}`;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return "PEDIDO #15";
+                }
+                throw e;
+              }
+            })()}
+          </React.Fragment>
+        </div>
+        <div
+          className={classNames(
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text__tTvVv
+          )}
+        >
+          <React.Fragment>
+            {(() => {
+              try {
+                return $props.name;
               } catch (e) {
                 if (
                   e instanceof TypeError ||

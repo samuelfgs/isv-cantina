@@ -3214,6 +3214,19 @@ function PlasmicHomepage__RenderFunc(props: {
               }
             })()}
             lineItems={$state.carrinho}
+            name={(() => {
+              try {
+                return $state.name.value;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
             ref={ref => {
               $refs["reactPrint"] = ref;
             }}

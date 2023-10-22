@@ -637,6 +637,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/pedidos-2"
+        },
+        {
+          "id": "YdlhJVWan4Kd",
+          "name": "Caixa",
+          "type": "managed",
+          "projectId": "eVCRKWwcuK6xExRdUZxKpb",
+          "renderModuleFilePath": "plasmic/cantina/PlasmicCaixa.tsx",
+          "importSpec": {
+            "modulePath": "../pages/caixa.tsx"
+          },
+          "cssFilePath": "plasmic/cantina/PlasmicCaixa.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/caixa"
         }
       ],
       "icons": [
