@@ -630,6 +630,54 @@ function PlasmicCardapio__RenderFunc(props: {
                                             "updateSelectedProduct4"
                                           ];
                                       }
+
+                                      $steps["updateSelectedProduct5"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "numberInput2",
+                                                  "value"
+                                                ]
+                                              },
+                                              operation: 1
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              p.set(
+                                                objRoot,
+                                                variablePath,
+                                                undefined
+                                              );
+                                              return undefined;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps["updateSelectedProduct5"] !=
+                                          null &&
+                                        typeof $steps[
+                                          "updateSelectedProduct5"
+                                        ] === "object" &&
+                                        typeof $steps["updateSelectedProduct5"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateSelectedProduct5"] =
+                                          await $steps[
+                                            "updateSelectedProduct5"
+                                          ];
+                                      }
                                     }).apply(null, eventArgs);
                                   }}
                                   options={(() => {
@@ -794,6 +842,56 @@ function PlasmicCardapio__RenderFunc(props: {
                                         $steps["updateNumberInputValue"] =
                                           await $steps[
                                             "updateNumberInputValue"
+                                          ];
+                                      }
+
+                                      $steps["updateNumberInput2Value"] = true
+                                        ? (() => {
+                                            const actionArgs = {
+                                              variable: {
+                                                objRoot: $state,
+                                                variablePath: [
+                                                  "numberInput2",
+                                                  "value"
+                                                ]
+                                              },
+                                              operation: 0,
+                                              value:
+                                                $state.selectedVariant.price
+                                            };
+                                            return (({
+                                              variable,
+                                              value,
+                                              startIndex,
+                                              deleteCount
+                                            }) => {
+                                              if (!variable) {
+                                                return;
+                                              }
+                                              const { objRoot, variablePath } =
+                                                variable;
+
+                                              p.set(
+                                                objRoot,
+                                                variablePath,
+                                                value
+                                              );
+                                              return value;
+                                            })?.apply(null, [actionArgs]);
+                                          })()
+                                        : undefined;
+                                      if (
+                                        $steps["updateNumberInput2Value"] !=
+                                          null &&
+                                        typeof $steps[
+                                          "updateNumberInput2Value"
+                                        ] === "object" &&
+                                        typeof $steps["updateNumberInput2Value"]
+                                          .then === "function"
+                                      ) {
+                                        $steps["updateNumberInput2Value"] =
+                                          await $steps[
+                                            "updateNumberInput2Value"
                                           ];
                                       }
                                     }).apply(null, eventArgs);
