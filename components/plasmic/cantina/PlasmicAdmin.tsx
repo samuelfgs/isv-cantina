@@ -539,6 +539,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                               })()
                                             : undefined;
                                           if (
+                                            $steps["runCode"] != null &&
                                             typeof $steps["runCode"] ===
                                               "object" &&
                                             typeof $steps["runCode"].then ===
@@ -569,6 +570,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                               })()
                                             : undefined;
                                           if (
+                                            $steps["refreshData"] != null &&
                                             typeof $steps["refreshData"] ===
                                               "object" &&
                                             typeof $steps["refreshData"]
@@ -827,6 +829,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                               })()
                                             : undefined;
                                           if (
+                                            $steps["runCode"] != null &&
                                             typeof $steps["runCode"] ===
                                               "object" &&
                                             typeof $steps["runCode"].then ===

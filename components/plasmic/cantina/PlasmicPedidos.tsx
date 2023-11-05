@@ -442,6 +442,7 @@ function PlasmicPedidos__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
+                    $steps["updateSelectedLineItems"] != null &&
                     typeof $steps["updateSelectedLineItems"] === "object" &&
                     typeof $steps["updateSelectedLineItems"].then === "function"
                   ) {
@@ -477,6 +478,7 @@ function PlasmicPedidos__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
+                    $steps["updateSelectedOrderId"] != null &&
                     typeof $steps["updateSelectedOrderId"] === "object" &&
                     typeof $steps["updateSelectedOrderId"].then === "function"
                   ) {
@@ -502,6 +504,7 @@ function PlasmicPedidos__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
+                    $steps["runCode"] != null &&
                     typeof $steps["runCode"] === "object" &&
                     typeof $steps["runCode"].then === "function"
                   ) {
@@ -520,6 +523,7 @@ function PlasmicPedidos__RenderFunc(props: {
                       })()
                     : undefined;
                   if (
+                    $steps["runActionOnReactPrint"] != null &&
                     typeof $steps["runActionOnReactPrint"] === "object" &&
                     typeof $steps["runActionOnReactPrint"].then === "function"
                   ) {

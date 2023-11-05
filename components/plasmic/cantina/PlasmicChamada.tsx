@@ -330,6 +330,7 @@ function PlasmicChamada__RenderFunc(props: {
                   })()
                 : undefined;
               if (
+                $steps["runCode"] != null &&
                 typeof $steps["runCode"] === "object" &&
                 typeof $steps["runCode"].then === "function"
               ) {
@@ -350,6 +351,7 @@ function PlasmicChamada__RenderFunc(props: {
                   })()
                 : undefined;
               if (
+                $steps["refreshData"] != null &&
                 typeof $steps["refreshData"] === "object" &&
                 typeof $steps["refreshData"].then === "function"
               ) {
@@ -378,6 +380,7 @@ function PlasmicChamada__RenderFunc(props: {
                   })()
                 : undefined;
               if (
+                $steps["updateCounter"] != null &&
                 typeof $steps["updateCounter"] === "object" &&
                 typeof $steps["updateCounter"].then === "function"
               ) {

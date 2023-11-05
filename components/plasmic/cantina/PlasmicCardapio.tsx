@@ -78,6 +78,7 @@ export type PlasmicCardapio__OverridesType = {
   product?: p.Flex<typeof Select>;
   productVariant?: p.Flex<typeof Select>;
   numberInput?: p.Flex<typeof AntdInputNumber>;
+  numberInput2?: p.Flex<typeof AntdInputNumber>;
   button?: p.Flex<typeof Button>;
 };
 
@@ -150,6 +151,25 @@ function PlasmicCardapio__RenderFunc(props: {
           (() => {
             try {
               return $state.selectedVariant.stock;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return undefined;
+              }
+              throw e;
+            }
+          })()
+      },
+      {
+        path: "numberInput2.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) =>
+          (() => {
+            try {
+              return $state.selectedVariant.price;
             } catch (e) {
               if (
                 e instanceof TypeError ||
@@ -456,6 +476,8 @@ function PlasmicCardapio__RenderFunc(props: {
                                           })()
                                         : undefined;
                                       if (
+                                        $steps["updateSelectedProduct"] !=
+                                          null &&
                                         typeof $steps[
                                           "updateSelectedProduct"
                                         ] === "object" &&
@@ -499,6 +521,8 @@ function PlasmicCardapio__RenderFunc(props: {
                                           })()
                                         : undefined;
                                       if (
+                                        $steps["updateSelectedProduct2"] !=
+                                          null &&
                                         typeof $steps[
                                           "updateSelectedProduct2"
                                         ] === "object" &&
@@ -545,6 +569,8 @@ function PlasmicCardapio__RenderFunc(props: {
                                           })()
                                         : undefined;
                                       if (
+                                        $steps["updateSelectedProduct3"] !=
+                                          null &&
                                         typeof $steps[
                                           "updateSelectedProduct3"
                                         ] === "object" &&
@@ -591,6 +617,8 @@ function PlasmicCardapio__RenderFunc(props: {
                                           })()
                                         : undefined;
                                       if (
+                                        $steps["updateSelectedProduct4"] !=
+                                          null &&
                                         typeof $steps[
                                           "updateSelectedProduct4"
                                         ] === "object" &&
@@ -709,6 +737,8 @@ function PlasmicCardapio__RenderFunc(props: {
                                           })()
                                         : undefined;
                                       if (
+                                        $steps["updateSelectedVariant"] !=
+                                          null &&
                                         typeof $steps[
                                           "updateSelectedVariant"
                                         ] === "object" &&
@@ -753,6 +783,8 @@ function PlasmicCardapio__RenderFunc(props: {
                                           })()
                                         : undefined;
                                       if (
+                                        $steps["updateNumberInputValue"] !=
+                                          null &&
                                         typeof $steps[
                                           "updateNumberInputValue"
                                         ] === "object" &&
@@ -834,6 +866,40 @@ function PlasmicCardapio__RenderFunc(props: {
                                   ])}
                                 />
                               </p.Stack>
+                              <p.Stack
+                                as={"div"}
+                                hasGap={true}
+                                className={classNames(
+                                  projectcss.all,
+                                  sty.freeBox__lptAl
+                                )}
+                              >
+                                <div
+                                  className={classNames(
+                                    projectcss.all,
+                                    projectcss.__wab_text,
+                                    sty.text__uak87
+                                  )}
+                                >
+                                  {"Pre\u00e7o"}
+                                </div>
+                                <AntdInputNumber
+                                  data-plasmic-name={"numberInput2"}
+                                  data-plasmic-override={overrides.numberInput2}
+                                  className={classNames(
+                                    "__wab_instance",
+                                    sty.numberInput2
+                                  )}
+                                  onChange={p.generateStateOnChangeProp(
+                                    $state,
+                                    ["numberInput2", "value"]
+                                  )}
+                                  value={p.generateStateValueProp($state, [
+                                    "numberInput2",
+                                    "value"
+                                  ])}
+                                />
+                              </p.Stack>
                               <Button
                                 data-plasmic-name={"button"}
                                 data-plasmic-override={overrides.button}
@@ -849,14 +915,15 @@ function PlasmicCardapio__RenderFunc(props: {
                                         const actionArgs = {
                                           dataOp: {
                                             sourceId: "hLw78H9DAdcctLTB5Q6jny",
-                                            opId: "4b85247b-e63a-4dc7-b44a-a36084f8867d",
+                                            opId: "c8db8808-6c1b-4144-8a75-2ca41b03af13",
                                             userArgs: {
                                               keys: [$state.selectedVariant.id],
                                               variables: [
-                                                $state.numberInput.value
+                                                $state.numberInput.value,
+                                                $state.numberInput2.value
                                               ]
                                             },
-                                            cacheKey: `plasmic.$.4b85247b-e63a-4dc7-b44a-a36084f8867d.$.`,
+                                            cacheKey: `plasmic.$.c8db8808-6c1b-4144-8a75-2ca41b03af13.$.`,
                                             invalidatedKeys: [
                                               "plasmic_refresh_all"
                                             ],
@@ -891,6 +958,7 @@ function PlasmicCardapio__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["postgresUpdateById"] != null &&
                                     typeof $steps["postgresUpdateById"] ===
                                       "object" &&
                                     typeof $steps["postgresUpdateById"].then ===
@@ -914,6 +982,7 @@ function PlasmicCardapio__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["showNotification"] != null &&
                                     typeof $steps["showNotification"] ===
                                       "object" &&
                                     typeof $steps["showNotification"].then ===
@@ -944,6 +1013,7 @@ function PlasmicCardapio__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["refreshData"] != null &&
                                     typeof $steps["refreshData"] === "object" &&
                                     typeof $steps["refreshData"].then ===
                                       "function"
@@ -988,6 +1058,7 @@ const PlasmicDescendants = {
     "product",
     "productVariant",
     "numberInput",
+    "numberInput2",
     "button"
   ],
   navigationBar: ["navigationBar"],
@@ -996,11 +1067,13 @@ const PlasmicDescendants = {
     "product",
     "productVariant",
     "numberInput",
+    "numberInput2",
     "button"
   ],
   product: ["product"],
   productVariant: ["productVariant"],
   numberInput: ["numberInput"],
+  numberInput2: ["numberInput2"],
   button: ["button"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -1013,6 +1086,7 @@ type NodeDefaultElementType = {
   product: typeof Select;
   productVariant: typeof Select;
   numberInput: typeof AntdInputNumber;
+  numberInput2: typeof AntdInputNumber;
   button: typeof Button;
 };
 
@@ -1081,6 +1155,7 @@ export const PlasmicCardapio = Object.assign(
     product: makeNodeComponent("product"),
     productVariant: makeNodeComponent("productVariant"),
     numberInput: makeNodeComponent("numberInput"),
+    numberInput2: makeNodeComponent("numberInput2"),
     button: makeNodeComponent("button"),
 
     // Metadata about props expected for PlasmicCardapio

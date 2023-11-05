@@ -689,6 +689,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                     })()
                                                   : undefined;
                                                 if (
+                                                  $steps["updateCarrinho"] !=
+                                                    null &&
                                                   typeof $steps[
                                                     "updateCarrinho"
                                                   ] === "object" &&
@@ -839,6 +841,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                                       })()
                                                     : undefined;
                                                   if (
+                                                    $steps[
+                                                      "updateSelectedItemId"
+                                                    ] != null &&
                                                     typeof $steps[
                                                       "updateSelectedItemId"
                                                     ] === "object" &&
@@ -892,6 +897,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                                         })()
                                                       : undefined;
                                                   if (
+                                                    $steps[
+                                                      "updateSelectedItem"
+                                                    ] != null &&
                                                     typeof $steps[
                                                       "updateSelectedItem"
                                                     ] === "object" &&
@@ -950,6 +958,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                                         })()
                                                       : undefined;
                                                   if (
+                                                    $steps[
+                                                      "updateSelectedOption"
+                                                    ] != null &&
                                                     typeof $steps[
                                                       "updateSelectedOption"
                                                     ] === "object" &&
@@ -1006,6 +1017,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                       })()
                                                     : undefined;
                                                   if (
+                                                    $steps["updateStep"] !=
+                                                      null &&
                                                     typeof $steps[
                                                       "updateStep"
                                                     ] === "object" &&
@@ -1166,6 +1179,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 })()
                                               : undefined;
                                             if (
+                                              $steps["updateStep"] != null &&
                                               typeof $steps["updateStep"] ===
                                                 "object" &&
                                               typeof $steps["updateStep"]
@@ -1210,6 +1224,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 })()
                                               : undefined;
                                             if (
+                                              $steps["updateSelectedItem"] !=
+                                                null &&
                                               typeof $steps[
                                                 "updateSelectedItem"
                                               ] === "object" &&
@@ -1352,6 +1368,9 @@ function PlasmicHomepage__RenderFunc(props: {
                                                           })()
                                                         : undefined;
                                                       if (
+                                                        $steps[
+                                                          "updateSelectedOption"
+                                                        ] != null &&
                                                         typeof $steps[
                                                           "updateSelectedOption"
                                                         ] === "object" &&
@@ -1610,6 +1629,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                     })()
                                                   : undefined;
                                               if (
+                                                $steps["updateItemQuantity"] !=
+                                                  null &&
                                                 typeof $steps[
                                                   "updateItemQuantity"
                                                 ] === "object" &&
@@ -1700,6 +1721,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                     })()
                                                   : undefined;
                                               if (
+                                                $steps["updateItemQuantity"] !=
+                                                  null &&
                                                 typeof $steps[
                                                   "updateItemQuantity"
                                                 ] === "object" &&
@@ -1783,6 +1806,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 })()
                                               : undefined;
                                             if (
+                                              $steps["runCode"] != null &&
                                               typeof $steps["runCode"] ===
                                                 "object" &&
                                               typeof $steps["runCode"].then ===
@@ -1849,6 +1873,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                   })()
                                                 : undefined;
                                             if (
+                                              $steps["showNotification"] !=
+                                                null &&
                                               typeof $steps[
                                                 "showNotification"
                                               ] === "object" &&
@@ -1922,6 +1948,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 })()
                                               : undefined;
                                             if (
+                                              $steps["runCode"] != null &&
                                               typeof $steps["runCode"] ===
                                                 "object" &&
                                               typeof $steps["runCode"].then ===
@@ -2047,6 +2074,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         })()
                                       : undefined;
                                   if (
+                                    $steps["updateStep"] != null &&
                                     typeof $steps["updateStep"] === "object" &&
                                     typeof $steps["updateStep"].then ===
                                       "function"
@@ -2509,6 +2537,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["updateIsFinished"] != null &&
                                     typeof $steps["updateIsFinished"] ===
                                       "object" &&
                                     typeof $steps["updateIsFinished"].then ===
@@ -2635,6 +2664,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["runCode2"] != null &&
                                     typeof $steps["runCode2"] === "object" &&
                                     typeof $steps["runCode2"].then ===
                                       "function"
@@ -2658,6 +2688,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["runActionOnReactPrint"] != null &&
                                     typeof $steps["runActionOnReactPrint"] ===
                                       "object" &&
                                     typeof $steps["runActionOnReactPrint"]
@@ -2687,6 +2718,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["refreshData"] != null &&
                                     typeof $steps["refreshData"] === "object" &&
                                     typeof $steps["refreshData"].then ===
                                       "function"
@@ -2771,6 +2803,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["updateIsFinished"] != null &&
                                     typeof $steps["updateIsFinished"] ===
                                       "object" &&
                                     typeof $steps["updateIsFinished"].then ===
@@ -2842,6 +2875,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["postgresCreate"] != null &&
                                     typeof $steps["postgresCreate"] ===
                                       "object" &&
                                     typeof $steps["postgresCreate"].then ===
@@ -2866,6 +2900,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["runCode"] != null &&
                                     typeof $steps["runCode"] === "object" &&
                                     typeof $steps["runCode"].then === "function"
                                   ) {
@@ -2891,6 +2926,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["runCode2"] != null &&
                                     typeof $steps["runCode2"] === "object" &&
                                     typeof $steps["runCode2"].then ===
                                       "function"
@@ -2914,6 +2950,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["runActionOnReactPrint"] != null &&
                                     typeof $steps["runActionOnReactPrint"] ===
                                       "object" &&
                                     typeof $steps["runActionOnReactPrint"]
@@ -2986,6 +3023,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["useIntegration"] != null &&
                                     typeof $steps["useIntegration"] ===
                                       "object" &&
                                     typeof $steps["useIntegration"].then ===
@@ -3016,6 +3054,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["refreshData"] != null &&
                                     typeof $steps["refreshData"] === "object" &&
                                     typeof $steps["refreshData"].then ===
                                       "function"
@@ -3057,6 +3096,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["runCode"] != null &&
                                     typeof $steps["runCode"] === "object" &&
                                     typeof $steps["runCode"].then === "function"
                                   ) {
@@ -3110,6 +3150,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["updateStep"] != null &&
                                     typeof $steps["updateStep"] === "object" &&
                                     typeof $steps["updateStep"].then ===
                                       "function"
@@ -3166,6 +3207,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       })()
                                     : undefined;
                                   if (
+                                    $steps["runActionOnReactPrint"] != null &&
                                     typeof $steps["runActionOnReactPrint"] ===
                                       "object" &&
                                     typeof $steps["runActionOnReactPrint"]

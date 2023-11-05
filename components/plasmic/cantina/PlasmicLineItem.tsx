@@ -156,6 +156,7 @@ function PlasmicLineItem__RenderFunc(props: {
             })()
           : undefined;
         if (
+          $steps["runOnClick"] != null &&
           typeof $steps["runOnClick"] === "object" &&
           typeof $steps["runOnClick"].then === "function"
         ) {
