@@ -3,7 +3,6 @@
 import * as React from "react";
 import * as ph from "@plasmicapp/react-web/lib/host";
 import GlobalContextsProvider from "../components/plasmic/cantina/PlasmicGlobalContextsProvider";
-import { ScreenVariantProvider } from "../components/plasmic/cantina/PlasmicGlobalVariant__Screen";
 import { PlasmicAdmin } from "../components/plasmic/cantina/PlasmicAdmin";
 import { useRouter } from "next/router";
 
