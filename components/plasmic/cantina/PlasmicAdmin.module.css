@@ -65,9 +65,6 @@
 .img__heavw > picture > img {
   object-fit: cover;
 }
-.img__heavw > :global(.__wab_img-spacer) > img {
-  object-fit: cover;
-}
 .text__faUe {
   position: relative;
   width: auto;
@@ -83,16 +80,10 @@
 .img__iVzil > picture > img {
   object-fit: cover;
 }
-.img__iVzil > :global(.__wab_img-spacer) > img {
-  object-fit: cover;
-}
 .img__fxhAc {
   object-fit: cover;
 }
 .img__fxhAc > picture > img {
-  object-fit: cover;
-}
-.img__fxhAc > :global(.__wab_img-spacer) > img {
   object-fit: cover;
 }
 .link___9WDcN {

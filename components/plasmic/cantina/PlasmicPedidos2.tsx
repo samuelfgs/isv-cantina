@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import {
   executePlasmicDataOp,
@@ -26,25 +65,9 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
-import { NavigationBar } from "@plasmicpkgs/plasmic-nav"; // plasmic-import: jGx9tiKJoex/codeComponent
+import { NavigationBar } from "@plasmicpkgs/plasmic-nav";
 import { ReactPrint } from "../../../pages/plasmic-host"; // plasmic-import: X8Zc8pbRE2UR/codeComponent
-import { Fetcher } from "@plasmicapp/react-web/lib/data-sources"; // plasmic-import: CBeuHHn1qQBJ/codeComponent
+import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -65,9 +88,9 @@ type ArgPropType = keyof PlasmicPedidos2__ArgsType;
 export const PlasmicPedidos2__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicPedidos2__OverridesType = {
-  root?: p.Flex<"div">;
-  navigationBar?: p.Flex<typeof NavigationBar>;
-  reactPrint?: p.Flex<typeof ReactPrint>;
+  root?: Flex__<"div">;
+  navigationBar?: Flex__<typeof NavigationBar>;
+  reactPrint?: Flex__<typeof ReactPrint>;
 };
 
 export interface DefaultPedidos2Props {}
@@ -97,16 +120,14 @@ function PlasmicPedidos2__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
-
-  const currentUser = p.useCurrentUser?.() || {};
 
   let [$queries, setDollarQueries] = React.useState<
     Record<string, ReturnType<typeof usePlasmicDataOp>>
   >({});
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "selectedLineItems",
@@ -123,7 +144,7 @@ function PlasmicPedidos2__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: $queries,
@@ -180,7 +201,7 @@ function PlasmicPedidos2__RenderFunc(props: {
             data-plasmic-override={overrides.navigationBar}
             brand={
               <div className={classNames(projectcss.all, sty.freeBox___2OMfW)}>
-                <p.PlasmicImg
+                <PlasmicImg__
                   alt={""}
                   className={classNames(sty.img__sG052)}
                   displayHeight={"auto"}
@@ -211,7 +232,7 @@ function PlasmicPedidos2__RenderFunc(props: {
             }
             className={classNames("__wab_instance", sty.navigationBar)}
             closeButton={
-              <p.PlasmicImg
+              <PlasmicImg__
                 alt={""}
                 className={classNames(sty.img__vr0Rv)}
                 displayHeight={"auto"}
@@ -226,7 +247,7 @@ function PlasmicPedidos2__RenderFunc(props: {
             itemsGap={8}
             menuItems={
               <React.Fragment>
-                <p.PlasmicLink
+                <PlasmicLink__
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
@@ -238,8 +259,8 @@ function PlasmicPedidos2__RenderFunc(props: {
                   platform={"nextjs"}
                 >
                   {"Novo pedido"}
-                </p.PlasmicLink>
-                <p.PlasmicLink
+                </PlasmicLink__>
+                <PlasmicLink__
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
@@ -251,11 +272,11 @@ function PlasmicPedidos2__RenderFunc(props: {
                   platform={"nextjs"}
                 >
                   {"Ver todos os pedidos"}
-                </p.PlasmicLink>
+                </PlasmicLink__>
               </React.Fragment>
             }
             openButton={
-              <p.PlasmicImg
+              <PlasmicImg__
                 alt={""}
                 className={classNames(sty.img___1IgU)}
                 displayHeight={"auto"}
@@ -479,7 +500,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       () =>
         deriveRenderOpts(props, {
           name: nodeName,
-          descendantNames: [...PlasmicDescendants[nodeName]],
+          descendantNames: PlasmicDescendants[nodeName],
           internalArgPropNames: PlasmicPedidos2__ArgProps,
           internalVariantPropNames: PlasmicPedidos2__VariantProps
         }),

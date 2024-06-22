@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,24 +66,8 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
 import { SupabaseFetcher } from "../../supabase/supabase"; // plasmic-import: jGc1XPhYG1oO/codeComponent
-import { SideEffect } from "@plasmicpkgs/plasmic-basic-components"; // plasmic-import: K-mWGqrHefEp/codeComponent
+import { SideEffect } from "@plasmicpkgs/plasmic-basic-components";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -71,10 +94,10 @@ export const PlasmicChamada__ArgProps = new Array<ArgPropType>(
 );
 
 export type PlasmicChamada__OverridesType = {
-  root?: p.Flex<"div">;
-  supabaseFetcher?: p.Flex<typeof SupabaseFetcher>;
-  img?: p.Flex<typeof p.PlasmicImg>;
-  sideEffect?: p.Flex<typeof SideEffect>;
+  root?: Flex__<"div">;
+  supabaseFetcher?: Flex__<typeof SupabaseFetcher>;
+  img?: Flex__<typeof PlasmicImg__>;
+  sideEffect?: Flex__<typeof SideEffect>;
 };
 
 export interface DefaultChamadaProps {}
@@ -114,13 +137,11 @@ function PlasmicChamada__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
-
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "counter",
@@ -131,7 +152,7 @@ function PlasmicChamada__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -174,10 +195,10 @@ function PlasmicChamada__RenderFunc(props: {
             filters={[{ column: "status", operator: "eq", value: "pronto" }]}
             table={"vendas"}
           >
-            <ph.DataCtxReader>
+            <DataCtxReader__>
               {$ctx => (
                 <div className={classNames(projectcss.all, sty.freeBox__ed4ZA)}>
-                  <p.PlasmicImg
+                  <PlasmicImg__
                     data-plasmic-name={"img"}
                     data-plasmic-override={overrides.img}
                     alt={""}
@@ -200,7 +221,7 @@ function PlasmicChamada__RenderFunc(props: {
                   <div
                     className={classNames(projectcss.all, sty.freeBox__ux5O3)}
                   >
-                    <p.Stack
+                    <Stack__
                       as={"div"}
                       hasGap={true}
                       className={classNames(
@@ -284,14 +305,14 @@ function PlasmicChamada__RenderFunc(props: {
                           );
                         })}
                       </div>
-                    </p.Stack>
+                    </Stack__>
                     <div
                       className={classNames(projectcss.all, sty.freeBox__ix8Va)}
                     />
                   </div>
                 </div>
               )}
-            </ph.DataCtxReader>
+            </DataCtxReader__>
           </SupabaseFetcher>
           <SideEffect
             data-plasmic-name={"sideEffect"}
@@ -373,8 +394,8 @@ function PlasmicChamada__RenderFunc(props: {
                       }
                       const { objRoot, variablePath } = variable;
 
-                      const oldValue = p.get(objRoot, variablePath);
-                      p.set(objRoot, variablePath, oldValue + 1);
+                      const oldValue = $stateGet(objRoot, variablePath);
+                      $stateSet(objRoot, variablePath, oldValue + 1);
                       return oldValue + 1;
                     })?.apply(null, [actionArgs]);
                   })()
@@ -406,7 +427,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   supabaseFetcher: typeof SupabaseFetcher;
-  img: typeof p.PlasmicImg;
+  img: typeof PlasmicImg__;
   sideEffect: typeof SideEffect;
 };
 
@@ -444,7 +465,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       () =>
         deriveRenderOpts(props, {
           name: nodeName,
-          descendantNames: [...PlasmicDescendants[nodeName]],
+          descendantNames: PlasmicDescendants[nodeName],
           internalArgPropNames: PlasmicChamada__ArgProps,
           internalVariantPropNames: PlasmicChamada__VariantProps
         }),

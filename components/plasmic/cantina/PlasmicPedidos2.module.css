@@ -60,9 +60,6 @@
 .img__sG052 > picture > img {
   object-fit: cover;
 }
-.img__sG052 > :global(.__wab_img-spacer) > img {
-  object-fit: cover;
-}
 .text__paIy4 {
   position: relative;
   width: auto;
@@ -78,16 +75,10 @@
 .img___1IgU > picture > img {
   object-fit: cover;
 }
-.img___1IgU > :global(.__wab_img-spacer) > img {
-  object-fit: cover;
-}
 .img__vr0Rv {
   object-fit: cover;
 }
 .img__vr0Rv > picture > img {
-  object-fit: cover;
-}
-.img__vr0Rv > :global(.__wab_img-spacer) > img {
   object-fit: cover;
 }
 .link__pLgxx {

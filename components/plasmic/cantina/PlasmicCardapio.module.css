@@ -60,9 +60,6 @@
 .img__caHP > picture > img {
   object-fit: cover;
 }
-.img__caHP > :global(.__wab_img-spacer) > img {
-  object-fit: cover;
-}
 .text__eRkux {
   position: relative;
   width: auto;
@@ -78,16 +75,10 @@
 .img__oeqTp > picture > img {
   object-fit: cover;
 }
-.img__oeqTp > :global(.__wab_img-spacer) > img {
-  object-fit: cover;
-}
 .img__oQtOs {
   object-fit: cover;
 }
 .img__oQtOs > picture > img {
-  object-fit: cover;
-}
-.img__oQtOs > :global(.__wab_img-spacer) > img {
   object-fit: cover;
 }
 .link__uavjz {
@@ -108,6 +99,11 @@
   height: auto;
   max-width: 100%;
   text-decoration-line: underline !important;
+}
+.supabaseMutation:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+  position: relative;
 }
 .supabaseFetcher__um2AZ:global(.__wab_instance) {
   max-width: 100%;
@@ -336,16 +332,16 @@
   max-width: 100%;
   position: relative;
 }
-.svg__p9D1B {
+.svg__gxi14 {
   position: relative;
   object-fit: cover;
   width: auto;
   height: 1em;
 }
-.text__bCfPq {
+.text__m1V0Z {
   height: auto;
 }
-.svg__abWt2 {
+.svg___3JI0S {
   position: relative;
   object-fit: cover;
   width: auto;

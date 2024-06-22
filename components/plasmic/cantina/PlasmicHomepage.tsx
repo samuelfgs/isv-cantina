@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,32 +66,16 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
-import { NavigationBar } from "@plasmicpkgs/plasmic-nav"; // plasmic-import: jGx9tiKJoex/codeComponent
+import { NavigationBar } from "@plasmicpkgs/plasmic-nav";
 import { SupabaseMutation } from "../../supabase/supabase"; // plasmic-import: RAfjAj2dBb8c/codeComponent
 import { PreQueries } from "../../supabase/supabase"; // plasmic-import: Cu9sFLV3rnHH/codeComponent
 import Button from "../../Button"; // plasmic-import: WaoscXndZ0Zl/component
 import Tag from "../../Tag"; // plasmic-import: lrm25Wbtct6n/component
 import LineItem from "../../LineItem"; // plasmic-import: KBis_g_ud_Oy/component
-import { AntdTextArea } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: pTzGlMptTxd/codeComponent
-import { inputHelpers as AntdTextArea_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: pTzGlMptTxd/codeComponentHelper
+import { AntdTextArea } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { inputHelpers as AntdTextArea_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
 import Select from "../../Select"; // plasmic-import: TQ2uLm_LONoV/component
-import { AntdInputNumber } from "@plasmicpkgs/antd5/skinny/registerInput"; // plasmic-import: wxD5qjEe3pU/codeComponent
+import { AntdInputNumber } from "@plasmicpkgs/antd5/skinny/registerInput";
 import TextInput from "../../TextInput"; // plasmic-import: J6Bka2G1vC3V/component
 import Checkbox from "../../Checkbox"; // plasmic-import: 3SFd0T01Rc6S/component
 import { ReactPrint } from "../../../pages/plasmic-host"; // plasmic-import: X8Zc8pbRE2UR/codeComponent
@@ -81,23 +104,23 @@ type ArgPropType = keyof PlasmicHomepage__ArgsType;
 export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicHomepage__OverridesType = {
-  root?: p.Flex<"div">;
-  navigationBar?: p.Flex<typeof NavigationBar>;
-  supabaseMutation?: p.Flex<typeof SupabaseMutation>;
-  supabasePreQueries?: p.Flex<typeof PreQueries>;
-  step0?: p.Flex<"div">;
-  tag?: p.Flex<typeof Tag>;
-  step1?: p.Flex<"div">;
-  svg?: p.Flex<"svg">;
-  lineItem?: p.Flex<typeof LineItem>;
-  textArea?: p.Flex<typeof AntdTextArea>;
-  subtotal?: p.Flex<"div">;
-  finalizar?: p.Flex<"div">;
-  formaPagamento?: p.Flex<typeof Select>;
-  numberInput?: p.Flex<typeof AntdInputNumber>;
-  name?: p.Flex<typeof TextInput>;
-  senha?: p.Flex<typeof Checkbox>;
-  reactPrint?: p.Flex<typeof ReactPrint>;
+  root?: Flex__<"div">;
+  navigationBar?: Flex__<typeof NavigationBar>;
+  supabaseMutation?: Flex__<typeof SupabaseMutation>;
+  supabasePreQueries?: Flex__<typeof PreQueries>;
+  step0?: Flex__<"div">;
+  tag?: Flex__<typeof Tag>;
+  step1?: Flex__<"div">;
+  svg?: Flex__<"svg">;
+  lineItem?: Flex__<typeof LineItem>;
+  textArea?: Flex__<typeof AntdTextArea>;
+  subtotal?: Flex__<"div">;
+  finalizar?: Flex__<"div">;
+  formaPagamento?: Flex__<typeof Select>;
+  numberInput?: Flex__<typeof AntdInputNumber>;
+  name?: Flex__<typeof TextInput>;
+  senha?: Flex__<typeof Checkbox>;
+  reactPrint?: Flex__<typeof ReactPrint>;
 };
 
 export interface DefaultHomepageProps {}
@@ -127,15 +150,13 @@ function PlasmicHomepage__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const $globalActions = ph.useGlobalActions?.();
+  const $globalActions = useGlobalActions?.();
 
-  const currentUser = p.useCurrentUser?.() || {};
-
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "carrinho",
@@ -230,7 +251,7 @@ function PlasmicHomepage__RenderFunc(props: {
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
 
-        onMutate: p.generateOnMutateForSpec("value", AntdTextArea_Helpers)
+        onMutate: generateOnMutateForSpec("value", AntdTextArea_Helpers)
       },
       {
         path: "name.value",
@@ -259,7 +280,7 @@ function PlasmicHomepage__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -300,7 +321,7 @@ function PlasmicHomepage__RenderFunc(props: {
             data-plasmic-override={overrides.navigationBar}
             brand={
               <div className={classNames(projectcss.all, sty.freeBox__rv0Px)}>
-                <p.PlasmicImg
+                <PlasmicImg__
                   alt={""}
                   className={classNames(sty.img__mgzGy)}
                   displayHeight={"auto"}
@@ -331,7 +352,7 @@ function PlasmicHomepage__RenderFunc(props: {
             }
             className={classNames("__wab_instance", sty.navigationBar)}
             closeButton={
-              <p.PlasmicImg
+              <PlasmicImg__
                 alt={""}
                 className={classNames(sty.img__u8Ers)}
                 displayHeight={"auto"}
@@ -346,7 +367,7 @@ function PlasmicHomepage__RenderFunc(props: {
             itemsGap={8}
             menuItems={
               <React.Fragment>
-                <p.PlasmicLink
+                <PlasmicLink__
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
@@ -358,8 +379,8 @@ function PlasmicHomepage__RenderFunc(props: {
                   platform={"nextjs"}
                 >
                   {"Novo pedido"}
-                </p.PlasmicLink>
-                <p.PlasmicLink
+                </PlasmicLink__>
+                <PlasmicLink__
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
@@ -371,8 +392,8 @@ function PlasmicHomepage__RenderFunc(props: {
                   platform={"nextjs"}
                 >
                   {"Ver todos os pedidos"}
-                </p.PlasmicLink>
-                <p.PlasmicLink
+                </PlasmicLink__>
+                <PlasmicLink__
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
@@ -384,11 +405,11 @@ function PlasmicHomepage__RenderFunc(props: {
                   platform={"nextjs"}
                 >
                   {"Estoque"}
-                </p.PlasmicLink>
+                </PlasmicLink__>
               </React.Fragment>
             }
             openButton={
-              <p.PlasmicImg
+              <PlasmicImg__
                 alt={""}
                 className={classNames(sty.img__tPJ0)}
                 displayHeight={"auto"}
@@ -408,7 +429,7 @@ function PlasmicHomepage__RenderFunc(props: {
             data-plasmic-override={overrides.supabaseMutation}
             className={classNames("__wab_instance", sty.supabaseMutation)}
           >
-            <ph.DataCtxReader>
+            <DataCtxReader__>
               {$ctx => (
                 <PreQueries
                   data-plasmic-name={"supabasePreQueries"}
@@ -419,7 +440,7 @@ function PlasmicHomepage__RenderFunc(props: {
                   )}
                   query={"fullProducts"}
                 >
-                  <ph.DataCtxReader>
+                  <DataCtxReader__>
                     {$ctx => (
                       <React.Fragment>
                         {(() => {
@@ -454,7 +475,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 throw e;
                               }
                             })() ? (
-                              <p.Stack
+                              <Stack__
                                 as={"div"}
                                 hasGap={true}
                                 className={classNames(
@@ -462,7 +483,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.freeBox__jmLfs
                                 )}
                               >
-                                <p.Stack
+                                <Stack__
                                   as={"div"}
                                   hasGap={true}
                                   className={classNames(
@@ -479,7 +500,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   >
                                     {"Carrinho"}
                                   </div>
-                                  <p.Stack
+                                  <Stack__
                                     as={"div"}
                                     hasGap={true}
                                     className={classNames(
@@ -512,7 +533,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         const currentItem = __plasmic_item_0;
                                         const currentIndex = __plasmic_idx_0;
                                         return (
-                                          <p.Stack
+                                          <Stack__
                                             as={"div"}
                                             hasGap={true}
                                             className={classNames(
@@ -527,7 +548,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 sty.freeBox__g1Nj
                                               )}
                                             >
-                                              <p.Stack
+                                              <Stack__
                                                 as={"div"}
                                                 hasGap={true}
                                                 className={classNames(
@@ -591,7 +612,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                     })()}
                                                   </React.Fragment>
                                                 </div>
-                                              </p.Stack>
+                                              </Stack__>
                                               <div
                                                 className={classNames(
                                                   projectcss.all,
@@ -674,7 +695,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                           variablePath
                                                         } = variable;
 
-                                                        const arr = p.get(
+                                                        const arr = $stateGet(
                                                           objRoot,
                                                           variablePath
                                                         );
@@ -707,13 +728,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                             >
                                               {"X"}
                                             </Button>
-                                          </p.Stack>
+                                          </Stack__>
                                         );
                                       }
                                     )}
-                                  </p.Stack>
-                                </p.Stack>
-                                <p.Stack
+                                  </Stack__>
+                                </Stack__>
+                                <Stack__
                                   as={"div"}
                                   hasGap={true}
                                   className={classNames(
@@ -829,7 +850,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                             variablePath
                                                           } = variable;
 
-                                                          p.set(
+                                                          $stateSet(
                                                             objRoot,
                                                             variablePath,
                                                             value
@@ -885,7 +906,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                               variablePath
                                                             } = variable;
 
-                                                            p.set(
+                                                            $stateSet(
                                                               objRoot,
                                                               variablePath,
                                                               value
@@ -946,7 +967,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                               variablePath
                                                             } = variable;
 
-                                                            p.set(
+                                                            $stateSet(
                                                               objRoot,
                                                               variablePath,
                                                               value
@@ -1001,11 +1022,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                                           } = variable;
 
                                                           const oldValue =
-                                                            p.get(
+                                                            $stateGet(
                                                               objRoot,
                                                               variablePath
                                                             );
-                                                          p.set(
+                                                          $stateSet(
                                                             objRoot,
                                                             variablePath,
                                                             oldValue + 1
@@ -1095,7 +1116,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                       throw e;
                                     }
                                   })() ? (
-                                    <p.Stack
+                                    <Stack__
                                       as={"div"}
                                       data-plasmic-name={"step1"}
                                       data-plasmic-override={overrides.step1}
@@ -1169,7 +1190,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                       variablePath
                                                     } = variable;
 
-                                                    p.set(
+                                                    $stateSet(
                                                       objRoot,
                                                       variablePath,
                                                       value
@@ -1214,7 +1235,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                       variablePath
                                                     } = variable;
 
-                                                    p.set(
+                                                    $stateSet(
                                                       objRoot,
                                                       variablePath,
                                                       undefined
@@ -1356,7 +1377,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                                 variablePath
                                                               } = variable;
 
-                                                              p.set(
+                                                              $stateSet(
                                                                 objRoot,
                                                                 variablePath,
                                                                 value
@@ -1480,7 +1501,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           )}
                                         </div>
                                       ) : null}
-                                      <p.Stack
+                                      <Stack__
                                         as={"div"}
                                         hasGap={true}
                                         className={classNames(
@@ -1504,18 +1525,18 @@ function PlasmicHomepage__RenderFunc(props: {
                                               sty.textArea
                                             ),
                                             onChange:
-                                              p.generateStateOnChangePropForCodeComponents(
+                                              generateStateOnChangePropForCodeComponents(
                                                 $state,
                                                 "value",
                                                 ["textArea", "value"],
                                                 AntdTextArea_Helpers
                                               ),
-                                            value: p.generateStateValueProp(
+                                            value: generateStateValueProp(
                                               $state,
                                               ["textArea", "value"]
                                             )
                                           };
-                                          p.initializeCodeComponentStates(
+                                          initializeCodeComponentStates(
                                             $state,
                                             [
                                               {
@@ -1539,7 +1560,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                             />
                                           );
                                         })()}
-                                      </p.Stack>
+                                      </Stack__>
                                       <div
                                         className={classNames(
                                           projectcss.all,
@@ -1555,7 +1576,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                         >
                                           {"Quantidade"}
                                         </div>
-                                        <p.Stack
+                                        <Stack__
                                           as={"div"}
                                           hasGap={true}
                                           className={classNames(
@@ -1613,11 +1634,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                                           variablePath
                                                         } = variable;
 
-                                                        const oldValue = p.get(
-                                                          objRoot,
-                                                          variablePath
-                                                        );
-                                                        p.set(
+                                                        const oldValue =
+                                                          $stateGet(
+                                                            objRoot,
+                                                            variablePath
+                                                          );
+                                                        $stateSet(
                                                           objRoot,
                                                           variablePath,
                                                           oldValue - 1
@@ -1705,11 +1727,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                                           variablePath
                                                         } = variable;
 
-                                                        const oldValue = p.get(
-                                                          objRoot,
-                                                          variablePath
-                                                        );
-                                                        p.set(
+                                                        const oldValue =
+                                                          $stateGet(
+                                                            objRoot,
+                                                            variablePath
+                                                          );
+                                                        $stateSet(
                                                           objRoot,
                                                           variablePath,
                                                           oldValue + 1
@@ -1739,7 +1762,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           >
                                             {"+"}
                                           </Button>
-                                        </p.Stack>
+                                        </Stack__>
                                         <div
                                           className={classNames(
                                             projectcss.all,
@@ -1765,7 +1788,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           </React.Fragment>
                                         </div>
                                       </div>
-                                      <p.Stack
+                                      <Stack__
                                         as={"div"}
                                         hasGap={true}
                                         className={classNames(
@@ -1860,15 +1883,18 @@ function PlasmicHomepage__RenderFunc(props: {
                                               $state.itemQuantity
                                                 ? (() => {
                                                     const actionArgs = {
-                                                      type: "error",
-                                                      message:
+                                                      args: [
+                                                        "error",
                                                         "Estoque indispon\u00edvel",
-                                                      description: `Estoque atual: ${$state.selectedOption.stock}`
+                                                        `Estoque atual: ${$state.selectedOption.stock}`,
+                                                        undefined,
+                                                        undefined
+                                                      ]
                                                     };
                                                     return $globalActions[
                                                       "plasmic-antd5-config-provider.showNotification"
                                                     ]?.apply(null, [
-                                                      actionArgs
+                                                      ...actionArgs.args
                                                     ]);
                                                   })()
                                                 : undefined;
@@ -1970,13 +1996,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                             {"Adicionar"}
                                           </div>
                                         </Button>
-                                      </p.Stack>
-                                    </p.Stack>
+                                      </Stack__>
+                                    </Stack__>
                                   ) : null}
-                                </p.Stack>
-                              </p.Stack>
+                                </Stack__>
+                              </Stack__>
                             ) : null}
-                            <p.Stack
+                            <Stack__
                               as={"div"}
                               data-plasmic-name={"subtotal"}
                               data-plasmic-override={overrides.subtotal}
@@ -2068,7 +2094,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                             const { objRoot, variablePath } =
                                               variable;
 
-                                            p.set(objRoot, variablePath, value);
+                                            $stateSet(
+                                              objRoot,
+                                              variablePath,
+                                              value
+                                            );
                                             return value;
                                           })?.apply(null, [actionArgs]);
                                         })()
@@ -2095,7 +2125,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   {"Pr\u00f3ximo"}
                                 </div>
                               </Button>
-                            </p.Stack>
+                            </Stack__>
                           </div>
                         ) : null}
                         {(() => {
@@ -2111,7 +2141,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             throw e;
                           }
                         })() ? (
-                          <p.Stack
+                          <Stack__
                             as={"div"}
                             data-plasmic-name={"finalizar"}
                             data-plasmic-override={overrides.finalizar}
@@ -2121,7 +2151,7 @@ function PlasmicHomepage__RenderFunc(props: {
                               sty.finalizar
                             )}
                           >
-                            <p.Stack
+                            <Stack__
                               as={"div"}
                               hasGap={true}
                               className={classNames(
@@ -2138,7 +2168,7 @@ function PlasmicHomepage__RenderFunc(props: {
                               >
                                 {"Carrinho"}
                               </div>
-                              <p.Stack
+                              <Stack__
                                 as={"div"}
                                 hasGap={true}
                                 className={classNames(
@@ -2170,7 +2200,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   const currentItem = __plasmic_item_0;
                                   const currentIndex = __plasmic_idx_0;
                                   return (
-                                    <p.Stack
+                                    <Stack__
                                       as={"div"}
                                       hasGap={true}
                                       className={classNames(
@@ -2185,7 +2215,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                           sty.freeBox__ugCa6
                                         )}
                                       >
-                                        <p.Stack
+                                        <Stack__
                                           as={"div"}
                                           hasGap={true}
                                           className={classNames(
@@ -2245,7 +2275,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                               })()}
                                             </React.Fragment>
                                           </div>
-                                        </p.Stack>
+                                        </Stack__>
                                         <div
                                           className={classNames(
                                             projectcss.all,
@@ -2277,12 +2307,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                           </React.Fragment>
                                         </div>
                                       </div>
-                                    </p.Stack>
+                                    </Stack__>
                                   );
                                 })}
-                              </p.Stack>
-                            </p.Stack>
-                            <p.Stack
+                              </Stack__>
+                            </Stack__>
+                            <Stack__
                               as={"div"}
                               hasGap={true}
                               className={classNames(
@@ -2307,7 +2337,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.formaPagamento
                                 )}
                                 onChange={(...eventArgs) => {
-                                  p.generateStateOnChangeProp($state, [
+                                  generateStateOnChangeProp($state, [
                                     "formaPagamento",
                                     "value"
                                   ])(eventArgs[0]);
@@ -2326,12 +2356,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                   __composite["2"]["label"] = "Dinheiro";
                                   return __composite;
                                 })()}
-                                value={p.generateStateValueProp($state, [
+                                value={generateStateValueProp($state, [
                                   "formaPagamento",
                                   "value"
                                 ])}
                               />
-                            </p.Stack>
+                            </Stack__>
                             {(() => {
                               try {
                                 return (
@@ -2347,7 +2377,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                 throw e;
                               }
                             })() ? (
-                              <p.Stack
+                              <Stack__
                                 as={"div"}
                                 hasGap={true}
                                 className={classNames(
@@ -2371,18 +2401,19 @@ function PlasmicHomepage__RenderFunc(props: {
                                     "__wab_instance",
                                     sty.numberInput
                                   )}
-                                  onChange={p.generateStateOnChangeProp(
-                                    $state,
-                                    ["numberInput", "value"]
-                                  )}
-                                  value={p.generateStateValueProp($state, [
+                                  onChange={generateStateOnChangeProp($state, [
+                                    "numberInput",
+                                    "value"
+                                  ])}
+                                  type={"number"}
+                                  value={generateStateValueProp($state, [
                                     "numberInput",
                                     "value"
                                   ])}
                                 />
-                              </p.Stack>
+                              </Stack__>
                             ) : null}
-                            <p.Stack
+                            <Stack__
                               as={"div"}
                               hasGap={true}
                               className={classNames(
@@ -2407,7 +2438,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.name
                                 )}
                                 onChange={(...eventArgs) => {
-                                  p.generateStateOnChangeProp($state, [
+                                  generateStateOnChangeProp($state, [
                                     "name",
                                     "value"
                                   ])(
@@ -2419,14 +2450,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                 }}
                                 placeholder={" "}
                                 value={
-                                  p.generateStateValueProp($state, [
+                                  generateStateValueProp($state, [
                                     "name",
                                     "value"
                                   ]) ?? ""
                                 }
                               />
-                            </p.Stack>
-                            <p.Stack
+                            </Stack__>
+                            <Stack__
                               as={"div"}
                               hasGap={true}
                               className={classNames(
@@ -2442,13 +2473,13 @@ function PlasmicHomepage__RenderFunc(props: {
                                   sty.senha
                                 )}
                                 isChecked={
-                                  p.generateStateValueProp($state, [
+                                  generateStateValueProp($state, [
                                     "senha",
                                     "isChecked"
                                   ]) ?? false
                                 }
                                 onChange={(...eventArgs) => {
-                                  p.generateStateOnChangeProp($state, [
+                                  generateStateOnChangeProp($state, [
                                     "senha",
                                     "isChecked"
                                   ])(eventArgs[0]);
@@ -2464,8 +2495,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                   {"N\u00e3o precisa de senha"}
                                 </div>
                               </Checkbox>
-                            </p.Stack>
-                            <p.Stack
+                            </Stack__>
+                            <Stack__
                               as={"div"}
                               hasGap={true}
                               className={classNames(
@@ -2523,11 +2554,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const { objRoot, variablePath } =
                                             variable;
 
-                                          const oldValue = p.get(
+                                          const oldValue = $stateGet(
                                             objRoot,
                                             variablePath
                                           );
-                                          p.set(
+                                          $stateSet(
                                             objRoot,
                                             variablePath,
                                             !oldValue
@@ -2789,11 +2820,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const { objRoot, variablePath } =
                                             variable;
 
-                                          const oldValue = p.get(
+                                          const oldValue = $stateGet(
                                             objRoot,
                                             variablePath
                                           );
-                                          p.set(
+                                          $stateSet(
                                             objRoot,
                                             variablePath,
                                             !oldValue
@@ -2842,7 +2873,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 }
                                               ]
                                             },
-                                            cacheKey: `plasmic.$.37475e34-ecd1-40c1-9661-74db57873601.$.`,
+                                            cacheKey: null,
                                             invalidatedKeys: [],
                                             roleId: null
                                           }
@@ -2990,7 +3021,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                                 })()
                                               ]
                                             },
-                                            cacheKey: `plasmic.$.4b85247b-e63a-4dc7-b44a-a36084f8867d.$.`,
+                                            cacheKey: null,
                                             invalidatedKeys: [],
                                             roleId: null
                                           }
@@ -3144,7 +3175,11 @@ function PlasmicHomepage__RenderFunc(props: {
                                           const { objRoot, variablePath } =
                                             variable;
 
-                                          p.set(objRoot, variablePath, value);
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            value
+                                          );
                                           return value;
                                         })?.apply(null, [actionArgs]);
                                       })()
@@ -3171,7 +3206,7 @@ function PlasmicHomepage__RenderFunc(props: {
                                   {"Voltar"}
                                 </div>
                               </Button>
-                            </p.Stack>
+                            </Stack__>
                             {(() => {
                               try {
                                 return $state.isFinished;
@@ -3229,14 +3264,14 @@ function PlasmicHomepage__RenderFunc(props: {
                                 </div>
                               </Button>
                             ) : null}
-                          </p.Stack>
+                          </Stack__>
                         ) : null}
                       </React.Fragment>
                     )}
-                  </ph.DataCtxReader>
+                  </DataCtxReader__>
                 </PreQueries>
               )}
-            </ph.DataCtxReader>
+            </DataCtxReader__>
           </SupabaseMutation>
           <ReactPrint
             data-plasmic-name={"reactPrint"}
@@ -3402,7 +3437,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       () =>
         deriveRenderOpts(props, {
           name: nodeName,
-          descendantNames: [...PlasmicDescendants[nodeName]],
+          descendantNames: PlasmicDescendants[nodeName],
           internalArgPropNames: PlasmicHomepage__ArgProps,
           internalVariantPropNames: PlasmicHomepage__VariantProps
         }),

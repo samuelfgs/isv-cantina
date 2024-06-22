@@ -17,8 +17,47 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 
-import * as p from "@plasmicapp/react-web";
-import * as ph from "@plasmicapp/react-web/lib/host";
+import {
+  Flex as Flex__,
+  MultiChoiceArg,
+  PlasmicDataSourceContextProvider as PlasmicDataSourceContextProvider__,
+  PlasmicIcon as PlasmicIcon__,
+  PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
+  PlasmicPageGuard as PlasmicPageGuard__,
+  SingleBooleanChoiceArg,
+  SingleChoiceArg,
+  Stack as Stack__,
+  StrictProps,
+  Trans as Trans__,
+  classNames,
+  createPlasmicElementProxy,
+  deriveRenderOpts,
+  ensureGlobalVariants,
+  generateOnMutateForSpec,
+  generateStateOnChangeProp,
+  generateStateOnChangePropForCodeComponents,
+  generateStateValueProp,
+  get as $stateGet,
+  hasVariant,
+  initializeCodeComponentStates,
+  initializePlasmicStates,
+  makeFragment,
+  omit,
+  pick,
+  renderPlasmicSlot,
+  set as $stateSet,
+  useCurrentUser,
+  useDollarState,
+  usePlasmicTranslator,
+  useTrigger,
+  wrapWithClassName
+} from "@plasmicapp/react-web";
+import {
+  DataCtxReader as DataCtxReader__,
+  useDataEnv,
+  useGlobalActions
+} from "@plasmicapp/react-web/lib/host";
 
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 import {
@@ -27,27 +66,11 @@ import {
   usePlasmicInvalidate
 } from "@plasmicapp/react-web/lib/data-sources";
 
-import {
-  hasVariant,
-  classNames,
-  wrapWithClassName,
-  createPlasmicElementProxy,
-  makeFragment,
-  MultiChoiceArg,
-  SingleBooleanChoiceArg,
-  SingleChoiceArg,
-  pick,
-  omit,
-  useTrigger,
-  StrictProps,
-  deriveRenderOpts,
-  ensureGlobalVariants
-} from "@plasmicapp/react-web";
-import { NavigationBar } from "@plasmicpkgs/plasmic-nav"; // plasmic-import: jGx9tiKJoex/codeComponent
+import { NavigationBar } from "@plasmicpkgs/plasmic-nav";
 import { SupabaseMutation } from "../../supabase/supabase"; // plasmic-import: RAfjAj2dBb8c/codeComponent
 import { SupabaseFetcher } from "../../supabase/supabase"; // plasmic-import: jGc1XPhYG1oO/codeComponent
-import { AntdTabs } from "@plasmicpkgs/antd5/skinny/registerTabs"; // plasmic-import: HV5Zx3YTIxFT/codeComponent
-import { AntdTabItem } from "@plasmicpkgs/antd5/skinny/registerTabs"; // plasmic-import: OSD--ykMTE95/codeComponent
+import { AntdTabs } from "@plasmicpkgs/antd5/skinny/registerTabs";
+import { AntdTabItem } from "@plasmicpkgs/antd5/skinny/registerTabs";
 import Button from "../../Button"; // plasmic-import: WaoscXndZ0Zl/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -72,11 +95,11 @@ type ArgPropType = keyof PlasmicAdmin__ArgsType;
 export const PlasmicAdmin__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicAdmin__OverridesType = {
-  root?: p.Flex<"div">;
-  navigationBar?: p.Flex<typeof NavigationBar>;
-  supabaseMutation?: p.Flex<typeof SupabaseMutation>;
-  supabaseFetcher?: p.Flex<typeof SupabaseFetcher>;
-  tabs?: p.Flex<typeof AntdTabs>;
+  root?: Flex__<"div">;
+  navigationBar?: Flex__<typeof NavigationBar>;
+  supabaseMutation?: Flex__<typeof SupabaseMutation>;
+  supabaseFetcher?: Flex__<typeof SupabaseFetcher>;
+  tabs?: Flex__<typeof AntdTabs>;
 };
 
 export interface DefaultAdminProps {}
@@ -106,13 +129,13 @@ function PlasmicAdmin__RenderFunc(props: {
   };
 
   const __nextRouter = useNextRouter();
-  const $ctx = ph.useDataEnv?.() || {};
+  const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const currentUser = p.useCurrentUser?.() || {};
+  const $globalActions = useGlobalActions?.();
 
-  const stateSpecs: Parameters<typeof p.useDollarState>[0] = React.useMemo(
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
     () => [
       {
         path: "tabs.activeKey",
@@ -123,7 +146,7 @@ function PlasmicAdmin__RenderFunc(props: {
     ],
     [$props, $ctx, $refs]
   );
-  const $state = p.useDollarState(stateSpecs, {
+  const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
     $queries: {},
@@ -164,7 +187,7 @@ function PlasmicAdmin__RenderFunc(props: {
             data-plasmic-override={overrides.navigationBar}
             brand={
               <div className={classNames(projectcss.all, sty.freeBox__ilyy9)}>
-                <p.PlasmicImg
+                <PlasmicImg__
                   alt={""}
                   className={classNames(sty.img__heavw)}
                   displayHeight={"auto"}
@@ -195,7 +218,7 @@ function PlasmicAdmin__RenderFunc(props: {
             }
             className={classNames("__wab_instance", sty.navigationBar)}
             closeButton={
-              <p.PlasmicImg
+              <PlasmicImg__
                 alt={""}
                 className={classNames(sty.img__fxhAc)}
                 displayHeight={"auto"}
@@ -210,7 +233,7 @@ function PlasmicAdmin__RenderFunc(props: {
             itemsGap={8}
             menuItems={
               <React.Fragment>
-                <p.PlasmicLink
+                <PlasmicLink__
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
@@ -222,8 +245,8 @@ function PlasmicAdmin__RenderFunc(props: {
                   platform={"nextjs"}
                 >
                   {"Novo pedido"}
-                </p.PlasmicLink>
-                <p.PlasmicLink
+                </PlasmicLink__>
+                <PlasmicLink__
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
@@ -235,8 +258,8 @@ function PlasmicAdmin__RenderFunc(props: {
                   platform={"nextjs"}
                 >
                   {"Ver todos os pedidos"}
-                </p.PlasmicLink>
-                <p.PlasmicLink
+                </PlasmicLink__>
+                <PlasmicLink__
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
@@ -248,11 +271,11 @@ function PlasmicAdmin__RenderFunc(props: {
                   platform={"nextjs"}
                 >
                   {"Estoque"}
-                </p.PlasmicLink>
+                </PlasmicLink__>
               </React.Fragment>
             }
             openButton={
-              <p.PlasmicImg
+              <PlasmicImg__
                 alt={""}
                 className={classNames(sty.img__iVzil)}
                 displayHeight={"auto"}
@@ -272,7 +295,7 @@ function PlasmicAdmin__RenderFunc(props: {
             data-plasmic-override={overrides.supabaseMutation}
             className={classNames("__wab_instance", sty.supabaseMutation)}
           >
-            <ph.DataCtxReader>
+            <DataCtxReader__>
               {$ctx => (
                 <SupabaseFetcher
                   data-plasmic-name={"supabaseFetcher"}
@@ -281,12 +304,12 @@ function PlasmicAdmin__RenderFunc(props: {
                   name={"vendas"}
                   table={"vendas"}
                 >
-                  <ph.DataCtxReader>
+                  <DataCtxReader__>
                     {$ctx => (
                       <AntdTabs
                         data-plasmic-name={"tabs"}
                         data-plasmic-override={overrides.tabs}
-                        activeKey={p.generateStateValueProp($state, [
+                        activeKey={generateStateValueProp($state, [
                           "tabs",
                           "activeKey"
                         ])}
@@ -348,7 +371,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                   const currentItem = __plasmic_item_0;
                                   const currentIndex = __plasmic_idx_0;
                                   return (
-                                    <p.Stack
+                                    <Stack__
                                       as={"div"}
                                       hasGap={true}
                                       className={classNames(
@@ -357,7 +380,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                       )}
                                       key={currentIndex}
                                     >
-                                      <p.Stack
+                                      <Stack__
                                         as={"div"}
                                         hasGap={true}
                                         className={classNames(
@@ -508,7 +531,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                             </React.Fragment>
                                           </React.Fragment>
                                         </div>
-                                      </p.Stack>
+                                      </Stack__>
                                       <Button
                                         className={classNames(
                                           "__wab_instance",
@@ -522,12 +545,15 @@ function PlasmicAdmin__RenderFunc(props: {
                                                 const actionArgs = {
                                                   customFunction: async () => {
                                                     return $ctx.supabaseMutation.upsert(
-                                                      [
-                                                        {
-                                                          id: currentItem.id,
-                                                          status: "pronto"
-                                                        }
-                                                      ]
+                                                      {
+                                                        table: "vendas",
+                                                        upsertValues: [
+                                                          {
+                                                            id: currentItem.id,
+                                                            status: "pronto"
+                                                          }
+                                                        ]
+                                                      }
                                                     );
                                                   }
                                                 };
@@ -579,11 +605,55 @@ function PlasmicAdmin__RenderFunc(props: {
                                             $steps["refreshData"] =
                                               await $steps["refreshData"];
                                           }
+
+                                          $steps["invokeGlobalAction"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  args: [
+                                                    "success",
+                                                    (() => {
+                                                      try {
+                                                        return `Pedido ${currentItem.id} movido para pronto`;
+                                                      } catch (e) {
+                                                        if (
+                                                          e instanceof
+                                                            TypeError ||
+                                                          e?.plasmicType ===
+                                                            "PlasmicUndefinedDataError"
+                                                        ) {
+                                                          return undefined;
+                                                        }
+                                                        throw e;
+                                                      }
+                                                    })()
+                                                  ]
+                                                };
+                                                return $globalActions[
+                                                  "plasmic-antd5-config-provider.showNotification"
+                                                ]?.apply(null, [
+                                                  ...actionArgs.args
+                                                ]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["invokeGlobalAction"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "invokeGlobalAction"
+                                            ] === "object" &&
+                                            typeof $steps["invokeGlobalAction"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["invokeGlobalAction"] =
+                                              await $steps[
+                                                "invokeGlobalAction"
+                                              ];
+                                          }
                                         }}
                                       >
                                         {"PRONTO"}
                                       </Button>
-                                    </p.Stack>
+                                    </Stack__>
                                   );
                                 })}
                               </div>
@@ -638,7 +708,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                   const currentItem = __plasmic_item_0;
                                   const currentIndex = __plasmic_idx_0;
                                   return (
-                                    <p.Stack
+                                    <Stack__
                                       as={"div"}
                                       hasGap={true}
                                       className={classNames(
@@ -647,7 +717,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                       )}
                                       key={currentIndex}
                                     >
-                                      <p.Stack
+                                      <Stack__
                                         as={"div"}
                                         hasGap={true}
                                         className={classNames(
@@ -798,7 +868,7 @@ function PlasmicAdmin__RenderFunc(props: {
                                             </React.Fragment>
                                           </React.Fragment>
                                         </div>
-                                      </p.Stack>
+                                      </Stack__>
                                       <Button
                                         className={classNames(
                                           "__wab_instance",
@@ -812,12 +882,15 @@ function PlasmicAdmin__RenderFunc(props: {
                                                 const actionArgs = {
                                                   customFunction: async () => {
                                                     return $ctx.supabaseMutation.upsert(
-                                                      [
-                                                        {
-                                                          id: currentItem.id,
-                                                          status: "entregue"
-                                                        }
-                                                      ]
+                                                      {
+                                                        table: "vendas",
+                                                        upsertValues: [
+                                                          {
+                                                            id: currentItem.id,
+                                                            status: "entregue"
+                                                          }
+                                                        ]
+                                                      }
                                                     );
                                                   }
                                                 };
@@ -839,18 +912,92 @@ function PlasmicAdmin__RenderFunc(props: {
                                               "runCode"
                                             ];
                                           }
+
+                                          $steps["refreshData"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  queryInvalidation: [
+                                                    "plasmic_refresh_all"
+                                                  ]
+                                                };
+                                                return (async ({
+                                                  queryInvalidation
+                                                }) => {
+                                                  if (!queryInvalidation) {
+                                                    return;
+                                                  }
+                                                  await plasmicInvalidate(
+                                                    queryInvalidation
+                                                  );
+                                                })?.apply(null, [actionArgs]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["refreshData"] != null &&
+                                            typeof $steps["refreshData"] ===
+                                              "object" &&
+                                            typeof $steps["refreshData"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["refreshData"] =
+                                              await $steps["refreshData"];
+                                          }
+
+                                          $steps["invokeGlobalAction"] = true
+                                            ? (() => {
+                                                const actionArgs = {
+                                                  args: [
+                                                    "success",
+                                                    (() => {
+                                                      try {
+                                                        return `Pedido ${currentItem.id} entregue`;
+                                                      } catch (e) {
+                                                        if (
+                                                          e instanceof
+                                                            TypeError ||
+                                                          e?.plasmicType ===
+                                                            "PlasmicUndefinedDataError"
+                                                        ) {
+                                                          return undefined;
+                                                        }
+                                                        throw e;
+                                                      }
+                                                    })()
+                                                  ]
+                                                };
+                                                return $globalActions[
+                                                  "plasmic-antd5-config-provider.showNotification"
+                                                ]?.apply(null, [
+                                                  ...actionArgs.args
+                                                ]);
+                                              })()
+                                            : undefined;
+                                          if (
+                                            $steps["invokeGlobalAction"] !=
+                                              null &&
+                                            typeof $steps[
+                                              "invokeGlobalAction"
+                                            ] === "object" &&
+                                            typeof $steps["invokeGlobalAction"]
+                                              .then === "function"
+                                          ) {
+                                            $steps["invokeGlobalAction"] =
+                                              await $steps[
+                                                "invokeGlobalAction"
+                                              ];
+                                          }
                                         }}
                                       >
                                         {"ENTREGUE"}
                                       </Button>
-                                    </p.Stack>
+                                    </Stack__>
                                   );
                                 })}
                               </div>
                             </AntdTabItem>
                           </React.Fragment>
                         }
-                        onChange={p.generateStateOnChangeProp($state, [
+                        onChange={generateStateOnChangeProp($state, [
                           "tabs",
                           "activeKey"
                         ])}
@@ -860,10 +1007,10 @@ function PlasmicAdmin__RenderFunc(props: {
                         tabsScopeClassName={sty["tabs__tabs"]}
                       />
                     )}
-                  </ph.DataCtxReader>
+                  </DataCtxReader__>
                 </SupabaseFetcher>
               )}
-            </ph.DataCtxReader>
+            </DataCtxReader__>
           </SupabaseMutation>
         </div>
       </div>
@@ -929,7 +1076,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       () =>
         deriveRenderOpts(props, {
           name: nodeName,
-          descendantNames: [...PlasmicDescendants[nodeName]],
+          descendantNames: PlasmicDescendants[nodeName],
           internalArgPropNames: PlasmicAdmin__ArgProps,
           internalVariantPropNames: PlasmicAdmin__VariantProps
         }),
