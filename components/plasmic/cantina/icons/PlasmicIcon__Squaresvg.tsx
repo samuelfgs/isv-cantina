@@ -5,11 +5,11 @@
 import React from "react";
 import { classNames } from "@plasmicapp/react-web";
 
-export type SquaresvgIconProps = React.ComponentProps<"svg"> & {
+export type SquareSvgIconProps = React.ComponentProps<"svg"> & {
   title?: string;
 };
 
-export function SquaresvgIcon(props: SquaresvgIconProps) {
+export function SquareSvgIcon(props: SquareSvgIconProps) {
   const { className, style, title, ...restProps } = props;
   return (
     <svg
@@ -41,5 +41,5 @@ export function SquaresvgIcon(props: SquaresvgIconProps) {
   );
 }
 
-export default SquaresvgIcon;
+export default SquareSvgIcon;
 /* prettier-ignore-end */

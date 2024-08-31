@@ -5,11 +5,11 @@
 import React from "react";
 import { classNames } from "@plasmicapp/react-web";
 
-export type ChevronUpsvgIconProps = React.ComponentProps<"svg"> & {
+export type ChevronUpSvgIconProps = React.ComponentProps<"svg"> & {
   title?: string;
 };
 
-export function ChevronUpsvgIcon(props: ChevronUpsvgIconProps) {
+export function ChevronUpSvgIcon(props: ChevronUpSvgIconProps) {
   const { className, style, title, ...restProps } = props;
   return (
     <svg
@@ -35,5 +35,5 @@ export function ChevronUpsvgIcon(props: ChevronUpsvgIconProps) {
   );
 }
 
-export default ChevronUpsvgIcon;
+export default ChevronUpSvgIcon;
 /* prettier-ignore-end */

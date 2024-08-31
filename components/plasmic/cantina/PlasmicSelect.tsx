@@ -71,8 +71,8 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_cantina.module.css"; // plasmic-import: eVCRKWwcuK6xExRdUZxKpb/projectcss
 import sty from "./PlasmicSelect.module.css"; // plasmic-import: TQ2uLm_LONoV/css
 
-import ChevronDownsvgIcon from "./icons/PlasmicIcon__ChevronDownsvg"; // plasmic-import: jNn6TVfimSlZ/icon
-import ChevronUpsvgIcon from "./icons/PlasmicIcon__ChevronUpsvg"; // plasmic-import: jQaKMVXEPdPX/icon
+import ChevronDownSvgIcon from "./icons/PlasmicIcon__ChevronDownSvg"; // plasmic-import: jNn6TVfimSlZ/icon
+import ChevronUpSvgIcon from "./icons/PlasmicIcon__ChevronUpSvg"; // plasmic-import: jQaKMVXEPdPX/icon
 
 createPlasmicElementProxy;
 
@@ -530,8 +530,8 @@ function PlasmicSelect__RenderFunc(props: {
             data-plasmic-override={overrides.dropdownIcon}
             PlasmicIconType={
               hasVariant($state, "isOpen", "isOpen")
-                ? ChevronUpsvgIcon
-                : ChevronDownsvgIcon
+                ? ChevronUpSvgIcon
+                : ChevronDownSvgIcon
             }
             className={classNames(projectcss.all, sty.dropdownIcon, {
               [sty.dropdownIcon___focusVisibleWithin]:

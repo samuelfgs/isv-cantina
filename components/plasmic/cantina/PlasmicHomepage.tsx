@@ -87,10 +87,10 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_cantina.module.css"; // plasmic-import: eVCRKWwcuK6xExRdUZxKpb/projectcss
 import sty from "./PlasmicHomepage.module.css"; // plasmic-import: O_2jzEy_JW9Z/css
 
-import ChecksvgIcon from "./icons/PlasmicIcon__Checksvg"; // plasmic-import: uqgFXbTur-qO/icon
+import CheckSvgIcon from "./icons/PlasmicIcon__CheckSvg"; // plasmic-import: uqgFXbTur-qO/icon
 import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: LHAURlYRDEN8/icon
 import Icon2Icon from "./icons/PlasmicIcon__Icon2"; // plasmic-import: vK-DEgytCHDE/icon
-import SearchsvgIcon from "./icons/PlasmicIcon__Searchsvg"; // plasmic-import: 4cDugE6nCYpo/icon
+import SearchSvgIcon from "./icons/PlasmicIcon__SearchSvg"; // plasmic-import: 4cDugE6nCYpo/icon
 
 createPlasmicElementProxy;
 

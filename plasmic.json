@@ -419,8 +419,7 @@
         }
       ],
       "splitsProviderFilePath": "",
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     },
     {
       "projectId": "eVCRKWwcuK6xExRdUZxKpb",
@@ -668,8 +667,8 @@
       "icons": [
         {
           "id": "uqgFXbTur-qO",
-          "name": "ChecksvgIcon",
-          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__Checksvg.tsx"
+          "name": "CheckSvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__CheckSvg.tsx"
         },
         {
           "id": "LHAURlYRDEN8",
@@ -678,33 +677,33 @@
         },
         {
           "id": "jNn6TVfimSlZ",
-          "name": "ChevronDownsvgIcon",
-          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__ChevronDownsvg.tsx"
+          "name": "ChevronDownSvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__ChevronDownSvg.tsx"
         },
         {
           "id": "jQaKMVXEPdPX",
-          "name": "ChevronUpsvgIcon",
-          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__ChevronUpsvg.tsx"
+          "name": "ChevronUpSvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__ChevronUpSvg.tsx"
         },
         {
           "id": "4cDugE6nCYpo",
-          "name": "SearchsvgIcon",
-          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__Searchsvg.tsx"
+          "name": "SearchSvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SearchSvg.tsx"
         },
         {
           "id": "kJfrcxVUxRzg",
-          "name": "SquaresvgIcon",
-          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__Squaresvg.tsx"
+          "name": "SquareSvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SquareSvg.tsx"
         },
         {
           "id": "TlQ7n2RwYBRj",
-          "name": "SquareCheckFilledsvgIcon",
-          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SquareCheckFilledsvg.tsx"
+          "name": "SquareCheckFilledSvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SquareCheckFilledSvg.tsx"
         },
         {
           "id": "7HVTh042efWA",
-          "name": "SquareMinussvgIcon",
-          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SquareMinussvg.tsx"
+          "name": "SquareMinusSvgIcon",
+          "moduleFilePath": "plasmic/cantina/icons/PlasmicIcon__SquareMinusSvg.tsx"
         },
         {
           "id": "vK-DEgytCHDE",
@@ -896,8 +895,7 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": [],
-      "jsBundleThemes": []
+      "customFunctions": []
     }
   ],
   "globalVariants": {
@@ -914,6 +912,6 @@
   "nextjsConfig": {
     "pagesDir": "../pages"
   },
-  "cliVersion": "0.1.330",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.330/dist/plasmic.schema.json"
+  "cliVersion": "0.1.331",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.331/dist/plasmic.schema.json"
 }
