@@ -71,8 +71,8 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_cantina.module.css"; // plasmic-import: eVCRKWwcuK6xExRdUZxKpb/projectcss
 import sty from "./PlasmicSelect.module.css"; // plasmic-import: TQ2uLm_LONoV/css
 
-import ChevronDownSvgIcon from "./icons/PlasmicIcon__ChevronDownSvg"; // plasmic-import: jNn6TVfimSlZ/icon
-import ChevronUpSvgIcon from "./icons/PlasmicIcon__ChevronUpSvg"; // plasmic-import: jQaKMVXEPdPX/icon
+import ChevronDownSvgIcon from "./icons/chevrondown";
+import ChevronUpSvgIcon from "./icons/chevronup";
 
 createPlasmicElementProxy;
 
