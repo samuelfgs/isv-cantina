@@ -25,6 +25,7 @@ export const ReactPrint = React.forwardRef(function ReactPrint(props: React.Prop
   lineItems: any,
   id: number
   name: string,
+  stock: number;
 }>, ref: React.Ref<ReactPrintRefActions>) {
   const { children, ...rest } = props;
   const componentRef = React.useRef(null);
@@ -57,6 +58,7 @@ registerComponent(ReactPrint, {
   props: {
     lineItems: "exprEditor",
     id: "number",
+    stock: "number",
     name: "string"
   },
   refActions: {

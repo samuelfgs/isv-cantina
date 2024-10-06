@@ -126,7 +126,9 @@ function PlasmicChamada__RenderFunc(props: {
           pronto: [1, 2, 3, 4, 5],
           preparando: [6, 7, 8, 9, 10]
         },
-        props.args
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
       ),
     [props.args]
   );

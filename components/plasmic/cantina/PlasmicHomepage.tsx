@@ -142,7 +142,16 @@ function PlasmicHomepage__RenderFunc(props: {
 }) {
   const { variants, overrides, forNode } = props;
 
-  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+  const args = React.useMemo(
+    () =>
+      Object.assign(
+        {},
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
+      ),
+    [props.args]
+  );
 
   const $props = {
     ...args,
@@ -273,6 +282,12 @@ function PlasmicHomepage__RenderFunc(props: {
       },
       {
         path: "step",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 0
+      },
+      {
+        path: "stock",
         type: "private",
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => 0
@@ -2651,6 +2666,8 @@ function PlasmicHomepage__RenderFunc(props: {
                                                           it.id ===
                                                           productVariant.id
                                                       );
+                                                    $state.stock =
+                                                      currentItem.stock;
                                                     if (currentItem) {
                                                       currentItem.stock -=
                                                         lineItem.qtt;
@@ -3307,6 +3324,19 @@ function PlasmicHomepage__RenderFunc(props: {
             ref={ref => {
               $refs["reactPrint"] = ref;
             }}
+            stock={(() => {
+              try {
+                return $state.stock;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return undefined;
+                }
+                throw e;
+              }
+            })()}
           />
         </div>
       </div>

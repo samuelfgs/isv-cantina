@@ -670,10 +670,10 @@
     fast-deep-equal "^3.1.3"
     valtio "^1.6.3"
 
-"@plasmicpkgs/antd5@^0.0.249":
-  version "0.0.249"
-  resolved "https://registry.yarnpkg.com/@plasmicpkgs/antd5/-/antd5-0.0.249.tgz#e660b3c2e2e5015307598ad1fbbd4912749e9d0c"
-  integrity sha512-NThoYy8TvbX010VhUrsO90ORafK4GCr2EhUEoJiBngsvSqbpsFqAJZDNkIajoOqCMpmZaNdftvBQfN6rNX3bKg==
+"@plasmicpkgs/antd5@^0.0.253":
+  version "0.0.253"
+  resolved "https://registry.yarnpkg.com/@plasmicpkgs/antd5/-/antd5-0.0.253.tgz#0ac0ebb7fec9edf7cc3df3a08b207480500e3308"
+  integrity sha512-vSVLPyuc5Qg/Ns5kQPtrMuT/sncFWsoEYLnSvS0X0taJchmZ9ebZtsuprjJZ43wAU4hXo5UjkMC5G1q31EGk4Q==
   dependencies:
     antd "^5.12.7"
     classnames "^2.3.2"
@@ -686,20 +686,20 @@
   resolved "https://registry.yarnpkg.com/@plasmicpkgs/luxon-parser/-/luxon-parser-3.4.4.tgz#32150fc2c7bbad1e9e0242c897518680c6dc5fed"
   integrity sha512-VN/nwVehURL1TeHt7WlxuYXD7v9f87MG58YLrZeBQOcGDA9ck/gZNz7m1S1MeJ67gpnbpyJ3uFUPt+t1KnMQxw==
 
-"@plasmicpkgs/plasmic-basic-components@^0.0.227":
-  version "0.0.227"
-  resolved "https://registry.yarnpkg.com/@plasmicpkgs/plasmic-basic-components/-/plasmic-basic-components-0.0.227.tgz#80b699770c01b8cb844d23dc6cc6646f62df1c2b"
-  integrity sha512-dNklHLHfvQL13qbYLUhamslsYhCeChFRFVuLCdGXZxzNqR3tacUZ+9tSSB3SUJjZzUC0FamH1REFoZ+v/WTkIA==
+"@plasmicpkgs/plasmic-basic-components@^0.0.230":
+  version "0.0.230"
+  resolved "https://registry.yarnpkg.com/@plasmicpkgs/plasmic-basic-components/-/plasmic-basic-components-0.0.230.tgz#d4b30e24aab8b4e3ce8470ba0be5ec2c9325eb11"
+  integrity sha512-MccNCbabdrYBau5tdaJwaLcCpnNSgTcQSCY90YgWCXZoA9n3DphiPUWgwCPDFHwG7QyghaJ3yOyVSItc2meNnQ==
 
-"@plasmicpkgs/plasmic-nav@^0.0.168":
-  version "0.0.168"
-  resolved "https://registry.yarnpkg.com/@plasmicpkgs/plasmic-nav/-/plasmic-nav-0.0.168.tgz#820c638fa961b4bd57a2b517502232f5727fdd59"
-  integrity sha512-4jPBfojZnNToDh43yFIp1Qe6dnCjychn9Uv8q6s0As2I2GNsVSeEWyU4W1hEfdm/0EtQeFLGc1bMu4eg0P2+Ag==
+"@plasmicpkgs/plasmic-nav@^0.0.177":
+  version "0.0.177"
+  resolved "https://registry.yarnpkg.com/@plasmicpkgs/plasmic-nav/-/plasmic-nav-0.0.177.tgz#edf55549b87c1179285af3fa7c6bbaec8ab933dc"
+  integrity sha512-mfnRDGWA0/QQ9WUqAled8mbyXquumOO06hmmMBIX17/ByhUj1+do6PT9aMrS4dh+Fip7GhMgwoYEFG4EUMDtjQ==
 
-"@plasmicpkgs/plasmic-rich-components@^1.0.187":
-  version "1.0.187"
-  resolved "https://registry.yarnpkg.com/@plasmicpkgs/plasmic-rich-components/-/plasmic-rich-components-1.0.187.tgz#13268d251170735811cc1ba569c5180eb9ddb061"
-  integrity sha512-ePEfhnCIBVb6DGvTB4AHAEww08zkzoP5iyuVCVttSnxTrSPFJPUHVjVYLuEfqQxi5YVKx8aiGX3y/tJ/8TTeYA==
+"@plasmicpkgs/plasmic-rich-components@^1.0.197":
+  version "1.0.197"
+  resolved "https://registry.yarnpkg.com/@plasmicpkgs/plasmic-rich-components/-/plasmic-rich-components-1.0.197.tgz#2a32ecad64e17b035a64e00932c02d61abfd4031"
+  integrity sha512-cONj29iSOdY6kpvvJq8oGKbPJJqa7RrYkCCScXUfzvvJctQR5qRgAP30BJicLYIZmY9f7s+HKpziSUYKIzAxDw==
   dependencies:
     "@ctrl/tinycolor" "^3.6.1"
     "@plasmicpkgs/luxon-parser" "^3.4.4"

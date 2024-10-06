@@ -71,8 +71,8 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_cantina.module.css"; // plasmic-import: eVCRKWwcuK6xExRdUZxKpb/projectcss
 import sty from "./PlasmicSelect.module.css"; // plasmic-import: TQ2uLm_LONoV/css
 
-import ChevronDownSvgIcon from "./icons/chevrondown"; 
-import ChevronUpSvgIcon from "./icons/chevronup"; 
+import ChevronDownSvgIcon from "./icons/PlasmicIcon__ChevronDownSvg"; // plasmic-import: jNn6TVfimSlZ/icon
+import ChevronUpSvgIcon from "./icons/PlasmicIcon__ChevronUpSvg"; // plasmic-import: jQaKMVXEPdPX/icon
 
 createPlasmicElementProxy;
 
@@ -190,7 +190,16 @@ function PlasmicSelect__RenderFunc(props: {
 }) {
   const { variants, overrides, forNode } = props;
 
-  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+  const args = React.useMemo(
+    () =>
+      Object.assign(
+        {},
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
+      ),
+    [props.args]
+  );
 
   const $props = {
     ...args,

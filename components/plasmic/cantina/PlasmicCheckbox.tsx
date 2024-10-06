@@ -68,9 +68,9 @@ import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plas
 import projectcss from "./plasmic_cantina.module.css"; // plasmic-import: eVCRKWwcuK6xExRdUZxKpb/projectcss
 import sty from "./PlasmicCheckbox.module.css"; // plasmic-import: 3SFd0T01Rc6S/css
 
-import SquareSvgIcon from "./icons/squaresvg";
-import SquareCheckFilledSvgIcon from "./icons/squarecheckfilled";
-import SquareMinusSvgIcon from "./icons/squreminus"; 
+import SquareSvgIcon from "../icons/PlasmicIcon__SquareSvg"; // plasmic-import: kJfrcxVUxRzg/icon
+import SquareCheckFilledSvgIcon from "./icons/PlasmicIcon__SquareCheckFilledSvg"; // plasmic-import: TlQ7n2RwYBRj/icon
+import SquareMinusSvgIcon from "./icons/PlasmicIcon__SquareMinusSvg"; // plasmic-import: 7HVTh042efWA/icon
 
 createPlasmicElementProxy;
 
@@ -142,7 +142,16 @@ function PlasmicCheckbox__RenderFunc(props: {
 }) {
   const { variants, overrides, forNode } = props;
 
-  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+  const args = React.useMemo(
+    () =>
+      Object.assign(
+        {},
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
+      ),
+    [props.args]
+  );
 
   const $props = {
     ...args,

@@ -77,12 +77,14 @@ export type PlasmicPrintOrder__ArgsType = {
   carrinho?: any;
   id?: number;
   name?: string;
+  stock?: number;
 };
 type ArgPropType = keyof PlasmicPrintOrder__ArgsType;
 export const PlasmicPrintOrder__ArgProps = new Array<ArgPropType>(
   "carrinho",
   "id",
-  "name"
+  "name",
+  "stock"
 );
 
 export type PlasmicPrintOrder__OverridesType = {
@@ -93,6 +95,7 @@ export interface DefaultPrintOrderProps {
   carrinho?: any;
   id?: number;
   name?: string;
+  stock?: number;
   className?: string;
 }
 
@@ -113,7 +116,18 @@ function PlasmicPrintOrder__RenderFunc(props: {
 }) {
   const { variants, overrides, forNode } = props;
 
-  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+  const args = React.useMemo(
+    () =>
+      Object.assign(
+        {
+          stock: 12
+        },
+        Object.fromEntries(
+          Object.entries(props.args).filter(([_, v]) => v !== undefined)
+        )
+      ),
+    [props.args]
+  );
 
   const $props = {
     ...args,
@@ -153,7 +167,7 @@ function PlasmicPrintOrder__RenderFunc(props: {
           <React.Fragment>
             {(() => {
               try {
-                return `PEDIDO ${$props.id}`;
+                return `Item ${$props.stock}`;
               } catch (e) {
                 if (
                   e instanceof TypeError ||
