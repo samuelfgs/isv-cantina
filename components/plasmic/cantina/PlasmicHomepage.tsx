@@ -3268,6 +3268,51 @@ function PlasmicHomepage__RenderFunc(props: {
                                     $steps["runActionOnReactPrint"] =
                                       await $steps["runActionOnReactPrint"];
                                   }
+
+                                  $steps["updateStock"] = true
+                                    ? (() => {
+                                        const actionArgs = {
+                                          variable: {
+                                            objRoot: $state,
+                                            variablePath: ["stock"]
+                                          },
+                                          operation: 3
+                                        };
+                                        return (({
+                                          variable,
+                                          value,
+                                          startIndex,
+                                          deleteCount
+                                        }) => {
+                                          if (!variable) {
+                                            return;
+                                          }
+                                          const { objRoot, variablePath } =
+                                            variable;
+
+                                          const oldValue = $stateGet(
+                                            objRoot,
+                                            variablePath
+                                          );
+                                          $stateSet(
+                                            objRoot,
+                                            variablePath,
+                                            oldValue - 1
+                                          );
+                                          return oldValue - 1;
+                                        })?.apply(null, [actionArgs]);
+                                      })()
+                                    : undefined;
+                                  if (
+                                    $steps["updateStock"] != null &&
+                                    typeof $steps["updateStock"] === "object" &&
+                                    typeof $steps["updateStock"].then ===
+                                      "function"
+                                  ) {
+                                    $steps["updateStock"] = await $steps[
+                                      "updateStock"
+                                    ];
+                                  }
                                 }}
                               >
                                 <div
