@@ -156,58 +156,12 @@ function PlasmicPrintOrder__RenderFunc(props: {
         sty.root
       )}
     >
-      <div className={classNames(projectcss.all, sty.freeBox__bKyAf)}>
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__vfMj5
-          )}
-        >
-          <React.Fragment>
-            {(() => {
-              try {
-                return `Item ${$props.stock}`;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return "PEDIDO #15";
-                }
-                throw e;
-              }
-            })()}
-          </React.Fragment>
-        </div>
-        <div
-          className={classNames(
-            projectcss.all,
-            projectcss.__wab_text,
-            sty.text__tTvVv
-          )}
-        >
-          <React.Fragment>
-            {(() => {
-              try {
-                return $props.name;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return "PEDIDO #15";
-                }
-                throw e;
-              }
-            })()}
-          </React.Fragment>
-        </div>
-      </div>
       {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
         (() => {
           try {
-            return $props.carrinho;
+            return [...new Array($props.stock)].map(
+              (_, i, arr) => arr.length - i
+            );
           } catch (e) {
             if (
               e instanceof TypeError ||
@@ -223,20 +177,227 @@ function PlasmicPrintOrder__RenderFunc(props: {
         const currentIndex = __plasmic_idx_0;
         return (
           <div
-            className={classNames(projectcss.all, sty.freeBox__g1PnZ)}
+            className={classNames(projectcss.all, sty.freeBox___95GeN)}
             key={currentIndex}
           >
+            <div className={classNames(projectcss.all, sty.freeBox__bKyAf)}>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__vfMj5
+                )}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return `Item ${currentItem}`;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "PEDIDO #15";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__tTvVv
+                )}
+              >
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return $props.name;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "PEDIDO #15";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
+              </div>
+            </div>
+            {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+              (() => {
+                try {
+                  return $props.carrinho;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+            ).map((__plasmic_item_1, __plasmic_idx_1) => {
+              const currentItem = __plasmic_item_1;
+              const currentIndex = __plasmic_idx_1;
+              return (
+                <div
+                  className={classNames(projectcss.all, sty.freeBox__g1PnZ)}
+                  key={currentIndex}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___0WZsg
+                    )}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return currentItem.name;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                  {(() => {
+                    try {
+                      return currentItem.option != null;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__gl0Oq
+                      )}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return `- ${currentItem.option.name}`;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  ) : null}
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__tAnj9
+                    )}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return `Quantidade: ${currentItem.qtt}`;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                  {(() => {
+                    try {
+                      return currentItem.description != null;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return true;
+                      }
+                      throw e;
+                    }
+                  })() ? (
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__tEbRj
+                      )}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return `Obs: ${currentItem.description}`;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  ) : null}
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__wi0Kp
+                    )}
+                  >
+                    {"----------------"}
+                  </div>
+                </div>
+              );
+            })}
             <div
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.text___0WZsg
+                sty.text__duvHf
               )}
             >
               <React.Fragment>
                 {(() => {
                   try {
-                    return currentItem.name;
+                    return `Total: R$ ${$props.carrinho
+                      .reduce((acc, item) => item.price * item.qtt + acc, 0)
+                      .toLocaleString("fr", {
+                        maximumFractionDigits: 2,
+                        minimumFractionDigits: 2
+                      })}`;
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -248,144 +409,10 @@ function PlasmicPrintOrder__RenderFunc(props: {
                   }
                 })()}
               </React.Fragment>
-            </div>
-            {(() => {
-              try {
-                return currentItem.option != null;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return true;
-                }
-                throw e;
-              }
-            })() ? (
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__gl0Oq
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return `- ${currentItem.option.name}`;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
-                      }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
-              </div>
-            ) : null}
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__tAnj9
-              )}
-            >
-              <React.Fragment>
-                {(() => {
-                  try {
-                    return `Quantidade: ${currentItem.qtt}`;
-                  } catch (e) {
-                    if (
-                      e instanceof TypeError ||
-                      e?.plasmicType === "PlasmicUndefinedDataError"
-                    ) {
-                      return "";
-                    }
-                    throw e;
-                  }
-                })()}
-              </React.Fragment>
-            </div>
-            {(() => {
-              try {
-                return currentItem.description != null;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return true;
-                }
-                throw e;
-              }
-            })() ? (
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__tEbRj
-                )}
-              >
-                <React.Fragment>
-                  {(() => {
-                    try {
-                      return `Obs: ${currentItem.description}`;
-                    } catch (e) {
-                      if (
-                        e instanceof TypeError ||
-                        e?.plasmicType === "PlasmicUndefinedDataError"
-                      ) {
-                        return "";
-                      }
-                      throw e;
-                    }
-                  })()}
-                </React.Fragment>
-              </div>
-            ) : null}
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__wi0Kp
-              )}
-            >
-              {"----------------"}
             </div>
           </div>
         );
       })}
-      <div
-        className={classNames(
-          projectcss.all,
-          projectcss.__wab_text,
-          sty.text__duvHf
-        )}
-      >
-        <React.Fragment>
-          {(() => {
-            try {
-              return `Total: R$ ${$props.carrinho
-                .reduce((acc, item) => item.price * item.qtt + acc, 0)
-                .toLocaleString("fr", {
-                  maximumFractionDigits: 2,
-                  minimumFractionDigits: 2
-                })}`;
-            } catch (e) {
-              if (
-                e instanceof TypeError ||
-                e?.plasmicType === "PlasmicUndefinedDataError"
-              ) {
-                return "";
-              }
-              throw e;
-            }
-          })()}
-        </React.Fragment>
-      </div>
     </div>
   ) as React.ReactElement | null;
 }
