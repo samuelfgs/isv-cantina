@@ -2666,12 +2666,12 @@ function PlasmicHomepage__RenderFunc(props: {
                                                           it.id ===
                                                           productVariant.id
                                                       );
-                                                    $state.stock =
-                                                      currentItem.stock;
                                                     if (currentItem) {
                                                       currentItem.stock -=
                                                         lineItem.qtt;
                                                     } else {
+                                                      $state.stock =
+                                                        productVariant.stock;
                                                       nonHamburguer.push({
                                                         id: productVariant.id,
                                                         stock:
